@@ -4,6 +4,7 @@ PhysTrack is an open source Matlab library developed by PhysLab (Lahore Universi
 The latest version on Feb 2, 2017 was 2.1.
 
 Following is a quick guide for testing the library.
+
 1: Open Matlab r2010 or above in the ectracted library folder.
 2: call fileInit and select a video file for tracking. Some sample videos can be found in the root of this repo.
 3: depending on the type of video selected, call the analyzeXYZMotion script and follow the instructions.
