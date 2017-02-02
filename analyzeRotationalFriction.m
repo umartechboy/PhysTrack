@@ -96,7 +96,7 @@ figure; hold on; plot(t, xp_, 'r'); plot(t, yp_, 'b'); title('t xp_-yp_');
 figure; hold on; plot(t, xp__, 'r'); plot(t, yp__, 'b'); title('t xp__-yp__');
 % 
 figure; hold on; plot(dt, dx, 'r'); plot(dt, dy, 'b'); title('dt dx-dy');
-%figure; hold on; plot(dt, dx_, 'r'); plot(dt, dy_, 'b'); title('dt dx_-dy_');
+figure; hold on; plot(dt, dx_, 'r'); plot(dt, dy_, 'b'); title('dt dx_-dy_');
 %figure; hold on; plot(dt, dx__, 'r'); plot(dt, dy__, 'b'); title('dt dx__-dy__');
 figure; hold on; plot(dt, dxp, 'r'); plot(dt, dyp, 'b'); title('dt dxp-dyp');
 figure; hold on; plot(dt, dxp_, 'r'); plot(dt, dyp_, 'b'); title('dt dxp_-dyp_');
