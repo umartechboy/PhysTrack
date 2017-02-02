@@ -28,7 +28,7 @@ function [ RefCoord, PixelsPerUnit] = DrawCoordinateSystem( vr2o, CurrentRefCoor
     global vtt_rw_00 vtt_ppm_00
 	RefCoord = vtt_rw_00;
     PixelsPerUnit = vtt_ppm_00;
-    if nargin == 2
+    if nargin == 2 && ~isstruct(vtt_rw_00)
         if strcmp(questdlg('Do you want to accept these changes?', 'Confirm changes.', 'Yes', 'No', 'Yes'), 'No')
             RefCoord = CurrentRefCoord;
         end

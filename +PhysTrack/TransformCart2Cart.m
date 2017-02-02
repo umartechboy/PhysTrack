@@ -3,72 +3,90 @@ if nargin < 2
     error('Not enough arguments');
 end
 if isstruct(points)
-    vars = fieldnames(points);
-    isTpStruct = false;
-    for ii = 1:length(vars)
-        if ~isempty(find(strcmp(vars, 'tp1')))
-            isTpStruct = true;
-            break;
+    if PhysTrack.IsTpStruct(points)
+        vars = fieldnames(points);
+        for ii = 1:length(vars)
+             eval(['transformedPoints.', strjoin(vars(ii)), ' = PhysTrack.TransformCart2Cart(points.', strjoin(vars(ii)), ', newAxes);'])
         end
-    end
-    if isTpStruct        
-        ansStr = '';
-        for ii = 1:100
-            if ~isempty(find(strcmp(vars, ['tp', num2str(ii)])))
-                if length(ansStr) > 0
-                    ansStr = [ansStr, ', '];
-                end
-                ansStr = [ansStr, '''tp', num2str(ii),''', transPts', num2str(ii)];
-                eval(['transPts', num2str(ii),' = PhysTrack.TransformCart2Cart(points.tp',num2str(ii),', newAxes);']);
-            end
-        end
-        eval(['transformedPoints = struct(', ansStr, ');']);
         return;
     else
-        vars = fieldnames(points);
-        if ~isempty(find(strcmp(vars, 'xy')))
-            points_ = points.xy;
-        elseif ~isempty(find(strcmp(vars, 'x'))) && ~isempty(find(strcmp(vars, 'y')))
-            if size(points.x, 2) == 1
-                points_ = [points.x, points.y];
-            else
-                points_ = [points.x; points.y]';
-            end
-        end
+        points_ = PhysTrack.StructToArr(points);
     end
 else
     points_ = points;
 end
+% determine the type of rwRCS
+
+if isstruct(newAxes)
+    isFloating = true;
+    if size(newAxes.tp1.xy, 1) ~= size(points_, 1)
+        error The duration of floating coordinate system must be equal to that of the total points.
+    end
+else
+    isFloating = false;
+end
+
 %axes in terms of points
-p1= newAxes(1,:);
-p2= newAxes(2,:);
-p3= newAxes(3,:);
+if isFloating
+    p1 = newAxes.tp1.xy;
+    p2 = newAxes.tp2.xy;
+    p3 = newAxes.tp3.xy;
+else
+    p1= newAxes(1,:);
+    p2= newAxes(2,:);
+    p3= newAxes(3,:);
+end
 
 %C_p2 in translated coordinates
-p2_(1:2) = p2(1:2) - p1(1:2);
+if isFloating
+    p2_(:, 1:2) = p2(:, 1:2) - p1(:, 1:2);
+else
+    p2_(1:2) = p2(1:2) - p1(1:2);
+end
 
 %C-polygon in translated coordinates
-ppl_(:,1) = points_(:,1) - p1(1);
-ppl_(:,2) = points_(:,2) - p1(2);
+if isFloating
+    ppl_(:,1) = points_(:,1) - p1(:, 1);
+    ppl_(:,2) = points_(:,2) - p1(:, 2);
+else
+    ppl_(:,1) = points_(:,1) - p1(1);
+    ppl_(:,2) = points_(:,2) - p1(2);
+end
 
 
 %P_polygon in translated coordinates
 [ppl_p(:, 1), ppl_p(:, 2)]  = cart2pol(ppl_(:,1), ppl_(:,2));
 
 %P_p2 in translated coordinates
-p2_p = cart2pol(p2_(1), p2_(2));
+if isFloating
+    p2_p = cart2pol(p2_(:,1), p2_(:,2));
+else
+    p2_p = cart2pol(p2_(1), p2_(2));
+end
 
 %P_polygon in translated, rotated coordinates
-ppl__p = ppl_p(:,1) - p2_p(1);
+if isFloating
+    ppl__p = ppl_p(:,1) - p2_p(:, 1);
+else
+    ppl__p = ppl_p(:,1) - p2_p(1);
+end
 ppl__p(:,2) = ppl_p(:,2);
 
 %C_polygon in translated, rotated coordinates
 [ppl__c(:, 1), ppl__c(:, 2)]  = pol2cart(ppl__p(:,1), ppl__p(:,2));
 
 %C_polygon in translated, rotated coordinates, Fixed Y Sign
-if sign((p2(1) - p1(1)) * (p3(2) - p1(2)) - (p2(2) - p1(2)) * (p3(1) - p1(1))) < 0
-    ppl__c(:,2) = ppl__c(:,2) * -1;
-end;
+if isFloating
+    for ii = 1:1:size(p1, 1)
+        if sign((p2(ii, 1) - p1(ii, 1)) * (p3(ii, 2) - p1(ii, 2)) - (p2(ii, 2) - p1(ii, 2)) * (p3(ii, 1) - p1(ii, 1))) < 0
+            ppl__c(ii, 2) = ppl__c(ii, 2) * -1;
+        end
+    end
+else
+    if sign((p2(1) - p1(1)) * (p3(2) - p1(2)) - (p2(2) - p1(2)) * (p3(1) - p1(1))) < 0
+        ppl__c(:,2) = ppl__c(:,2) * -1;
+    end
+end
 
 %Rename Result
 transformedPoints = ppl__c;
