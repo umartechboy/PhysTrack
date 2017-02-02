@@ -1,7 +1,7 @@
-%obs = PhysTrack.GetObjects(vro);
-%particles = PhysTrack.BinaryTracker(vro, obs);
-%t = PhysTrack.GenerateTimeStamps(vro);
-%ppmm = PhysTrack.askValue('Enter a value for pixels per \mu m calibration', 0.2025) * vro.PreMag; 
+obs = PhysTrack.GetObjects(vro);
+particles = PhysTrack.BinaryTracker(vro, obs);
+t = PhysTrack.GenerateTimeStamps(vro);
+ppmm = PhysTrack.askValue('Enter a value for pixels per \mu m calibration', 0.2025) * vro.PreMag; 
 particles = PhysTrack.StructOp(particles, ppmm, '*');
 rn2 = 0;
 for ii = 1:size(obs, 1)
