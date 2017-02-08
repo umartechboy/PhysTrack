@@ -1,5 +1,4 @@
 ![PhysTrack Logo](http://i.imgur.com/fuiAoR3.png)
-Welcome to the PhysTrack Wiki!
 
 PhysTrack is a Matlab based video tracking solution for analyzing kinematics of moving bodies. Since Matlab is a very popular analysis tool in physics laboratories around the globe, we have tried to combine the robustness of Matlab computation power with such a friendly user interface which can be found in commercial video tracking software.
 
