@@ -1,5 +1,11 @@
-function VideoDecompressor(fileName, saveName)
-    % this function simply converts a compressed video to raw AVI.
+function VideoDecoder(fileName, saveName)
+% This function simply converts a compressed video to raw AVI. When using a
+% compressed video, the whole process is slowed down because of the way
+% video reading functino works. To fetch any frame N in a video sequence,
+% the video reader function has to convert all the preceding frames first
+% because in a compressed video, no frame is independant of its previous
+% frames. This is resolved by converting the whole video into raw AVI which
+% stores a BitmapImage for every frame, indepentant of the history.
 
     if nargin == 0
     [fileName, pathname] = uigetfile({ ...

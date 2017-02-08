@@ -1,8 +1,14 @@
 function I = AdjustBrightnessContrast(I, contrast, brightness)
-%AJUSTBRIGHTNESSCONTRAST Adjusts brightness and contrast of an image. Correction factors' domain is [-1,+1]
+% ADJUSTBRIGHTNESSCONTRAST Adjusts brightness and contrast of an image. Correction factors' domain is [-1,+1]
+%    AdjustBrightnessContrast(I, 0, 0), AdjustBrightnessContrast(I) returns the original image
+%    AdjustBrightnessContrast(I, 1, 1) returns an image with maximum contrast
+%    and brightness
+%    AdjustBrightnessContrast(I, -1, -1) returns an image with minimum contrast and brightness
+%    See also PhysTrack.CORRECTHSV, PhysTrack.SetPreProcessingFunction 
+    
     if nargin == 1 % fixed correction
-    contrast = 0;
-    brightness = 0;
+        contrast = 0;
+        brightness = 0;
     end
     brightness = brightness + 1;
     contrast = contrast + 1;

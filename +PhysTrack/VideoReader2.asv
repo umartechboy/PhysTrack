@@ -2,8 +2,8 @@ function vro2Obj = VideoReader2()
 %VIDEOREADER2 Gets a new video reader 2 object. In contrast to a usual
 % video reader object from the image acquisition toolbox, the video reader2
 % object embeds the cropping, trimming, pre-magnification and binary
-% conversion information in a single object. This is neccessary to reduce
-% the repeatitive process to be done to fetch every frame from the video
+% conversion information in a single object. This is necessary  to reduce
+% the repetitive  process to be done to fetch every frame from the video
 % file. 
 %
 % There are separate GUIs avaiable for each step of conversion, but
@@ -21,19 +21,19 @@ function vro2Obj = VideoReader2()
 % useful if those extra frames are also included. So, in the VideoReader2,
 % there are 3 variables called ifi, ofi and TotalNumberOfFrames. ifi is
 % the In-Frame, at which the video actually should have started, Out-Frame
-% is the last desirable frame and TotalNumberofframes just gives the
+% is the last desirable frame and TotalNumberofFrames just gives the
 % number of frames included in the trimmed section. So now after trimming,
 % ifi will serve as the first frame of the whole video.
 %
-% Cropping 
+% Cropping :
 % In video processing, to avoid processing extra pixels of a video frame,
-% we aften desire to define a region of interest. To incorporate thios
+% we often desire to define a region of interest. To incorporate thios
 % cropping, there is a CropRect variable in the video reader 2 which
 % conatins the cropping rectangle's coordinates and dimensions. So, now,
 % the (1,1) pixel of a video frame is actually the top left pixel of the
 % crop rectangle instead.
 %
-% Pre-magnification
+% Pre-magnification:
 % Matlab imresize function not just increases the number of pixels in an
 % image, it also interpolates to create new information. This process
 % actually inhances the image quality artificially. To maintain a balance
@@ -41,7 +41,7 @@ function vro2Obj = VideoReader2()
 % is this variable PreMag, in video reader 2 objects which magnify the
 % finally cropped frames.
 %
-% BinrayThreshold
+% BinrayThreshold:
 % To convert a grayscale to binary logical image, the practice is to define
 % a gray level above or below which pixels are converted to white or black.
 % Usually, the same threshoold is used for the whole video but in

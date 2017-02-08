@@ -22,7 +22,7 @@ function I = read2(vro, frameNumber, indIsAbsolute, forceRGB, cropPreviewOnly)
 %    The fourth argument, cropPreviewOnly isn't used in usual scenarios. It
 %    is built to be used in the video reader 2 GUI tool only.
 %
-%    See also PHYSTRACK.VIDEOREADER2, PHYSTRACK.SETPREPROCESSINGFUNCTION,
+%    See also, PHYSTRACK.VIDEOREADER2, PHYSTRACK.SETPREPROCESSINGFUNCTION,
 %    PHYSTRACK.CONVERTVIDEOTOBINARY
     if ~exist('indIsAbsolute')
         indIsAbsolute = false;

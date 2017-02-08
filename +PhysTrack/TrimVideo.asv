@@ -1,8 +1,6 @@
 function vr2oOut = TrimVideo(vr2o, silent)
-%TRIMVIDEO interacts with the user using a GUI tool to obtain the trimming
-% information for a given videoreader2 object. The usage of the GUI is
-% extremely simple and self explanatory.
-
+%TRIMVIDEO interacts 
+%try
     if nargin == 0
         error 'Provide a video reader 2 object to be trimmed.'
     end
@@ -26,6 +24,8 @@ function vr2oOut = TrimVideo(vr2o, silent)
             vr2oOut = vtt_vr2o_00;
         end
     end
-    evalin('base', 'clear vtt_vr2o_00');
+%catch
+%end
+evalin('base', 'clear vtt_vr2o_00');
 end
 

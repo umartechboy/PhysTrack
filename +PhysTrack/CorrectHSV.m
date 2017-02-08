@@ -1,6 +1,8 @@
 function I = CorrectHSV(I, h, s, v)
-%CORRECTHSV Applys correction factors on the Hue, Saturation and Vibrance
-%Domain for each factor is [-1,+1]
+%CORRECTHSV Applyies correction factors on the Hue, Saturation and Vibrance
+% of the given image I. Domain for each factor is [-1,+1]. 
+%    See also PhysTrack.ADJUSTBRIGHTNESSCONTRAST, PhysTrack.SetPreProcessingFunction 
+    
 if nargin == 1 % fixed correction
     h = 0;
     s = 0;
