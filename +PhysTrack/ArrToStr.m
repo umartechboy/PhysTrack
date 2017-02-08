@@ -1,5 +1,6 @@
 function structData = ArrToStr(arrData, forceCollectionStruct)
 if nargin == 1
+    %if true, we will force to create a tp struct even if it is not needed
     forceCollectionStruct = false;
 end
     if size(arrData, 3) == 1

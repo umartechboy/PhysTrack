@@ -1,5 +1,12 @@
 function polyObjTrack = StitchObjectToPoints(pointsToStich_, trackPoints1, trackPoints2)
     %ang disp
+    if nargin == 2 % we may have a tp struct
+        if ~PhysTrack.IsTpStruct(trackPoints1)
+            error 'To trajectories are required for this operation'
+        end
+        trackPoints1 = PhysTrack.StructToArr(trackPoints1);
+        trackPoints2 = zeros(size(trackPoints1,1),2);
+    end
     trackPoints1 = PhysTrack.StructToArr(trackPoints1);
     trackPoints2 = PhysTrack.StructToArr(trackPoints2);
     pointsToStich_ = PhysTrack.StructToArr(pointsToStich_);
