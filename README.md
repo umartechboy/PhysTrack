@@ -29,9 +29,16 @@ Examples of some experiments can be viewed on the Smart Physics Lab website on [
 Performing a classical mechanics experiments using video tracking and performing advance analysis is very simple.
 
 * We capture video of the moving object using a digital camera, 
-* use one of the automated trackers of PhysTrack to track the objects and generate position and orientation data
+* use one of the automated trackers of PhysTrack to track the objects and generate position and orientation data,
 * to investigate the motion, use the in-built Matlab tools or those included in PhysTrack like numerical differentiation, curve fitting, object stitching and coordinate system transformation and
 * present the results using Matlab plots and video plots included in PhysTrack.
+
+## Resources
+
+* [PhysLab website](http://physlab.org/).
+* Primer: [Observing kinematics with PhysTrack](http://physlab.org/wp-content/uploads/2016/03/primer_videoTracking.pdf).
+* [Examples of mechanics experiments](http://physlab.org/tag/mechanics/).
+* [Example of experiment with video microscopy](http://physlab.org/experiment/tracking-brownian-motion-through-video-microscopy/).
 
 ## References
 
