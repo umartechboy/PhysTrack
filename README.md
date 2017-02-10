@@ -10,17 +10,17 @@ PhysTrack is used in numerous physics experiments of [Smart Physics Lab](http://
 
 Physics teachers, students and researchers can use PhysTrack to track the motion of moving bodies and investigate the underlying physics in many kinds of experiments. Typical examples of these experiments are rotating and translating discs [1], spring pendulum systems [2], bodies colliding on a plane and projectiles [3], microspheres exhibiting Brownian motion [4], liquid droplets falling down a stream and the movement of a fruitfly [5].
 
-Examples of some experiments can be viewewd on the Smart Physics Lab website on [This Link](http://physlab.org/smart-physics/).
+Examples of some experiments can be viewed on the Smart Physics Lab website on [This Link](http://physlab.org/smart-physics/).
 
 ## Requirements for performing an experiment with PhysTrack
 
 * In addition to the primary knowledge of kinematics, we assume that the user is accustomed to the basics of Matlab tool and language.
 
-* To capture videos a good slow motion camera is requried. In PhysLab, we usually use a [Canon PowerShot SX280HS](https://www.cnet.com/products/canon-powershot-sx280-hs/review/) mounted on a tripod stand which works very well with most of the mechanics experiments. This camera can capture video at as high a frame rate as 240fps with a frame size of 320x240 pixels.
+* To capture videos a good slow motion camera is required. In PhysLab, we usually use a [Canon PowerShot SX280HS](https://www.cnet.com/products/canon-powershot-sx280-hs/review/) mounted on a tripod stand which works very well with most of the mechanics experiments. This camera can capture video at as high a frame rate as 240fps with a frame size of 320x240 pixels.
 
-* For inverstigating microscopic motion, a video microscop is also required. In PhysLab, we usually use a [Motic BA210 Trinocular](http://www.motic.com/As_LifeSciences_UM_BA210/product_240.html) for investigating the Browninan motion of micro particles.
+* For investigating microscopic motion, a video microscope is also required. In PhysLab, we usually use a [Motic BA210 Trinocular](http://www.motic.com/As_LifeSciences_UM_BA210/product_240.html) for investigating the Browninan motion of micro particles.
 
-* Usually, to move the objects in required fassion, an apparatus is also recomended.
+* Usually, to move the objects in required fashion, an apparatus is also recommended.
 
 * A computer with RAM >=3GB and an installation of Matlab 2006 (or above) with [Image Acquisition Toolbox](https://www.mathworks.com/products/imaq.html) and [Computer Vision Toolbox](https://www.mathworks.com/products/computer-vision.html) is also required.
 
