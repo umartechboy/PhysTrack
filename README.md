@@ -24,6 +24,11 @@ Examples of some experiments can be viewed on the Smart Physics Lab website on [
 
 * A computer with RAM >=3GB and an installation of Matlab 2006 (or above) with [Image Acquisition Toolbox](https://www.mathworks.com/products/imaq.html) and [Computer Vision Toolbox](https://www.mathworks.com/products/computer-vision.html) is also required.
 
+## Getting started
+
+You are only a couple of steps away from using PhysTrack for your own experiments.
+* Clone the GIT or download the whole package in your computer
+
 ## Performing a physics experiment with PhysTrack
 
 ![Process Flow](http://i.imgur.com/iYiVtuD.png)
@@ -38,13 +43,14 @@ Performing a classical mechanics experiments using video tracking and performing
 ## Sample experiments
 | Experiment Title | Student manual and resources | Sample Analysis Codes| Sample Videos|
 | ------------------ |:----------:| :----------:|:----------:|
-|	Spring pendulum	|	[Link]	(http://physlab.org/experiment/spring-pendulum/)	|	[Link]	(https://github.com/umartechboy/PhysTrack/blob/master/analyze1DSHM.m)	|	[Link]	(https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos/SpringPendulum) 	|
-|	2D Collisions	|	[Link]	(http://physlab.org/experiment/colliding-pucks-on-a-carom-board/)	|	[Link]	(https://github.com/umartechboy/PhysTrack/blob/master/analyze2DCollision.m)	|	[Link]	(https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos/CaromPuck)	|
-|	Projectile Motion	|	[Link]	(http://physlab.org/experiment/projectile-motion/)	|	[Link]	(https://github.com/umartechboy/PhysTrack/blob/master/analyzeProjectileMotion.m)	|	[Link]	(https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos/Projectile%20Motion)	|
-|	Sliding Friction	|	[Link]	(http://physlab.org/experiment/sliding-friction-2/)	|	[Link]	(https://github.com/umartechboy/PhysTrack/blob/master/analyzeSlidingFriction.m)	|	[Link]	(https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos/SlidingFriction)	|
-|	Rotation on a Fixed Pivot	|	[Link]	(http://physlab.org/experiment/rotational-motion-about-a-fixed-axis/)	|	[Link]	(https://github.com/umartechboy/PhysTrack/blob/master/analyzeRotationOnAFixedPivot.m)	|	[Link]	(https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos/RotationOnAFixedPivot)	|
-|	Brownian Motion	|	[Link]	(http://physlab.org/experiment/tracking-brownian-motion-through-video-microscopy/)	|	[Link]	(https://github.com/umartechboy/PhysTrack/blob/master/analyzeBrownianMotion.m)	|	[Link]	(https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos/BrownianMotion)	|
-|	Rotational Friction	|			|	[Link]	(https://github.com/umartechboy/PhysTrack/blob/master/analyzeRotationalFriction.m)	|	[Link]	(https://github.com/umartechboy/PhysTrack/blob/master/SampleVideos/RollingCylinder.MP4)	|
+|	Spring pendulum	|	[Link]	(http://physlab.org/experiment/spring-pendulum/)	|	[analyze1DSHM.m]	(https://github.com/umartechboy/PhysTrack/blob/master/Sample%20experiment%20scripts/analyze1DSHM.m)	|	[Link]	(https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos/SpringPendulum) 	|
+|	2D Collisions	|	[Link]	(http://physlab.org/experiment/colliding-pucks-on-a-carom-board/)	|	[analyze2DCollision.m]	(https://github.com/umartechboy/PhysTrack/blob/master/Sample%20experiment%20scripts/analyze2DCollision.m)	|	[Link]	(https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos/CaromPuck)	|
+|	Projectile Motion	|	[Link]	(http://physlab.org/experiment/projectile-motion/)	|	[analyzeProjectileMotion.m]	(https://github.com/umartechboy/PhysTrack/blob/master/Sample%20experiment%20scripts/analyzeProjectileMotion.m)	|	[Link]	(https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos/Projectile%20Motion)	|
+|	Sliding Friction	|	[Link]	(http://physlab.org/experiment/sliding-friction-2/)	|	[analyzeSlidingFriction.m]	(https://github.com/umartechboy/PhysTrack/blob/master/Sample%20experiment%20scripts/analyzeSlidingFriction.m)	|	[Link]	(https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos/SlidingFriction)	|
+|	Rotation on a Fixed Pivot	|	[Link]	(http://physlab.org/experiment/rotational-motion-about-a-fixed-axis/)	|	[analyzeRotationOnAFixedPivot.m]	(https://github.com/umartechboy/PhysTrack/blob/master/Sample%20experiment%20scripts/analyzeRotationOnAFixedPivot.m)	|	[Link]	(https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos/RotationOnAFixedPivot)	|
+|	Brownian Motion	|	[Link]	(http://physlab.org/experiment/tracking-brownian-motion-through-video-microscopy/)	|	[analyzeBrownianMotion.m]	(https://github.com/umartechboy/PhysTrack/blob/master/Sample%20experiment%20scripts/analyzeBrownianMotion.m)	|	[Link]	(https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos/BrownianMotion)	|
+|	Rotational Friction	|			|	[analyzeRotationalFriction.m]	(https://github.com/umartechboy/PhysTrack/blob/master/Sample%20experiment%20scripts/analyzeRotationalFriction.m)	|	[Link]	(https://github.com/umartechboy/PhysTrack/blob/master/SampleVideos/RollingCylinder.MP4)	|
+
 
 ## Video demonstration
 
