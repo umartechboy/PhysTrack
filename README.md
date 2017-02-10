@@ -12,7 +12,9 @@ Physics teachers, students and researchers can use PhysTrack to track the motion
 
 * In addition to the primary knowledge of kinematics, we assume that the user is accustomed to the basics of Matlab tool and language.
 
-* Videos can be captured using a a good slow motion camera. In PhysLab, we usually use a [Canon PowerShot SX280HS](https://www.cnet.com/products/canon-powershot-sx280-hs/review/)) mounted on a tripod stand.
+* To capture videos a good slow motion camera is requried. In PhysLab, we usually use a [Canon PowerShot SX280HS](https://www.cnet.com/products/canon-powershot-sx280-hs/review/) mounted on a tripod stand which works very well with most of the mechanics experiments.
+
+* For inverstigating microscopic motion, a video microscop is also required. In PhysLab, we usually use a [Motic BA210 Trinocular](http://www.motic.com/As_LifeSciences_UM_BA210/product_240.html) for investigating the Browninan motion of micro particles.
 
 * An installation of Matlab 2006 (or above) with [Image Acquisition Toolbox](https://www.mathworks.com/products/imaq.html) and [Computer Vision Toolbox](https://www.mathworks.com/products/computer-vision.html)
 
