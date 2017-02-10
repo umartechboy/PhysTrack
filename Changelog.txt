@@ -4,6 +4,8 @@ v2.1
 + Added code in tranformation function to work with floating ref systems.
 + Added a preview Mod for floating ref systems in CoordinateSystem Tool.
 .+ Added and corrected code in the sample experiments
+.+ Corrected Total frames setting KLT.
+.+ removed BinaryTracker, added BOT.
 
 v2.0
 >>mega changes to the whole library.
