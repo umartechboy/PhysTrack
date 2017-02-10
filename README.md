@@ -6,7 +6,17 @@ PhysTrack is a Matlab based video tracking solution for analyzing kinematics of 
 
 ## Who should use it?
 
-Physics teachers, students and researchers can use PhysTrack in many kinds of experiments. Typical examples of these experiments are rotating and translating discs [1], spring pendulum systems [2], bodies colliding on a plane and projectiles [3], microspheres exhibiting Brownian motion [4], liquid droplets falling down a stream and the movement of a fruitfly [5].
+Physics teachers, students and researchers can use PhysTrack to track the motion of moving bodies and investigate the underlying physics in many kinds of experiments. Typical examples of these experiments are rotating and translating discs [1], spring pendulum systems [2], bodies colliding on a plane and projectiles [3], microspheres exhibiting Brownian motion [4], liquid droplets falling down a stream and the movement of a fruitfly [5].
+
+## Requirements for performing an experiment with PhysTrack
+
+* In addition to the primary knowledge of kinematics, we assume that the user is accustomed to the basics of Matlab tool and language.
+
+* Videos can be captured using a a good slow motion camera. In PhysLab, we usually use a [Canon PowerShot SX280HS](https://www.cnet.com/products/canon-powershot-sx280-hs/review/)) mounted on a tripod stand.
+
+* An installation of Matlab 2006 (or above) with [Image Acquisition Toolbox](https://www.mathworks.com/products/imaq.html) and [Computer Vision Toolbox](https://www.mathworks.com/products/computer-vision.html)
+
+* Computer RAM: >= 3GB (Preffered)
 
 ### References
 
