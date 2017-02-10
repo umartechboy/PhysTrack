@@ -1,4 +1,4 @@
-![PhysTrack Logo](http://i.imgur.com/fuiAoR3.png)
+![PhysTrack Logo](http://i.imgur.com/5YFi1E8.png)
 
 ## What is PhysTrack?
 
@@ -35,13 +35,13 @@ Performing a classical mechanics experiments using video tracking and performing
 * to investigate the motion, use the in-built Matlab tools or those included in PhysTrack like numerical differentiation, curve fitting, object stitching and coordinate system transformation and
 * present the results using Matlab plots and video plots included in PhysTrack.
 
-## Experimental Demonstrations
+## Experimental demonstrations
 For demonstration purpose, the we have packed some additional files with PhysTrack. We have also created some sample analysis scripts for different kinds of experiments and provided the videos used with them.
 
 A video demonstration of physics experiment can be viewed on the following link:
 ## <a href="https://drive.google.com/file/d/0B8JKsZMA1LM4OGg5WnQyM2w0bGM/view?usp=sharing">Google Drive Link
 
-## Sample Experiments
+## Sample experiments
 | Experiment Title | Student manual and resources | Sample Analysis Codes| Sample Videos|
 | ------------------ |:----------:| :----------:|:----------:|
 |	Spring pendulum	|	[Link]	(http://physlab.org/experiment/spring-pendulum/)	|	[Link]	(https://github.com/umartechboy/PhysTrack/blob/master/analyze1DSHM.m)	|	[Link]	(https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos/SpringPendulum) 	|
