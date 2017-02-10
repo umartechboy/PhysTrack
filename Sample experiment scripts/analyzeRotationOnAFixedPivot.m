@@ -1,3 +1,4 @@
+vro = PhysTrack.VideoReader2;
 obs = PhysTrack.GetObjects(vro);
 [trPt_, vro] = PhysTrack.KLT(vro, obs);
 tpt1 = trPt_.tp1.xy;

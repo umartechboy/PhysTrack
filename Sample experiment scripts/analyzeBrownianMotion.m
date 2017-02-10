@@ -1,3 +1,4 @@
+vro = PhysTrack.VideoReader2;
 obs = PhysTrack.GetObjects(vro);
 particles = PhysTrack.BinaryTracker(vro, obs);
 t = PhysTrack.GenerateTimeStamps(vro);

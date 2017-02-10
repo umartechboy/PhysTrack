@@ -1,3 +1,4 @@
+vro = PhysTrack.VideoReader2;
 obs = PhysTrack.GetObjects(vro);
 trajUT = PhysTrack.KLT(vro, obs);
 questdlg('Define a reference coordinate system where x-axis is aligned along the horizontal board in the direction of the motion and y-axis is pointing upwards', '', 'OK', 'OK');

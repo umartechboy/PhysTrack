@@ -1,3 +1,4 @@
+vro = PhysTrack.VideoReader2;
 questdlg('Define a reference coordinate system.', '', 'OK', 'OK');
 [rwRCS, ppm] = PhysTrack.DrawCoordinateSystem(vro);
 obs = PhysTrack.GetObjects(vro);

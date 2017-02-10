@@ -1,3 +1,4 @@
+vro = PhysTrack.VideoReader2;
 questdlg('Define a reference coordinate system where x-coordinate is aligned horizontally acording to the scene and the mass moves along the y-axis.', '', 'OK', 'OK');
 [rwRCS, ppm] = PhysTrack.DrawCoordinateSystem(vro);
 obs = PhysTrack.GetObjects(vro);
