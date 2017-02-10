@@ -24,7 +24,13 @@ Examples of some experiments can be viewewd on the Smart Physics Lab website on 
 
 * A computer with RAM >=3GB and an installation of Matlab 2006 (or above) with [Image Acquisition Toolbox](https://www.mathworks.com/products/imaq.html) and [Computer Vision Toolbox](https://www.mathworks.com/products/computer-vision.html) is also required.
 
-### References
+## Performing a physics experiment with PhysTrack
+
+Performing a classical mechanics experiments using video tracking and performing advance analysis is very simple.
+
+We capture video of the moving object using a digital camera, use one of the automated trackers of PhysTrack to track the objects and generate position, orientation, velocity and acceleration data
+
+## References
 
 [1] J. Poonyawatpornkul and P. Wattanakasiwich, "High-speed video analysis of a rolling disc in three dimensions", Eur. J. Phys. 36 065027 (2015).
 
