@@ -37,8 +37,8 @@ function [trajectories, vr2o_new] = KLT(vr2o, objs)
     end
     h = waitbar(0, 'Creating trajectory of track pointer');
     broken = false;
-    for ff = 1:(vr2o.TotalFrames)
-        frame = PhysTrack.read2(vr2o, ff, false, true);
+    for ff = 1:(klt_vr2o_00.TotalFrames)
+        frame = PhysTrack.read2(klt_vr2o_00, ff, false, true);
         out = frame;
         for ii = 1: size(objs, 1);
             inS = num2str(ii);
@@ -48,8 +48,8 @@ function [trajectories, vr2o_new] = KLT(vr2o, objs)
 
             lastValidFID = ff;
             if mean(validity) < 0.5 %track was lost
-                vr2o.ofi = vr2o.ofi + lastValidFID - 1;
-                vr2o.TotalFrames = vr2o.ofi - vr2o.ifi + 1;
+                klt_vr2o_00.TotalFrames = lastValidFID - 1;
+                klt_vr2o_00.ofi = klt_vr2o_00.ifi + klt_vr2o_00.TotalFrames - 1;
                 questdlg('Validity of track points has dropped below 50%. Tracking will stop now.', 'Track point was lost', 'OK', 'OK');
                 broken = true;
                 break;
@@ -58,7 +58,7 @@ function [trajectories, vr2o_new] = KLT(vr2o, objs)
                 eval(['klt_PointsValidity_00_', inS, '(:,end+1) = validity;']);
             end
         end
-        waitbar(double(ff)/double(vr2o.TotalFrames), h, ['Creating trajectory of track pointer: ', num2str(round(double(ff)/double(vr2o.TotalFrames)*100)), '%']);
+        waitbar(double(ff)/double(klt_vr2o_00.TotalFrames), h, ['Creating trajectory of track pointer: ', num2str(round(double(ff)/double(vr2o.TotalFrames)*100)), '%']);
         imshow(out,'InitialMagnification',200);
         if broken 
             break;
@@ -84,7 +84,7 @@ function [trajectories, vr2o_new] = KLT(vr2o, objs)
                 remInds(end + 1) = ii;
             end
         end
-        if length(remInds) > 0
+        if ~isempty(remInds)
             % eval(['klt_PointsValidity_00_', inS, '(remInds,:) = [];']);
             eval(['klt_trackPoints_00_', inS, '(remInds,:,:) = [];']);
         end
@@ -119,6 +119,6 @@ function [trajectories, vr2o_new] = KLT(vr2o, objs)
         evalin('base', ['clear klt_trackPoints_00_', num2str(ii)]);
     end
     evalin('base', 'clear ans klt_vr2o_00 klt_tObs_00');
-    vr2o_new = vr2o;
+    vr2o_new = klt_vr2o_00;
 end
 

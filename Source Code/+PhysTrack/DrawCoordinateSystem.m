@@ -22,6 +22,9 @@ function [ RefCoord, PixelsPerUnit] = DrawCoordinateSystem( vr2o, CurrentRefCoor
     if nargin == 1
         assignin('base', 'vtt_rw_00' ,[0,0; vr2o.CropRect(4)*.8, 0; 0, vr2o.CropRect(4)*.4] + 1);
     else
+        if size(CurrentRefCoord, 1) == 1 % is a point. convert it to ref
+            CurrentRefCoord = [CurrentRefCoord;[CurrentRefCoord(1) + 100, CurrentRefCoord(2)];[CurrentRefCoord(1), CurrentRefCoord(2) + 50]];
+        end
         assignin('base', 'vtt_rw_00' ,CurrentRefCoord);
     end
     CoordinateSystemTool;

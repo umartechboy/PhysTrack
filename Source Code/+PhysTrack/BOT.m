@@ -1,62 +1,56 @@
-function traj = BOT(vro, obs, saveAddress)
-%Binray object tracker tracks objects in a binary video.
-if nargin == 2
-    saveAddress = false;
-end
-if ~isstruct(vro.BinaryThreshold)
-    error('The binary object tracker works on a binary video. This video reader object does not contain any binary conversion data.');
-end
+function [trajectories, vr2o_new] = BOT(vr2o, selObjects)
+% BOT (Binary Object Tracker)
+%  The other tracker works on a background difference technique. Its called 
+% the Binary Object Tracker (BOT). The algorithm takes the first frame of
+% the binary image and identifies objects by detecting connected regions. 
+% Each connected region is an object. Then it matches the location and size 
+% of these objects with the object collection given for tracking. By doing 
+% this, it actually tries to map each desired object with a detected object
+% approximately sharing it's location and size. It then updates the new
+% location of these objects and repeats the process through the rest of the
+% video.
+%
+% See also PHYSTRACK.KLT
+
+    
     watchon;
-    if ~exist('posTol')
-        posTol = 4000;
-    end
-    if  size(obs, 1) == 0
-        retObs = [];
-        return;
-    end
-    % prepare the datatypes
-    objs = struct('x', 0, 'y', 0, 'dx', 0, 'dy', 0, 'rp2', 0, 'validity', 0);
-    for ii = 2:size(selObjects, 1)
-        objs(end + 1) = struct('x', 0, 'y', 0, 'dx', 0, 'dy', 0, 'rp2', 0, 'validity', 0);
-    end
-    % check if we need to save the output
-    if ~isempty(saveAddress)
-        vwo = VideoWriter(saveAddress);
-        vwo.FrameRate = vro.FrameRate;
-        vwo.open();
-    end
+    vr2o_new = vr2o;
     % some variables to be used in the loop
-    se = strel('disk', 4);
-    crsr = 0;    % used as a one based index in the loop
     lost = false; % used to set a flag that the tracking is lost
     fh = figure; % figure used to display the processing frame
     wbh = waitbar(0, 'Starting...'); % handle of waitbar used to show the progress
-    for ii = 1:vro.TotalFrames    
+    for ii = 1: size(selObjects, 1)
+        cx = selObjects(ii, 1) + selObjects(ii, 3) / 2;
+        cy = selObjects(ii, 2) + selObjects(ii, 4) / 2;
+        eval(['trajectories.tp', num2str(ii), '.x(1) = cx;']);
+        eval(['trajectories.tp', num2str(ii), '.y(1) = cy;']);
+        eval(['trajectories.tp', num2str(ii), '.xy(1, :) = [cx, cy];']);
+        eval(['trajectories.tp', num2str(ii), '.validity(1) = 1;']);
+    end
+    objs = [];
+    for ii = 2:vr2o.TotalFrames
         % temporarily acquire the positions before appending them in the
         % final results
         sObs = [];
-        % the main binary frame for processing
-        frame =  imclose(PhysTrack.read2(vro, ii), se);
+        frame = PhysTrack.read2(vr2o, ii, false, false);
         % extract the centroids
-        fObs = regionprops(frame, {'centroid'});        
+        fObs = regionprops(frame, {'centroid', 'BoundingBox'});        
         
-        % in case of first frame, just store the points in the first index
-        % of result array. coz the values in selObjects is also calculated
-        % using same method
-        if ii == ifi            
-            for jj = 1:size(obs,1)
-                retObs(jj).x = obs(jj, 1);
-                retObs(jj).y = obs(jj, 2);
-                retObs(jj).validity = 1;
-            end
-            continue;
-        end
-        % match the centroids with the selected centroids
-        for jj = 1:size(obs,1)
-            for kk = 1:size(fObs,1)                
-                rhs = abs((fObs(kk).Centroid(1) - retObs(jj).x(crsr - 1))^2 + (fObs(kk).Centroid(2) - retObs(jj).y(crsr - 1))^2) / (posTol)*100;
-                lhs = obs(jj,3) * 2; % dia of obj
-                if lhs > rhs % object matched
+        % for each original object, find a probable new object
+        for jj = 1:size(selObjects,1)
+            lastXY = eval(['trajectories.tp', num2str(jj), '.xy(end,:)']);
+            lastSize = selObjects(jj, 3:4);
+            for kk = 1:size(fObs,1)   
+                thisXY = fObs(kk).Centroid;
+                thisSize = fObs(kk).BoundingBox(3:4);
+                
+                if ...
+                        sqrt((lastXY(1) - thisXY(1))^2 + (lastXY(2) - thisXY(2))^2) ...
+                        < ...
+                        sqrt(thisSize(1)*thisSize(2)) * 5 ...% object matched
+                        && ...
+                        sqrt(thisSize(1)*thisSize(2)) < ...
+                        sqrt(lastSize(1)*lastSize(2)) * 3
                     sObs(end + 1, :) = [fObs(kk).Centroid(:); 1];
                     break;
                 end
@@ -65,7 +59,7 @@ end
             % check if a match was found for this centroid in the processed
             % frame
             if size(sObs, 1) < jj                
-                sObs(end + 1, 1:3) = [retObs(jj).x(end), retObs(jj).y(end), 0];
+                sObs(end + 1, 1:3) = [lastXY(1), lastXY(2), 0];
                 % watchoff;
                 % waitfor(msgbox('Tracking process was stopped because one or more of the selected objects were lost.'));
                 % lost  = true;
@@ -77,69 +71,30 @@ end
         % end
         % store the centroids in the resulting array
         totalValid  = size(sObs,1);
-        for jj = 1:size(sObs,1)
-            retObs(jj).x(crsr) = sObs(jj, 1);
-            retObs(jj).y(crsr) = sObs(jj, 2);
-            retObs(jj).validity(crsr) = sObs(jj, 3);
+        for jj = 1: size(selObjects, 1)
+            eval(['trajectories.tp', num2str(jj), '.x(end + 1) = sObs(jj,1);']);
+            eval(['trajectories.tp', num2str(jj), '.y(end + 1) = sObs(jj,2);']);
+            eval(['trajectories.tp', num2str(jj), '.xy(end + 1, :) = sObs(jj,1:2);']);
+            eval(['trajectories.tp', num2str(jj), '.validity(end + 1) = sObs(jj,3);']);
+            
             if sObs(jj, 3) == 0
                 totalValid = totalValid - 1;
             end
             col = [0, 255, 255];
-            if mean(retObs(jj).validity) < 1
+            if mean(eval(['trajectories.tp', num2str(jj), '.validity'])) < 1
                 col = [255, 0, 0];
             end
-            sFrame = drawCrossHairMarks(sFrame, [sObs(jj,1:2), obs(jj,3)]/double(cPreMag), col);            
-            
+            frame = PhysTrack.drawCrossHairMarks(frame, [sObs(jj,1:2), selObjects(jj,3)], col);            
         end
         % preview the progress            
         warning off
-        imshow(sFrame); 
-        if ~isempty(saveAddress)
-            writeVideo(vwo, sFrame);
-        end
-        waitbar(double(ii - ifi + 1) / double(ofi - ifi + 1), wbh, ...
+        imshow(frame); 
+        waitbar(double(ii) / double(vr2o.TotalFrames), wbh, ...
             ['Total objects: ', num2str(totalValid), '/', num2str(size(sObs,1)),...
-            ', Processed frame ', num2str(ii - ifi + 1), ' of ', num2str(ofi - ifi + 1), ...
-            ' (', num2str(round(double(ii - ifi + 1) / double(ofi - ifi + 1) * 100)), '%)']);
+            ', Processed frame ', num2str(ii), ' of ', num2str(vr2o.TotalFrames), ...
+            ' (', num2str(round(double(ii) / double(vr2o.TotalFrames) * 100)), '%)']);
     end   
-    % prepare r^2
-    rn2 = 0;
-    for ii = 1:size(obs, 1)
-        retObs(ii).x = retObs(ii).x(1:end-1) * umpp / double(cPreMag);
-        retObs(ii).y = retObs(ii).y(1:end-1) * umpp / double(cPreMag);
-        retObs(ii).dx = retObs(ii).x - retObs(ii).x(1);
-        retObs(ii).dy = retObs(ii).y(:) - retObs(ii).y(1);
-        retObs(ii).rp2 = (retObs(ii).x - retObs(ii).x(1)).^2 + (retObs(ii).y - retObs(ii).y(1)).^2;  
-        retObs(ii).validity = mean(retObs(ii).validity(1:end-1));
-        rn2 = rn2 + retObs(ii).rp2;        
-    end
-    rn2 = rn2/size(obs,1);
-    % prepare time stamps
-    tStamps = linspace(double(0), double(1 / vro.FrameRate * double(ofi-ifi)), length(retObs(1).x)); 
-    validObjects = [];
-    objs2 = struct('x', 0, 'y', 0, 'dx', 0, 'dy', 0, 'rp2', 0);
-    for ii = 1:size(retObs,2)
-        if retObs(ii).validity == 1
-            objs2(end + 1).x = retObs(ii).x;
-            objs2(end).y = retObs(ii).y;
-            objs2(end).dx = retObs(ii).dx;
-            objs2(end).dy = retObs(ii).dy;
-            objs2(end).rp2 = retObs(ii).rp2;
-            validObjects(end+1,:) = obs(ii,:);
-        end
-    end
-    objs2(1) = [];
-    
-    % prepare the final result
-    retObs = struct('Objects', objs2, 'AllObjects', retObs, 'rn2', rn2,'TimeStamps', tStamps, 'AllObjectsCount', size(obs,1), 'ValidObjectsCount', size(objs2, 2), 'FramesCount', size(tStamps,2));
-   
-    % clean up the workspace
-    if ~isempty(saveAddress)
-        vwo.close();
-    end
-    watchoff;
-    close(wbh);
-    close(fh);    
-
+    close (wbh)
+    close (fh)
 end
 

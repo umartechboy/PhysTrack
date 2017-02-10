@@ -341,7 +341,6 @@ else
                 drawnow;
                 pause(1 / vtt_vr2o_00.FPS);
         end
-        pause(1000);
     end
 end
 % --- Executes on button press in gotoxB.
