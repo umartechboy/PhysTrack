@@ -54,11 +54,11 @@ A video demonstration of physics experiment can be viewed on the following link:
 
 ## Resources
 
-* [PhysLab website](http://physlab.org/).
+* [PhysTrack Wiki](https://github.com/umartechboy/PhysTrack/wiki).
 * Primer: [Observing kinematics with PhysTrack](http://physlab.org/wp-content/uploads/2016/03/primer_videoTracking.pdf).
 * [Examples of mechanics experiments](http://physlab.org/tag/mechanics/).
 * [Example of experiment with video microscopy](http://physlab.org/experiment/tracking-brownian-motion-through-video-microscopy/).
-* [PhysTrack Wiki](https://github.com/umartechboy/PhysTrack/wiki).
+* [PhysLab website](http://physlab.org/).
 
 ## Credits
 
