@@ -39,6 +39,15 @@ Performing a classical mechanics experiments using video tracking and performing
 * Primer: [Observing kinematics with PhysTrack](http://physlab.org/wp-content/uploads/2016/03/primer_videoTracking.pdf).
 * [Examples of mechanics experiments](http://physlab.org/tag/mechanics/).
 * [Example of experiment with video microscopy](http://physlab.org/experiment/tracking-brownian-motion-through-video-microscopy/).
+* [PhysTrack Wiki](https://github.com/umartechboy/PhysTrack/wiki).
+
+## Credits
+
+The whole work is an effort of <a href="http://physlab.org/">PhysLab</a> of the Lahore University of Management Sciences (<a href="https://lums.edu.pk/">LUMS</a>), Lahore, Pakistan. Kindly feel free to contact in case you wish to contribute in the development and improvement of this library.
+
+### Authors
+
+M. Umar Hassan, [M. Sabieh Anwar](http://physlab.org/muhammad-sabieh-anwar-personal/).
 
 ## References
 
@@ -54,4 +63,3 @@ Performing a classical mechanics experiments using video tracking and performing
 
 The first version uploaded on GitHub is v2.1 and a comprehensive documentation of this code can be viewed on PhysTrack Wiki on <a href="https://github.com/umartechboy/PhysTrack/wiki">This Link</a>. 
 
-The whole work is an effort of <a href="http://physlab.org/">PhysLab</a>, <a href="https://lums.edu.pk/">LUMS</a>, Pakistan. Kindly feel free to contact in case you wish to contribute in the development and improvement of this library.
