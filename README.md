@@ -48,7 +48,7 @@ You are only a couple of steps away from using PhysTrack for your own experiment
 alt="PhysTrack Package" width="20" height="20" border="10" /></a> [The latest PhysTrack Package (without videos)](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/umartechboy/PhysTrack/tree/master/Source%20Code)
 
 <a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos" target="_blank"><img src="http://www.free-icons-download.net/images/download-logo-icon-45961.png" 
-alt="PhysTrack Package" width="25" height="25" border="10" /></a> [Sample Videos](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos)
+alt="PhysTrack Package" width="20" height="20" border="10" /></a> [Sample Videos](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos)
 
 ## Performing a physics experiment with PhysTrack
 
