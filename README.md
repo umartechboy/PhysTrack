@@ -26,6 +26,8 @@ Examples of some experiments can be viewed on the Smart Physics Lab website on [
 
 ## Performing a physics experiment with PhysTrack
 
+![http://i.imgur.com/iYiVtuD.png](Process Flow)
+
 Performing a classical mechanics experiments using video tracking and performing advance analysis is very simple.
 
 * We capture video of the moving object using a digital camera, 
