@@ -38,7 +38,7 @@ You are only a couple of steps away from using PhysTrack for your own experiment
 
 * The scripts are designed to be user interactive. They communicate with the user through GUI's and message boxes and guide through the whole process. The script will also ask to load the experiment video you downloaded in the previous steps.
 
-* Once done, peruse the sample scripts, which are well commented, and try to understand how you can modify the codes for your own experiment.
+* Once done, peruse the sample scripts, which are well commented, and try to understand how you can modify the codes for your own experiment. You will also find help on the usage of each function from the [PhysTrack Wiki](https://github.com/umartechboy/PhysTrack/wiki).
 
 * Capture your own experiment's video and start making robust video tracking experiment scripts.
 
