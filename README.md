@@ -6,7 +6,11 @@ PhysTrack is a Matlab based video tracking solution for analyzing kinematics of 
 
 ## Who should use it?
 
+PhysTrack is used in numerous physics experiments of [Smart Physics Lab](http://physlab.org/smart-physics/) section of [PhysLab](http://physlab.org/smart-physics/). 
+
 Physics teachers, students and researchers can use PhysTrack to track the motion of moving bodies and investigate the underlying physics in many kinds of experiments. Typical examples of these experiments are rotating and translating discs [1], spring pendulum systems [2], bodies colliding on a plane and projectiles [3], microspheres exhibiting Brownian motion [4], liquid droplets falling down a stream and the movement of a fruitfly [5].
+
+Examples of some experiments can be viewewd on the Smart Physics Lab website on [This Link](http://physlab.org/smart-physics/).
 
 ## Requirements for performing an experiment with PhysTrack
 
