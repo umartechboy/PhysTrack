@@ -18,7 +18,7 @@ Examples of some experiments can be viewed on the Smart Physics Lab website on [
 
 * To capture videos a good slow motion camera is required. In PhysLab, we usually use a [Canon PowerShot SX280HS](https://www.cnet.com/products/canon-powershot-sx280-hs/review/) mounted on a tripod stand which works very well with most of the mechanics experiments. This camera can capture video at as high a frame rate as 240fps with a frame size of 320x240 pixels.
 
-* For investigating microscopic motion, a video microscope is also required. In PhysLab, we usually use a [Motic BA210 Trinocular](http://www.motic.com/As_LifeSciences_UM_BA210/product_240.html) for investigating the Browninan motion of micro parti[]cles.
+* For investigating microscopic motion, a video microscope is also required. In PhysLab, we usually use a [Motic BA210 Trinocular](http://www.motic.com/As_LifeSciences_UM_BA210/product_240.html) for investigating the Brownian motion of micro particles.
 
 * Usually, to move the objects in required fashion, an apparatus is also recommended.
 
@@ -28,17 +28,17 @@ Examples of some experiments can be viewed on the Smart Physics Lab website on [
 
 You are only a couple of steps away from using PhysTrack for your own experiments. 
 
-* Download and extract the latest PhysTrack source from the downloads section . It also contains some additional experiment scripts which serve as an example for creating your own experiments.
+* Download and extract the latest PhysTrack source from the downloads section. It also contains some additional experiment scripts which serve as an example for creating your own experiments.
 
 * Also, choose and download a sample video from the [this link](https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos).
 
-* Open Matlab and change the current directory to the downloaded package. You should see the _"+PhysTrack"_ and _"GUIs"_ directory alongwith some _"analyze motion"_ scripts in the current address window.
+* Open Matlab and change the current directory to the downloaded package. You should see the _"+PhysTrack"_ and _"GUIs"_ directory along with some _"analyze motion"_ scripts in the current address window.
 
-* Depending upon the type of experiment requied, select any script from the window and run it. (Or you can type in the name of that experiment in the command window and hit _"Enter"_.
+* Depending upon the type of experiment required, select any script from the window and run it. (Or you can type in the name of that experiment in the command window and hit _"Enter"_.
 
 * The scripts are designed to be user interactive. They communicate with the user through GUI's and message boxes and guide through the whole process. The script will also ask to load the experiment video you downloaded in the previous steps.
 
-* Once done, puruse the sample scripts, which are well commented, and try to understand how you can modify the codes for your own experiment.
+* Once done, peruse the sample scripts, which are well commented, and try to understand how you can modify the codes for your own experiment.
 
 * Capture your own experiment's video and start making robust video tracking experiment scripts.
 
