@@ -18,7 +18,7 @@ Physics teachers, students and researchers can use PhysTrack in many kinds of ex
 
 [4] Paul Nakroshis, Matthew Amoroso, Jason Legere and Christian Smith, _"Measuring Boltzmann’s constant using video microscopy of Brownian motion"_, Am. J. Phys, 71, 568 (2003).
 
-[5] _"Tracking kinematics of a fruitfly using video analysis"_, [This Link](http://goo.gl/ljypdC).
+[5] [_"Tracking kinematics of a fruitfly using video analysis"_](http://goo.gl/ljypdC).
 
 The first version uploaded on GitHub is v2.1 and a comprehensive documentation of this code can be viewed on PhysTrack Wiki on <a href="https://github.com/umartechboy/PhysTrack/wiki">This Link</a>. 
 
