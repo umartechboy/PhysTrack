@@ -35,19 +35,6 @@ Performing a classical mechanics experiments using video tracking and performing
 * to investigate the motion, use the in-built Matlab tools or those included in PhysTrack like numerical differentiation, curve fitting, object stitching and coordinate system transformation and
 * present the results using Matlab plots and video plots included in PhysTrack.
 
-## Video demonstration
-
-Once the video is captured, PhysTrack is used in Matlab for extracting data, performing analysis and presenting the results. When using the sample _"analyze motion"_ scripts from the previous section, the process is similar for all the experiments. Users can also take these experiments as a base for creating new scrips and automated experiments.
-
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=tSQxx-jpT-Q" target="_blank"><img src="http://i.imgur.com/VrLSe5p.png" 
-alt="Video Demonstration on YouTube" width="650" height="360" border="10" /></a>
-
-## Physics experiments with PhysTrack
-For demonstration purpose, the we have packed some additional files with PhysTrack. We have also created some sample analysis scripts for different kinds of experiments and provided the videos used with them.
-
-A video demonstration of physics experiment can be viewed on the following link:
-## <a href="https://drive.google.com/file/d/0B8JKsZMA1LM4OGg5WnQyM2w0bGM/view?usp=sharing">Google Drive Link
-
 ## Sample experiments
 | Experiment Title | Student manual and resources | Sample Analysis Codes| Sample Videos|
 | ------------------ |:----------:| :----------:|:----------:|
@@ -58,6 +45,13 @@ A video demonstration of physics experiment can be viewed on the following link:
 |	Rotation on a Fixed Pivot	|	[Link]	(http://physlab.org/experiment/rotational-motion-about-a-fixed-axis/)	|	[Link]	(https://github.com/umartechboy/PhysTrack/blob/master/analyzeRotationOnAFixedPivot.m)	|	[Link]	(https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos/RotationOnAFixedPivot)	|
 |	Brownian Motion	|	[Link]	(http://physlab.org/experiment/tracking-brownian-motion-through-video-microscopy/)	|	[Link]	(https://github.com/umartechboy/PhysTrack/blob/master/analyzeBrownianMotion.m)	|	[Link]	(https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos/BrownianMotion)	|
 |	Rotational Friction	|			|	[Link]	(https://github.com/umartechboy/PhysTrack/blob/master/analyzeRotationalFriction.m)	|	[Link]	(https://github.com/umartechboy/PhysTrack/blob/master/SampleVideos/RollingCylinder.MP4)	|
+
+## Video demonstration
+
+Once the video is captured, PhysTrack is used in Matlab for extracting data, performing analysis and presenting the results. When using the sample _"analyze motion"_ scripts from the previous section, the process is similar for all the experiments. Users can also take these experiments as a base for creating new scrips and automated experiments.
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=tSQxx-jpT-Q" target="_blank"><img src="http://i.imgur.com/VrLSe5p.png" 
+alt="Video Demonstration on YouTube" width="650" height="360" border="10" /></a>
 
 ## Resources
 
