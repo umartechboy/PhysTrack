@@ -1,49 +1,67 @@
-# PhysTrack
-PhysTrack is an open source Matlab library developed by PhysLab (Lahore University of management sciences, Pakistan).
+![PhysTrack Logo](http://i.imgur.com/fuiAoR3.png)
 
+## What is PhysTrack?
 
-The latest version on Feb 2, 2017 was 2.1.
+PhysTrack is a Matlab based video tracking solution for analyzing kinematics of moving bodies. Since Matlab is a very popular analysis tool in physics laboratories around the globe, we have tried to combine the robustness of Matlab computation power with such a friendly user interface which can be found in commercial video tracking software.
 
+## Who should use it?
 
-Following is a quick guide for testing the library.
+PhysTrack is used in numerous physics experiments of [Smart Physics Lab](http://physlab.org/smart-physics/) section of [PhysLab](http://physlab.org/smart-physics/). 
 
-1: Open Matlab r2010 or above in the ectracted library folder.
+Physics teachers, students and researchers can use PhysTrack to track the motion of moving bodies and investigate the underlying physics in many kinds of experiments. Typical examples of these experiments are rotating and translating discs [1], spring pendulum systems [2], bodies colliding on a plane and projectiles [3], microspheres exhibiting Brownian motion [4], liquid droplets falling down a stream and the movement of a fruitfly [5].
 
-2: call fileInit and select a video file for tracking. Some sample videos can be found in the root of this repo.
+Examples of some experiments can be viewed on the Smart Physics Lab website on [This Link](http://physlab.org/smart-physics/).
 
-3: depending on the type of video selected, call the analyzeXYZMotion script and follow the instructions.
+## Requirements for performing an experiment with PhysTrack
 
-4: All of the videos require a pixel to meters calibration constant which has to be drawn on the frame. For testing purpose, any distance can be marked.
+* In addition to the primary knowledge of kinematics, we assume that the user is accustomed to the basics of Matlab tool and language.
 
-5: The script will call different functions to analyze, process and preview the video.
+* To capture videos a good slow motion camera is required. In PhysLab, we usually use a [Canon PowerShot SX280HS](https://www.cnet.com/products/canon-powershot-sx280-hs/review/) mounted on a tripod stand which works very well with most of the mechanics experiments. This camera can capture video at as high a frame rate as 240fps with a frame size of 320x240 pixels.
 
+* For investigating microscopic motion, a video microscope is also required. In PhysLab, we usually use a [Motic BA210 Trinocular](http://www.motic.com/As_LifeSciences_UM_BA210/product_240.html) for investigating the Browninan motion of micro particles.
 
-Following is a small list of some important functions and scripts.
-  
-  a: PhysTrack.VideoReader2 >> constructs and returns a video redear object. This object contains cropping and trimming information.
-  
-  b: PhysTrack.read2(VideoReader2Object, frameNumber) reads a specific frame from the VideoReader2 object.
-  
-  c: PhysTrack.GetObjects(VideoReader2Object) is a GUI to manually mark objects for tracking purpose.
-  
-  d: PhysTrack.KLT(VideoReader2Object, SelectedObjects) previews and tracks the objects in the rest of the video using KLT algorithm. returns the trajectories of the selected objects in a struct form. The struct contains tpN objects. where N is equal to the number of objects given for tracking.
-  
-  e: PhysTrack.BinaryTracker(VideoReader2Object, SelectedObjects) previews and tracks the objects in the rest of the video using Binary background difference method. It returns the trajectories of the selected objects in a struct form. The struct contains tpN objects. where N is equal to the number of objects given for tracking.
-  
-  f: DrawCoordinateSystem(vro) lets the user interactively define a floating coordinate system and a pixel to unit calibration constant.
-  
-  g: DrawFloatingCoordinateSystem(vro, trajectory1, trajectory2) lets the user interactively define a floating coordinate system and a pixel to unit calibration constant. This type of coordinate system is defined in the first frame but will be stitched to the given track points. This way, it will move with those points in the whole Video.
-  
-  h: PhysTrack.TransformCart2Cart and PhysTrack.InverseTransformCart2Cart can transform trajectories from and to a coordinate system defined using the coordinate system tools. These functions work with both TP type structs and arrays of points and can also work fine with floating and stationary coordinate systems.
-  
-  i: PhysTrack.VidPlot(VideoReader2Object, TrackPoints) can create a colorful video using the track points and the original video.
-  
-  j: PhysTrack.deriv(xdata, ydata, order) function can derivate a given array of points and return deriavative of order 1 to 4.
-  
-  k: PhysTrack.lsqCFit(xdata, ydata, dependant, model, independant, startingValues) uses the inbuilt cftool to fit the data on a mathematical model.
-  
-  l: PhysTrack.cascade arranges all open figures on the screen in sequence.
+* Usually, to move the objects in required fashion, an apparatus is also recommended.
 
+* A computer with RAM >=3GB and an installation of Matlab 2006 (or above) with [Image Acquisition Toolbox](https://www.mathworks.com/products/imaq.html) and [Computer Vision Toolbox](https://www.mathworks.com/products/computer-vision.html) is also required.
 
+## Performing a physics experiment with PhysTrack
 
-For a detail on how every function works, see the embedded comments.
+![Process Flow](http://i.imgur.com/iYiVtuD.png)
+
+Performing a classical mechanics experiments using video tracking and performing advance analysis is very simple.
+
+* We capture video of the moving object using a digital camera, 
+* use one of the automated trackers of PhysTrack to track the objects and generate position and orientation data,
+* to investigate the motion, use the in-built Matlab tools or those included in PhysTrack like numerical differentiation, curve fitting, object stitching and coordinate system transformation and
+* present the results using Matlab plots and video plots included in PhysTrack.
+
+## Resources
+
+* [PhysLab website](http://physlab.org/).
+* Primer: [Observing kinematics with PhysTrack](http://physlab.org/wp-content/uploads/2016/03/primer_videoTracking.pdf).
+* [Examples of mechanics experiments](http://physlab.org/tag/mechanics/).
+* [Example of experiment with video microscopy](http://physlab.org/experiment/tracking-brownian-motion-through-video-microscopy/).
+* [PhysTrack Wiki](https://github.com/umartechboy/PhysTrack/wiki).
+
+## Credits
+
+The whole work is an effort of <a href="http://physlab.org/">PhysLab</a> of the Lahore University of Management Sciences (<a href="https://lums.edu.pk/">LUMS</a>), Lahore, Pakistan. Kindly feel free to contact in case you wish to contribute in the development and improvement of this library.
+
+### Authors
+
+M. Umar Hassan, [M. Sabieh Anwar](http://physlab.org/muhammad-sabieh-anwar-personal/).
+
+## References
+
+[1] J. Poonyawatpornkul and P. Wattanakasiwich, "High-speed video analysis of a rolling disc in three dimensions", Eur. J. Phys. 36 065027 (2015).
+
+[2] J. Poonyawatpornkul and P. Wattanakasiwich, _"High-speed video analysis of damped harmonic motion"_, Eur. J. Phys. 48 6 (2013).
+
+[3] Loo Kang Wee, Charles Chew, Giam Hwee Goh, Samuel Tan and Tat Leong Lee, _"Using Tracker as a pedagogical tool for understanding projectile motion"_ Eur. J. Phys. 47 448 (2012).
+
+[4] Paul Nakroshis, Matthew Amoroso, Jason Legere and Christian Smith, _"Measuring Boltzmann’s constant using video microscopy of Brownian motion"_, Am. J. Phys, 71, 568 (2003).
+
+[5] [_"Tracking kinematics of a fruitfly using video analysis"_](http://goo.gl/ljypdC).
+
+The first version uploaded on GitHub is v2.1 and a comprehensive documentation of this code can be viewed on PhysTrack Wiki on <a href="https://github.com/umartechboy/PhysTrack/wiki">This Link</a>. 
+
