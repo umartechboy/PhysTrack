@@ -6,7 +6,9 @@ function [floatingRwRCS, ppm] = DrawFloatingCoordinateSystemNonRotating(vro, tra
     tp1 = PhysTrack.StructToArr(trajectory);
     if nargin == 3
         if size(preferredCenterOrRwRCS, 1) == 1 % its a center
-            preferredCenterOrRwRCS = [preferredCenterOrRwRCS;[preferredCenterOrRwRCS(1) + 100, preferredCenterOrRwRCS(2)];[preferredCenterOrRwRCS(1), preferredCenterOrRwRCS(2) + 50]];
+            if isstruct(preferredCenterOrRwRCS)
+                preferredCenterOrRwRCS = [preferredCenterOrRwRCS;[preferredCenterOrRwRCS(1) + 100, preferredCenterOrRwRCS(2)];[preferredCenterOrRwRCS(1), preferredCenterOrRwRCS(2) + 50]];
+            end
         end
 
         [rwRCS, ppm] = PhysTrack.DrawCoordinateSystem(vro, preferredCenterOrRwRCS);
