@@ -3,8 +3,8 @@ vro = PhysTrack.VideoReader2;
 % we need a static coordinate system to be placed on the horizontal
 % surface. coordinate system is stored in rwRCS and the pixels per meter
 % constant in ppm.
-% questdlg('Define a reference coordinate system where x-coordinate is aligned horizontally acording to the scene and y-axis is pointing upwards.', '', 'OK', 'OK');
-% [rwRCS, ppm] = PhysTrack.DrawCoordinateSystem(vro);
+questdlg('Define a reference coordinate system where x-coordinate is aligned horizontally acording to the scene and y-axis is pointing upwards.', '', 'OK', 'OK');
+[rwRCS, ppm] = PhysTrack.DrawCoordinateSystem(vro);
 % let the user select the object needed to be tracked.
 % the user will select the whole flying bob as the object
 obs = PhysTrack.GetObjects(vro);
