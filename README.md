@@ -50,6 +50,9 @@ alt="PhysTrack Package" width="20" height="20" border="10" /></a> [The latest Ph
 <a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos" target="_blank"><img src="http://www.free-icons-download.net/images/download-logo-icon-45961.png" 
 alt="PhysTrack Package" width="20" height="20" border="10" /></a> [Sample Videos](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos)
 
+<a href="https://github.com/umartechboy/PhysTrack/blob/master/PhysTrack%20--%20Experimenter's%20Reference%20Manual%202017-1.pdf" target="_blank"><img src="http://www.free-icons-download.net/images/download-logo-icon-45961.png" 
+alt="PhysTrack Package" width="20" height="20" border="10" /></a> [Experimenter's Reference Manual](https://github.com/umartechboy/PhysTrack/blob/master/PhysTrack%20--%20Experimenter's%20Reference%20Manual%202017-1.pdf)
+
 ## Performing a physics experiment with PhysTrack
 
 ![Process Flow](http://i.imgur.com/iYiVtuD.png)
