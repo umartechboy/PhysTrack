@@ -1,5 +1,5 @@
 % Create a video reader object. 
-vro = PhysTrack.VideoReader2;
+vro = PhysTrack.VideoReader2(true, false, 240);
 % let the user select the object needed to be tracked. The user will select
 % two points on the rolling cylinder.
 obs = PhysTrack.GetObjects(vro);

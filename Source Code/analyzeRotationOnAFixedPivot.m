@@ -1,5 +1,5 @@
 % Create a video reader object. 
-vro = PhysTrack.VideoReader2;
+vro = PhysTrack.VideoReader2(true, false, 240);
 % let the user select the object needed to be tracked. The user will select
 % a track marker on the rotating disc.
 obs = PhysTrack.GetObjects(vro);
@@ -66,7 +66,7 @@ ylabel('Angular displacement (radians)');
 
 figure; grid on;
 plot(tw,w, 'Color', [0,0,1],'MarkerSize', 4);
-title('Angular velocity (calculated by 5-point differentiation)');
+title('Angular velocity (calculated by numerical differentiation)');
 xlabel('time t (second)');
 ylabel('Angular velocity (radians per second)');
 

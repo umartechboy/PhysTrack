@@ -1,5 +1,5 @@
 % Create a video reader object.
-vro = PhysTrack.VideoReader2;
+vro = PhysTrack.VideoReader2(true, false, 240);
 % we need a static coordinate system to be placed on the horizontal
 % surface. coordinate system is stored in rwRCS and the pixels per meter
 % constant in ppm.
@@ -21,17 +21,17 @@ trajectory = PhysTrack.TransformCart2Cart(trPt_.tp1, rwRCS);
 % convert pixels to meters.
 trajectory = PhysTrack.StructOp(trajectory, ppm, './');
 
-% for a comparison of the launch velocity calculated from video tracking
-% and the Verniew projectile launcher, we need to identify the location of
-% the point of launch in the video.
-questdlg('Identify the location of the first photogate on VPL.', '', 'OK', 'OK');
-% display the first frame
-imshow(PhysTrack.read2(vro,1));
-% get input from user.
-pg1 = ginput(1);
-% transform and convert the point to real worl coordinates because all
-% other data is in that frame.
-pg1 = PhysTrack.TransformCart2Cart(pg1, rwRCS) / ppm;
+% % for a comparison of the launch velocity calculated from video tracking
+% % and the Verniew projectile launcher, we need to identify the location of
+% % the point of launch in the video.
+% questdlg('Identify the location of the first photogate on VPL.', '', 'OK', 'OK');
+% % display the first frame
+% imshow(PhysTrack.read2(vro,1));
+% % get input from user.
+% pg1 = ginput(1);
+% % transform and convert the point to real worl coordinates because all
+% % other data is in that frame.
+% pg1 = PhysTrack.TransformCart2Cart(pg1, rwRCS) / ppm;
 
 % generate thime stamps
 t = PhysTrack.GenerateTimeStamps(vro);
@@ -111,18 +111,18 @@ legend('vy (real)', 'vy = vy_i + g * t');
 % cascade the figures
 PhysTrack.cascade;
 
-% lets now calculate the launch velocity and leave it in the workspace.
-% for that, we first calculate the time the y component of ball equals the
-% x of photogate specified by the user.
-% usng that time, we can calculate the velocty.
-th_ = double(PhysTrack.askValue('Kindly identify the manually measured value of the launch angle in degrees.',45));
-% get the velocity at the first photogate
-vyFit = PhysTrack.lsqCFit(tvy, vy, 'y',  'c0 + c1 * t_', 't_' );
-tyFit = PhysTrack.lsqCFit(t, trajectory.y, 'y',  'b0 + b1 * t_ + b2 * t_^2', 't_');
-% time of launch
-tl = (-tyFit.b1 + sqrt(tyFit.b1^2 - 4 * (tyFit.b0 - pg1(2)) * tyFit.b2) ) / (2 * tyFit.b2);
-vi = vyFit(tl)/ sin (th_ * pi / 180);
-photoGate = pg1;
+% % lets now calculate the launch velocity and leave it in the workspace.
+% % for that, we first calculate the time the y component of ball equals the
+% % x of photogate specified by the user.
+% % usng that time, we can calculate the velocty.
+% th_ = double(PhysTrack.askValue('Kindly identify the manually measured value of the launch angle in degrees.',45));
+% % get the velocity at the first photogate
+% vyFit = PhysTrack.lsqCFit(tvy, vy, 'y',  'c0 + c1 * t_', 't_' );
+% tyFit = PhysTrack.lsqCFit(t, trajectory.y, 'y',  'b0 + b1 * t_ + b2 * t_^2', 't_');
+% % time of launch
+% tl = (-tyFit.b1 + sqrt(tyFit.b1^2 - 4 * (tyFit.b0 - pg1(2)) * tyFit.b2) ) / (2 * tyFit.b2);
+% vi = vyFit(tl)/ sin (th_ * pi / 180);
+% photoGate = pg1;
 %clear temporary data
 clear('ans', 'dgof', 'lastValidFID', 'traceValidity', 'mxx', 'mxy', 'pFinal', 'wgof', 'answer', 'defaultValues', 'dlg_title', 'kd', 'kdx', 'kdy', 'num_lines','options','prompt');
 clear tvx tvy vx vy  vyFit vyFunc t_ vyFuncStr tyFit

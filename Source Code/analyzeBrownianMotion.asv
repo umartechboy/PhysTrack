@@ -11,8 +11,8 @@ particles = PhysTrack.BOT(vro, obs);
 t = PhysTrack.GenerateTimeStamps(vro);
 % for pixels per meter, we won;t use on screen distance marking. instead we
 % use the micro-scope's builtin function of distance calibration.
-ppmm = PhysTrack.askValue('Enter a value for pixels per \mu m calibration', 0.2025) * vro.PreMag; 
-particles = PhysTrack.StructOp(particles, ppmm, '*');
+ppum = PhysTrack.askValue('Enter a value for pixels per \mu m calibration', 0.2025) * vro.PreMag; 
+particles = PhysTrack.StructOp(particles, ppum, '*');
 
 % calculate <r^2> from all the particles. Don't filter out the wrong track.
 % its easier this way.
@@ -27,7 +27,7 @@ for ii = 1:size(obs, 1)
     % it first converts the arguments to string... then execute the 
     % command represented by that string
     eval(['particles.tp', num2str(ii), '.rp2 = rp2;']);
-    if eval(['mean(particles.tp', num2str(ii), '.validity) >= 1'])
+    if eval(['mean(particles.tp', num2str(ii), '.validity) >= .95'])
         rn2 = rn2 + rp2;
         obsUsed = obsUsed + 1;
     end

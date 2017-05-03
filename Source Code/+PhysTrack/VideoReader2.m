@@ -1,4 +1,4 @@
-function vro2Obj = VideoReader2()
+function vro2Obj = VideoReader2(forceCropTrim, forceBinaryConvert, forceFPS)
 %VIDEOREADER2 Gets a new video reader 2 object. In contrast to a usual
 % video reader object from the image acquisition toolbox, the video reader2
 % object embeds the cropping, trimming, pre-magnification and binary
@@ -58,6 +58,12 @@ function vro2Obj = VideoReader2()
 %    See also PHYSTRACK.READ2, PHYSTRACK.TRIMVIDEO,
 %    PHYSTRACK.CONVERTVIDEOTOBINARY
 
+    if ~exist('forceCropTrim')
+        forceCropTrim = true;
+    end
+    if ~exist('forceBinaryConvert')
+        forceBinaryConvert = true;
+    end
     [fileName, rootPath, filterIndex] = uigetfile({'*.mp4;*.avi;*.mov','Common Video File Types';'*.*','All Files'}, 'Select a video file for processing');
     fullPath = strcat(rootPath,fileName);
     if exist(fullPath, 'file') ~= 2
@@ -66,13 +72,20 @@ function vro2Obj = VideoReader2()
     end
     vro = VideoReader(fullPath);
     preMag = max(1,round(1500 / vro.Height));
-    fps = PhysTrack.askValue('Enter the number of frames shot per second by the camera: ', round(vro.FrameRate), 'Video Frame rate', 'uint16');
-    vro2Obj = struct('obj', vro, 'PreMag', preMag, 'FPS', fps, 'CropRect', [0,0, vro.Width * preMag, vro.height * preMag], 'ifi', 1, 'ofi', vro.NumberOfFrames, 'TotalFrames', vro.NumberOfFrames, 'BinaryThreshold', [], 'BinaryBackgroundIsLight', false );
-    if strcmp(questdlg('Do you want to Crop and Trim the video?', '', 'Yes', 'No', 'Yes'), 'Yes')
-        vro2Obj = PhysTrack.TrimVideo(vro2Obj, true);
+    if ~exist('forceFPS')
+        forceFPS = round(vro.FrameRate);
     end
-    if strcmp(questdlg('Do you want to convert this video to binary?', '', 'Yes', 'No', 'Yes'), 'Yes')
-        vro2Obj = PhysTrack.ConvertVideoToBinary(vro2Obj);
+    fps = PhysTrack.askValue('Enter the number of frames shot per second by the camera: ', forceFPS, 'Video Frame rate', 'uint16');
+    vro2Obj = struct('obj', vro, 'PreMag', preMag, 'FPS', fps, 'CropRect', [0,0, vro.Width * preMag, vro.height * preMag], 'ifi', 1, 'ofi', vro.NumberOfFrames, 'TotalFrames', vro.NumberOfFrames, 'BinaryThreshold', [], 'BinaryBackgroundIsLight', false );
+    if (forceCropTrim)
+        if strcmp(questdlg('Do you want to Crop and Trim the video?', '', 'Yes', 'No', 'Yes'), 'Yes')
+            vro2Obj = PhysTrack.TrimVideo(vro2Obj, true);
+        end
+    end
+    if (forceBinaryConvert)
+        if strcmp(questdlg('Do you want to convert this video to binary?', '', 'Yes', 'No', 'Yes'), 'Yes')
+            vro2Obj = PhysTrack.ConvertVideoToBinary(vro2Obj);  
+        end
     end
     global PreProcessingFunction
     if ~isstr(PreProcessingFunction) 

@@ -1,14 +1,14 @@
-% % Create a video reader object. 
-% vro = PhysTrack.VideoReader2;
-% % we need a static coordinate system to be placed on the slanted plane
-% % surface. coordinate system is stored in rwRCS and the pixels per meter
-% % constant in ppm.
-% 
-% questdlg('Define a reference coordinate system where x-coordinate is aligned with the inclined plane and the object moves along the positive side of the axis', '', 'OK', 'OK');
-% [rwRCS, ppm] = PhysTrack.DrawCoordinateSystem(vro);
-% % let the user select the object needed to be tracked. The user will select
-% % a single point on sliding object.
-% obs = PhysTrack.GetObjects(vro);
+% Create a video reader object. 
+vro = PhysTrack.VideoReader2(true, false, 240);
+% we need a static coordinate system to be placed on the slanted plane
+% surface. coordinate system is stored in rwRCS and the pixels per meter
+% constant in ppm.
+
+questdlg('Define a reference coordinate system where x-coordinate is aligned with the inclined plane and the object moves along the positive side of the axis', '', 'OK', 'OK');
+[rwRCS, ppm] = PhysTrack.DrawCoordinateSystem(vro);
+% let the user select the object needed to be tracked. The user will select
+% a single point on sliding object.
+obs = PhysTrack.GetObjects(vro);
 % call the automatic object tracker now and give it the video and the
 % objects from the first frame. It will track these objects throughout the
 % video.
