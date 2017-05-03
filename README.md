@@ -44,6 +44,9 @@ You are only a couple of steps away from using PhysTrack for your own experiment
 
 ## Downloads
 
+<a href="https://github.com/umartechboy/PhysTrack/archive/master.zip" target="_blank"><img src="http://www.free-icons-download.net/images/download-logo-icon-45961.png" 
+alt="PhysTrack Package" width="20" height="20" border="10" /></a> [Complete package including the sample videos (this Git)](https://github.com/umartechboy/PhysTrack/archive/master.zip)
+
 <a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/umartechboy/PhysTrack/tree/master/Source%20Code" target="_blank"><img src="http://www.free-icons-download.net/images/download-logo-icon-45961.png" 
 alt="PhysTrack Package" width="20" height="20" border="10" /></a> [The latest PhysTrack Package (without videos)](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/umartechboy/PhysTrack/tree/master/Source%20Code)
 
@@ -87,7 +90,7 @@ alt="Video Demonstration on YouTube" width="650" height="360" border="10" /></a>
 ## Resources
 
 * [PhysTrack Wiki](https://github.com/umartechboy/PhysTrack/wiki).
-* Primer: [Investigating kinematics with PhysTrack](http://physlab.org/wp-content/uploads/2016/03/primer_videoTracking.pdf).
+* Primer: [Investigating kinematics with PhysTrack](http://physlab.org/wp-content/uploads/2016/03/primer_videoTracking-1.pdf).
 * [Examples of mechanics experiments](http://physlab.org/tag/mechanics/).
 * [Example of experiment with video microscopy](http://physlab.org/experiment/tracking-brownian-motion-through-video-microscopy/).
 * [PhysLab website](http://physlab.org/).
