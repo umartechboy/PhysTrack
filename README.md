@@ -96,7 +96,7 @@ alt="Video Demonstration on YouTube" width="650" height="360" border="10" /></a>
 * [Examples of mechanics experiments](http://physlab.org/tag/mechanics/).
 * [Example of experiment with video microscopy](http://physlab.org/experiment/tracking-brownian-motion-through-video-microscopy/).
 * [PhysLab website](http://physlab.org/).
-* [PhysTrack paper published in EJP (European Journal of Physics)](http://iopscience.iop.org/article/10.1088/1361-6404/aa747a/meta;jsessionid=EA876E543596F17F173DA7C593F6F86D.c3.iopscience.cld.iop.org).
+* PhysTrack paper published in EJP (European Journal of Physics): ["PhysTrack": a Matlab based environment for video tracking of kinematics in the physics laboratory.](http://iopscience.iop.org/article/10.1088/1361-6404/aa747a/meta;jsessionid=EA876E543596F17F173DA7C593F6F86D.c3.iopscience.cld.iop.org).
 
 ## Credits
 
