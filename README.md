@@ -12,7 +12,7 @@ Physics teachers, students and researchers can use PhysTrack to track the motion
 
 Examples of some experiments can be viewed on the Smart Physics Lab website on [This Link](http://physlab.org/smart-physics/).
 
-[June 2015] EJP (European Journal of Physics) publishes "PhysTrack: A Matlab based environment for video tracking of kinematics in physics laboratory", a paper which discusses PhysTrack and related concepts in detail.
+[June 2015] EJP (European Journal of Physics) publishes ["PhysTrack: A Matlab based environment for video tracking of kinematics in physics laboratory"](http://iopscience.iop.org/article/10.1088/1361-6404/aa747a/meta;jsessionid=EA876E543596F17F173DA7C593F6F86D.c3.iopscience.cld.iop.org), a paper which discusses PhysTrack and related concepts in detail.
 
 ## Requirements for performing an experiment with PhysTrack
 
@@ -96,7 +96,7 @@ alt="Video Demonstration on YouTube" width="650" height="360" border="10" /></a>
 * [Examples of mechanics experiments](http://physlab.org/tag/mechanics/).
 * [Example of experiment with video microscopy](http://physlab.org/experiment/tracking-brownian-motion-through-video-microscopy/).
 * [PhysLab website](http://physlab.org/).
-* [PhysTrack paper published in EJP (European Journal of Physics)](https://doi.org/10.1088/1361-6404/aa747a).
+* [PhysTrack paper published in EJP (European Journal of Physics)](http://iopscience.iop.org/article/10.1088/1361-6404/aa747a/meta;jsessionid=EA876E543596F17F173DA7C593F6F86D.c3.iopscience.cld.iop.org).
 
 ## Credits
 
