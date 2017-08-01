@@ -125,4 +125,4 @@ PhysTrack.cascade;
 % photoGate = pg1;
 %clear temporary data
 clear('ans', 'dgof', 'lastValidFID', 'traceValidity', 'mxx', 'mxy', 'pFinal', 'wgof', 'answer', 'defaultValues', 'dlg_title', 'kd', 'kdx', 'kdy', 'num_lines','options','prompt');
-clear tvx tvy vx vy  vyFit vyFunc t_ vyFuncStr tyFit
+%clear tvx tvy vx vy  vyFit vyFunc t_ vyFuncStr tyFit
