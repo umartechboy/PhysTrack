@@ -1,3 +1,11 @@
+v2.2 (20170503)
+. Changed default video framerate to 240 fps in the analyze motion
+scripts.
++ Scripts don't ask unnecessary question to convert the video to
+binary.
++ Added the option to force turn on or off the frame rate, binary
+conversion popup, video trimming popup in video reader 2.
+
 v2.1
 + Binary video conversion done using GUI
 . repaired the brownian motion experiment sample.

@@ -37,10 +37,11 @@ function VideoDecoder(fileName, saveName)
     vwo.FrameRate = vro.FrameRate;
     open(vwo);
     h = waitbar(0, '');
-    for ii = 1:vro.NumberOfFrames
+    skippedValue = PhysTrack.askValue('Kindly enter the number of frames to be skipped after every decoded frame.', 0) + 1;
+    for ii = 1:skippedValue:vro.NumberOfFrames
         writeVideo(vwo, step(vfr));
         waitbar(ii / double(vro.NumberOfFrames), h, ...
-            ['Converted frame ',num2str(ii), ' of ', num2str(vro.NumberOfFrames), ', (',num2str(round(ii / double(vro.NumberOfFrames) * 100)), '%)']);
+            ['Converted frame ',num2str(ii), ' of ', num2str(vro.NumberOfFrames), ', (',num2str(round(ii / double(vro.NumberOfFrames) * double(100))), '%)']);
     end
     close(h);
 end
