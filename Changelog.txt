@@ -1,3 +1,6 @@
+v2.2 (20170801)
++ Video decoder asks for the number of framses to be skipped.
+
 v2.2 (20170503)
 . Changed default video framerate to 240 fps in the analyze motion
 scripts.
