@@ -31,13 +31,15 @@ function VideoDecoder(fileName, saveName)
         },'Select a destination for saving the decompressed video');
         saveName = [pathname, saveName];
     end
+    
+    skippedValue = double(round(PhysTrack.askValue('Kindly enter the number of frames to be skipped after every decoded frame.', 0.0))) + 1;
+    newFPS = double(round(PhysTrack.askValue('What should be the frame rate of the decoded vide while playing.', vro.FrameRate/skippedValue))) + 1;
     vro = VideoReader(fileName);
     vfr = vision.VideoFileReader(fileName);
     vwo = VideoWriter(saveName);
-    vwo.FrameRate = vro.FrameRate;
+    vwo.FrameRate = newFPS;
     open(vwo);
     h = waitbar(0, '');
-    skippedValue = PhysTrack.askValue('Kindly enter the number of frames to be skipped after every decoded frame.', 0) + 1;
     for ii = 1:skippedValue:vro.NumberOfFrames
         writeVideo(vwo, step(vfr));
         waitbar(ii / double(vro.NumberOfFrames), h, ...
