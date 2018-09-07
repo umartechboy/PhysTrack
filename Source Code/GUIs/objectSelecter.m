@@ -22,7 +22,7 @@ function varargout = objectSelecter(varargin)
 
 % Edit the above text to modify the response to help objectSelecter
 
-% Last Modified by GUIDE v2.5 01-Feb-2017 14:16:38
+% Last Modified by GUIDE v2.5 06-Sep-2018 12:20:05
 
 % Begin initialization code - DO NOT EDIT
 
@@ -88,8 +88,15 @@ if PhysTrack.vr2oExists;
         set(handles.binThreshSlider, 'Value', th);
     end
     axis(handles.mainAxis);
-    imshow(PhysTrack.read2(vtt_vr2o_00, 1, false, get(handles.forceRGBCB, 'Value')));
-    drawnow;
+    global vtt_resumeFromInd_00 
+    if vtt_resumeFromInd_00 > 1
+        set(handles.showLastCB, 'Visible', 'On');
+        set(handles.showLastCB, 'Value', 1);
+    else
+        set(handles.showLastCB, 'Visible', 'Off');
+        set(handles.showLastCB, 'Value', 0);
+    end
+    refreshBinObsWindow;
 end
 uiwait(handles.vtt);
 
@@ -357,9 +364,9 @@ function removeAll_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 if PhysTrack.vr2oExists;   
-    global vtt_vr2o_00 vtt_obs_00
-    vtt_obs_00 = [];
-    imshow(PhysTrack.read2(vtt_vr2o_00, 1, false, get(handles.forceRGBCB, 'Value')));
+    global vtt_vr2o_00 vtt_obs_00 vtt_StartF_00
+    vtt_obs_00 = [];   
+    refreshBinObsWindow;
     drawnow;    
     set(handles.obsList, 'String', '');
 end
@@ -377,3 +384,14 @@ if PhysTrack.vr2oExists;
     global vtt_vr2o_00 vtt_obs_00
     refreshBinObsWindow;
 end
+
+
+% --- Executes on button press in showLastCB.
+function showLastCB_Callback(hObject, eventdata, handles)
+% hObject    handle to showLastCB (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of showLastCB
+showLast = get(handles.showLastCB, 'Value');
+refreshBinObsWindow;
