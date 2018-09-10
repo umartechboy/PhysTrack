@@ -1,4 +1,8 @@
-v2.3 (20170907)
+v2.4 (20180910)
++ Added video rotation in VideoReader2
+. FFT function does zero padding of data make the length a multiple of 2
+
+v2.3 (20180907)
 .+ Added functionality to allow the user to re-select the object if the tracking is lost in KLT. The tracker is re-initialized with new eigen shapes on the last successfully tracked frame. This give a new set of object coordinates. The offset of these coordinates is kept for all the further tracked points. This way, the first newly tracked point coincides with the last tarcked and the track is rebuilt. Note that the length of validity map and track point records may change after selecting a new object. The length of the existing and new data are padded for the matching.
 + Added "Show Last position" button in objectSelector. This way, the user can view the location of the object on the last tracked frame which can be tool as a reference while selecting a new object.
 + Added script for analyzing Wilberforce pendulum
