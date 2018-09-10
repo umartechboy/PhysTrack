@@ -427,6 +427,9 @@ else
     global vtt_vr2o_00    
     vroTemp = vtt_vr2o_00;
     vtt_vr2o_00.CropRect = [1, 1, vtt_vr2o_00.obj.Width * vtt_vr2o_00.PreMag, vtt_vr2o_00.obj.Height * vtt_vr2o_00.PreMag];
+    if vtt_vr2o_00.Rotation == 90 || vtt_vr2o_00.Rotation == 270
+        vtt_vr2o_00.CropRect = [1, 1, vtt_vr2o_00.obj.Height * vtt_vr2o_00.PreMag, vtt_vr2o_00.obj.Width * vtt_vr2o_00.PreMag];
+    end
     I = PhysTrack.read2(vtt_vr2o_00, get(handles.slider1, 'Value'), true, get(handles.forceRGB, 'Value'), true);
     I2 = showCropping(I, vroTemp.CropRect, 0.6);
     imshow(I2);
@@ -451,6 +454,9 @@ if ~PhysTrack.vr2oExists
 else
     global vtt_vr2o_00
     vtt_vr2o_00.CropRect = [1, 1, vtt_vr2o_00.obj.Width * vtt_vr2o_00.PreMag, vtt_vr2o_00.obj.Height * vtt_vr2o_00.PreMag];
+    if vtt_vr2o_00.Rotation == 90 || vtt_vr2o_00.Rotation == 270
+        vtt_vr2o_00.CropRect = [1, 1, vtt_vr2o_00.obj.Height * vtt_vr2o_00.PreMag, vtt_vr2o_00.obj.Width * vtt_vr2o_00.PreMag];
+    end
     imshow(PhysTrack.read2(vtt_vr2o_00, get(handles.slider1, 'Value'), true, get(handles.forceRGB, 'Value'), true));
 end
 
