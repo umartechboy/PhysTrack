@@ -22,7 +22,7 @@ function varargout = vidTrimTool(varargin)
 
 % Edit the above text to modify the response to help vidTrimTool
 
-% Last Modified by GUIDE v2.5 17-Nov-2016 11:08:49
+% Last Modified by GUIDE v2.5 10-Sep-2018 13:33:00
 
 % Begin initialization code - DO NOT EDIT
 addpath(fileparts(pwd));
@@ -461,3 +461,71 @@ function forceRGB_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of forceRGB
+
+
+% --- Executes on button press in rotate0RB.
+function rotate0RB_Callback(hObject, eventdata, handles)
+% hObject    handle to rotate0RB (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+global vtt_vr2o_00
+if get(hObject, 'Value') == 1
+    vtt_vr2o_00.Rotation = 0;
+    set(handles.rotate90RB, 'Value', 0);
+    set(handles.rotate180RB, 'Value', 0);
+    set(handles.rotate270RB, 'Value', 0);
+end
+imshow(PhysTrack.read2(vtt_vr2o_00, vtt_vr2o_00.ifi, true, get(handles.forceRGB, 'Value'), true));
+% Hint: get(hObject,'Value') returns toggle state of rotate0RB
+
+
+% --- Executes on button press in rotate90RB.
+function rotate90RB_Callback(hObject, eventdata, handles)
+% hObject    handle to rotate90RB (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+global vtt_vr2o_00
+if get(hObject, 'Value') == 1
+    vtt_vr2o_00.Rotation = 90;
+    set(handles.rotate0RB, 'Value', 0);
+    set(handles.rotate180RB, 'Value', 0);
+    set(handles.rotate270RB, 'Value', 0);
+end
+imshow(PhysTrack.read2(vtt_vr2o_00, vtt_vr2o_00.ifi, true, get(handles.forceRGB, 'Value'), true));
+% Hint: get(hObject,'Value') returns toggle state of rotate90RB
+
+
+% --- Executes on button press in rotate180RB.
+function rotate180RB_Callback(hObject, eventdata, handles)
+% hObject    handle to rotate180RB (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+global vtt_vr2o_00
+if get(hObject, 'Value') == 1
+    vtt_vr2o_00.Rotation = 180;
+    set(handles.rotate90RB, 'Value', 0);
+    set(handles.rotate0RB, 'Value', 0);
+    set(handles.rotate270RB, 'Value', 0);
+end
+imshow(PhysTrack.read2(vtt_vr2o_00, vtt_vr2o_00.ifi, true, get(handles.forceRGB, 'Value'), true));
+% Hint: get(hObject,'Value') returns toggle state of rotate180RB
+
+
+% --- Executes on button press in rotate270RB.
+function rotate270RB_Callback(hObject, eventdata, handles)
+% hObject    handle to rotate270RB (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+global vtt_vr2o_00
+if get(hObject, 'Value') == 1
+    vtt_vr2o_00.Rotation = 270;
+    set(handles.rotate90RB, 'Value', 0);
+    set(handles.rotate180RB, 'Value', 0);
+    set(handles.rotate0RB, 'Value', 0);
+end
+imshow(PhysTrack.read2(vtt_vr2o_00, vtt_vr2o_00.ifi, true, get(handles.forceRGB, 'Value'), true));
+% Hint: get(hObject,'Value') returns toggle state of rotate270RB

@@ -22,7 +22,7 @@ function varargout = vidTrimToolOld(varargin)
 
 % Edit the above text to modify the response to help vidTrimToolOld
 
-% Last Modified by GUIDE v2.5 18-Dec-2016 11:04:01
+% Last Modified by GUIDE v2.5 10-Sep-2018 13:25:59
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -204,3 +204,39 @@ function framex_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes on button press in rotate0RB.
+function rotate0RB_Callback(hObject, eventdata, handles)
+% hObject    handle to rotate0RB (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of rotate0RB
+
+
+% --- Executes on button press in rotate90RB.
+function rotate90RB_Callback(hObject, eventdata, handles)
+% hObject    handle to rotate90RB (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of rotate90RB
+
+
+% --- Executes on button press in rotate180RB.
+function rotate180RB_Callback(hObject, eventdata, handles)
+% hObject    handle to rotate180RB (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of rotate180RB
+
+
+% --- Executes on button press in rotate270RB.
+function rotate270RB_Callback(hObject, eventdata, handles)
+% hObject    handle to rotate270RB (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of rotate270RB

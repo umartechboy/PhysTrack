@@ -1,4 +1,5 @@
 function I = read2(vro, frameNumber, indIsAbsolute, forceRGB, cropPreviewOnly)
+
 % READ2 This function has mnay working modes and depending upon the kind
 % and types of arguments, can give differnet result. Basically, it is used
 % to read an image frame from a PHYSTRACK.VIDEOREADER2 object. It will use 
@@ -125,5 +126,8 @@ function I = read2(vro, frameNumber, indIsAbsolute, forceRGB, cropPreviewOnly)
             	I = eval([PreProcessingFunction,'(I)']);
             end
         end
+    end
+    if vro.Rotation ~= 0
+        I = imrotate(I, vro.Rotation);
     end
 end

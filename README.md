@@ -79,6 +79,7 @@ Performing a classical mechanics experiments using video tracking and performing
 |	Rotation on a Fixed Pivot	|	[Link]	(http://physlab.org/experiment/rotational-motion-about-a-fixed-axis/)	|	[analyzeRotationOnAFixedPivot.m]	(https://github.com/umartechboy/PhysTrack/blob/master/Source%20Code/analyzeRotationOnAFixedPivot.m)	|	[Link]	(https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos/RotationOnAFixedPivot)	|
 |	Brownian Motion	|	[Link]	(http://physlab.org/experiment/tracking-brownian-motion-through-video-microscopy/)	|	[analyzeBrownianMotion.m]	(https://github.com/umartechboy/PhysTrack/blob/master/Source%20Code/analyzeBrownianMotion.m)	|	[Link]	(https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos/BrownianMotion)	|
 |	Rotational Friction	|			|	[analyzeRotationalFriction.m]	(https://github.com/umartechboy/PhysTrack/blob/master/Source%20Code/analyzeRotationalFriction.m)	|	[Link]	(https://github.com/umartechboy/PhysTrack/blob/master/SampleVideos/RollingCylinder.MP4)	|
+|	Wilberforce Pendulum|			|	[analyzeWilberforcePendulum.m]	(https://github.com/umartechboy/PhysTrack/blob/master/Source%20Code/analyzeWilberforcePendulum.m)	|	[Link]	(https://www.youtube.com/watch?v=UNhr9W0W-JE&list=PLImGVzFaOSBwp81p6VPLUukONhXLhCnB8)	|
 
 
 

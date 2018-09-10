@@ -6,6 +6,12 @@ end
 if nargin <=3
     dataUnits = 'the data';
 end
+nearestPower = log2(length(data));
+if nearestPower - floor(nearestPower) ~= 0 
+    nearestPower = uint16(floor(nearestPower) + 1);
+    lengthReq = 2^nearestPower
+    data(lengthReq) = 0;
+end
 meanData = data(:,1)-mean(data(:,1));
 dataFFT = abs((fft(meanData))); %take the fourier transform of the position data
 dataFFT = dataFFT * 1/length(data);

@@ -76,7 +76,7 @@ function vro2Obj = VideoReader2(forceCropTrim, forceBinaryConvert, forceFPS)
         forceFPS = round(vro.FrameRate);
     end
     fps = PhysTrack.askValue('Enter the number of frames shot per second by the camera: ', forceFPS, 'Video Frame rate', 'uint16');
-    vro2Obj = struct('obj', vro, 'PreMag', preMag, 'FPS', fps, 'CropRect', [0,0, vro.Width * preMag, vro.height * preMag], 'ifi', 1, 'ofi', vro.NumberOfFrames, 'TotalFrames', vro.NumberOfFrames, 'BinaryThreshold', [], 'BinaryBackgroundIsLight', false );
+    vro2Obj = struct('obj', vro, 'PreMag', preMag, 'FPS', fps, 'CropRect', [0,0, vro.Width * preMag, vro.height * preMag], 'ifi', 1, 'ofi', vro.NumberOfFrames, 'TotalFrames', vro.NumberOfFrames, 'BinaryThreshold', [], 'BinaryBackgroundIsLight', false , 'Rotation', 0);
     if (forceCropTrim)
         if strcmp(questdlg('Do you want to Crop and Trim the video?', '', 'Yes', 'No', 'Yes'), 'Yes')
             vro2Obj = PhysTrack.TrimVideo(vro2Obj, true);

@@ -9,8 +9,10 @@ function ShowImWithRef( vr2o, ind, rwRCS, forceRGB, ppmLine)
     else
         rwRCS_ = rwRCS;
     end
-    I = insertText(PhysTrack.read2(vr2o, ind, false, forceRGB), rwRCS_(2,:), 'X', 'BoxOpacity', 0.2, 'BoxColor', [255,255,255]);
-    I = insertText(I, rwRCS_(3,:), 'Y', 'BoxOpacity', 0.2, 'BoxColor', [255,255,255]);
+    I = PhysTrack.read2(vr2o, ind, false, forceRGB);
+    ts = uint16(round(min(size(I, 1), size(I, 2))/20));
+    I = insertText(I, rwRCS_(2,:), 'X', 'BoxOpacity', 0.5, 'BoxColor', [255,255,255], 'FontSize', ts);
+    I = insertText(I, rwRCS_(3,:), 'Y', 'BoxOpacity', 0.5, 'BoxColor', [255,255,255], 'FontSize', ts);
     if ~isempty(ppmLine)
         I = insertShape(I, 'Line', ppmLine, 'Color', PhysTrack.GetColor('Pink'), 'LineWidth',3);
     end
