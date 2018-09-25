@@ -32,7 +32,7 @@ You are only a couple of steps away from using PhysTrack for your own experiment
 
 * Download and extract the latest PhysTrack source from the downloads section. It also contains some additional experiment scripts which serve as an example for creating your own experiments.
 
-* Also, choose and download a sample video from the [this link](https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos). [Download all as zip](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos).
+* Also, choose and download a sample video from the [this link](https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos) or  download all as zip from [this link.](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos)
 
 * Open Matlab and change the current directory to the downloaded package. You should see the _"+PhysTrack"_ and _"GUIs"_ directory along with some _"analyze motion"_ scripts in the current address window.
 
