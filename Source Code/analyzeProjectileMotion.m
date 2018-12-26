@@ -1,5 +1,5 @@
 % Create a video reader object.
-vro = PhysTrack.VideoReader2(true, false, 240);
+vro = PhysTrack.VideoReader2(true);
 % we need a static coordinate system to be placed on the horizontal
 % surface. coordinate system is stored in rwRCS and the pixels per meter
 % constant in ppm.
@@ -16,6 +16,7 @@ obs = PhysTrack.GetObjects(vro);
 % returned from the tracker because the out frame might change during the
 % tracking process.
 [trPt_, vro] = PhysTrack.KLT(vro, obs);
+%[trPt_, vro] = PhysTrack.BOT(vro, obs);
 % transform our trajectory to real world coordinates (units are still pixels)
 trajectory = PhysTrack.TransformCart2Cart(trPt_.tp1, rwRCS);
 % convert pixels to meters.
