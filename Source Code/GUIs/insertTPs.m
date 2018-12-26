@@ -6,7 +6,7 @@ if nargin == 1
     meanPoint = true;
 end
     global klt_vr2o_00 klt_tObs_00
-    I = PhysTrack.read2(klt_vr2o_00, frameInd, false, true);
+    I = PhysTrack.read2(klt_vr2o_00, frameInd + 1, false, true);
     % hook on the marker objects
     for ii = 1:klt_tObs_00
         inS = num2str(ii);

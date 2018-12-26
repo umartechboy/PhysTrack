@@ -131,7 +131,7 @@ end
     
     for kk = 1: klt_tObs_00
         eval(['klt_trackPoints_00_', num2str(kk), '(:,:,1) = [];']);
-        eval(['klt_PointsValidity_00_', num2str(kk), '(:,1) = [];']);
+        eval(['klt_trackPoints_00_', num2str(kk), '(:,:,1) = [];']);
     end
 
     % filter out track pointer
