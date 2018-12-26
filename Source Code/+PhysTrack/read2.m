@@ -50,18 +50,21 @@ function I = read2(vro, frameNumber, indIsAbsolute, forceRGB, cropPreviewOnly)
         if frameNumber + vro.ifi - 2 > vro.ofi || frameNumber  + vro.ifi - 1 < vro.ifi
             warning 'The requested frame is outside the trimmed bounds of the video.';
         end
-
+        I = read(vro.obj, frameNumber + vro.ifi - 1);
+        if vro.Rotation ~= 0
+            I = imrotate(I, vro.Rotation);
+        end
         if vro.PreMag == 1
             if cropPreviewOnly
-                I = showCropping(read(vro.obj, frameNumber + vro.ifi - 1), vro.CropRect);
+                I = showCropping(I, vro.CropRect);
             else
-                I = imcrop(read(vro.obj, frameNumber + vro.ifi - 1), vro.CropRect);
+                I = imcrop(I, vro.CropRect);
             end
         elseif vro.PreMag > 1
             if cropPreviewOnly
-                I = showCropping(imresize(read(vro.obj, frameNumber + vro.ifi - 1), vro.PreMag), vro.CropRect);
+                I = showCropping(imresize(I, vro.PreMag), vro.CropRect);
             else
-                I = imcrop(imresize(read(vro.obj, frameNumber + vro.ifi - 1), vro.PreMag), vro.CropRect);
+                I = imcrop(imresize(I, vro.PreMag), vro.CropRect);
             end
         else
             error 'The video reader 2 object seems to be damaged.'
@@ -86,16 +89,26 @@ function I = read2(vro, frameNumber, indIsAbsolute, forceRGB, cropPreviewOnly)
             error 'The video file doesn''t contain the frame specified.';
         end
         if vro.PreMag == 1
+            I = read(vro.obj, frameNumber);
+            if vro.Rotation ~= 0
+                I = imrotate(I, vro.Rotation);
+            end
             if cropPreviewOnly                
-                I = showCropping(read(vro.obj, frameNumber), vro.CropRect);
+                I = showCropping(I, vro.CropRect);
             else
-                I = imcrop(read(vro.obj, frameNumber), vro.CropRect);
+                I = imcrop(I, vro.CropRect);
             end
         elseif vro.PreMag > 1
+            
+            I = read(vro.obj, frameNumber);
+            if vro.Rotation ~= 0
+                I = imrotate(I, vro.Rotation);
+            end
+            
             if cropPreviewOnly
-                I = showCropping(imresize(read(vro.obj, frameNumber), vro.PreMag), vro.CropRect);
+                I = showCropping(imresize(I, vro.PreMag), vro.CropRect);
             else
-                I = imcrop(imresize(read(vro.obj, frameNumber), vro.PreMag), vro.CropRect);
+                I = imcrop(imresize(I, vro.PreMag), vro.CropRect);
             end
         else
             error 'The video reader 2 object seems to be damaged.'
@@ -126,8 +139,5 @@ function I = read2(vro, frameNumber, indIsAbsolute, forceRGB, cropPreviewOnly)
             	I = eval([PreProcessingFunction,'(I)']);
             end
         end
-    end
-    if vro.Rotation ~= 0
-        I = imrotate(I, vro.Rotation);
     end
 end

@@ -478,7 +478,7 @@ function rotate0RB_Callback(hObject, eventdata, handles)
 global vtt_vr2o_00
 if get(hObject, 'Value') == 1
     vtt_vr2o_00.Rotation = 0;
-    vtt_vr2o_00.CropRect = [0,0, vtt_vr2o_00.obj.Width * vtt_vr2o_00.PreMag, vtt_vr2o_00.obj.Height * vtt_vr2o_00.PreMag];
+    vtt_vr2o_00.CropRect = [0,0, vtt_vr2o_00.obj.Width * preMag, vtt_vr2o_00.obj.Height * preMag];
     set(handles.rotate90RB, 'Value', 0);
     set(handles.rotate180RB, 'Value', 0);
     set(handles.rotate270RB, 'Value', 0);
@@ -496,7 +496,7 @@ function rotate90RB_Callback(hObject, eventdata, handles)
 global vtt_vr2o_00
 if get(hObject, 'Value') == 1
     vtt_vr2o_00.Rotation = 90;
-    vtt_vr2o_00.CropRect = [0,0, vtt_vr2o_00.obj.Height * vtt_vr2o_00.PreMag, vtt_vr2o_00.obj.Width * vtt_vr2o_00.PreMag];
+    vtt_vr2o_00.CropRect = [0,0, vtt_vr2o_00.obj.Height * preMag, vtt_vr2o_00.obj.Width * preMag];
     set(handles.rotate0RB, 'Value', 0);
     set(handles.rotate180RB, 'Value', 0);
     set(handles.rotate270RB, 'Value', 0);
