@@ -118,20 +118,25 @@ end
             tic;
             framesDone = 0;
         end
-        waitbar(double(ff)/double(klt_vr2o_00.TotalFrames), h, ['Creating trajectory of track pointer: ', num2str(round(double(ff)/double(vr2o.TotalFrames)*100)), '% ', speedStr]);
-        
         if rem(ff, previewDownSample) == 0
             imshow(out,'InitialMagnification',200);
+        end
+        try
+            waitbar(double(ff)/double(klt_vr2o_00.TotalFrames), h, ['Creating trajectory of track pointer: ', num2str(round(double(ff)/double(vr2o.TotalFrames)*100)), '% ', speedStr]);
+        catch
+            %h = waitbar(0, 'Creating trajectory of track pointer');
+            %title(['Creating trajectory of track pointer: ', num2str(round(double(ff)/double(vr2o.TotalFrames)*100)), '% ', speedStr]);
         end
         if broken 
             break;
         end
     end
     close(h);
-    
-    for kk = 1: klt_tObs_00
-        eval(['klt_trackPoints_00_', num2str(kk), '(:,:,1) = [];']);
-    end
+%     
+%     for kk = 1: klt_tObs_00
+%         eval(['klt_trackPoints_00_', num2str(kk), '(:,:,1) = [];']);
+%         eval(['klt_PointsValidity_00_', num2str(kk), '(:,1) = [];']);
+%     end
 
     % filter out track pointer
     close all;
@@ -143,7 +148,7 @@ end
         inS = num2str(jj);
         remInds = [];
         for kk = 1:eval(['size(klt_PointsValidity_00_', inS, ',1)'])
-            if eval(['mean(klt_PointsValidity_00_', inS, '(ii,:)) < 0.000001'])
+            if eval(['mean(klt_PointsValidity_00_', inS, '(kk,:)) < 0.000000001'])
                 remInds(end + 1) = kk;
             end
         end
@@ -185,6 +190,7 @@ end
     evalin('base', 'clear ans klt_vr2o_00 klt_tObs_00');
     
     klt_vr2o_00.TotalFrames = length(klt_trackPoints_00_1(:,1));
+    klt_vr2o_00.ofo = klt_vr2o_00.ofi + klt_vr2o_00.TotalFrames - 1;
     vr2o_new = klt_vr2o_00;
 end
 

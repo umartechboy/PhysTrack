@@ -29,6 +29,6 @@ if length(strs) > 0
     set(handles.obsList, 'String', strs);
 end
 
-axis(handles.mainAxis);
+axes(handles.mainAxis);
 imshow(I);
 drawnow;

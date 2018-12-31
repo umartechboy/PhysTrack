@@ -55,7 +55,7 @@ function vidTrimToolOld_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for vidTrimToolOld
 handles.output = hObject;
-
+axes(axes1);
 % Update handles structure
 guidata(hObject, handles);
 

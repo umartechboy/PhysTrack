@@ -9,7 +9,7 @@ function vr2oOut = TrimVideo(vr2o, silent)
     if nargin == 1
         silent = false;
     end
-    evalin('base','global vtt_vr2o_00');
+    evalin('base','global vtt_vr2o_00 vtt_inFrameRect_00 vtt_outFrameRect_00');
     assignin('base', 'vtt_vr2o_00', vr2o);
     addpath([pwd,'\GUIs']);
     if ~PhysTrack.vr2oExists
@@ -17,8 +17,10 @@ function vr2oOut = TrimVideo(vr2o, silent)
         return;
     end
     vr2oOut = vr2o;
+    global vtt_vr2o_00 vtt_inFrameRect_00 vtt_outFrameRect_00
+%     vtt_inFrameRect_00 = [];
+%     vtt_outFrameRect_00 = [];
     vidTrimTool;
-    global vtt_vr2o_00
     if isstruct(vtt_vr2o_00)
         if silent
             vr2oOut = vtt_vr2o_00;
@@ -27,5 +29,6 @@ function vr2oOut = TrimVideo(vr2o, silent)
         end
     end
     evalin('base', 'clear vtt_vr2o_00');
+    evalin('base', 'clear vtt_vr2o_00 vtt_inFrameRect_00 vtt_outFrameRect_00');
 end
 
