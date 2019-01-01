@@ -1,3 +1,0 @@
-function MarkSectionStart(title)
-end
-

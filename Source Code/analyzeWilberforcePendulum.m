@@ -33,58 +33,46 @@ dy = trajectory.y - trajectory.y(1);
 % close all open figures and windows
 close all;
 
-dy = dy - mean(dy);
 % create a Figure
 dispH = figure;
 % change the background color to white
 whitebg([1,1,1]);
 
 % plot the vertical Deiplacement
-plot(t, dy, 'Color', [0,0,0],'MarkerSize', 5);
+plot(t,dy * 1000, 'Color', [0,0,0],'MarkerSize', 5);
 grid on;
-title('Vertical Displacement with time');
+title('Vertical Displacement');
 xlabel('time - t (second)');
 ylabel('Vertical displacement (mm)');
 
 
 % do the FFT
 [freqAxis, amplitudes] = PhysTrack.FFT(dy, 30);
-fftH = figure; hold on;
+fftH = figure;
 plot(freqAxis, amplitudes);
 set(gca,'xtick', [0:0.25:15]);
 xlim([0,1.8]);
 title('Fast Fourier Transform (FFT) of displacement data');
 xlabel('Frequency (Hz)');
 ylabel('Amplitude');
-uiwait(msgbox('Mark the peak for f1 and f2'));
-[f1] = ginput(1);
-[f2] = ginput(1);
-f1 = f1(1);
-f2 = f2(1);
-plot([f1, f1], [min(amplitudes), max(amplitudes)], 'r--');
-plot([f2, f2], [min(amplitudes), max(amplitudes)], 'g--');
-legend('FFT', ['f1 = ', num2str(f1)], ['f2 = ', num2str(f2)]);
 
 PhysTrack.cascade;
-
-if strcmp(questdlg('Do you want to save this data?', '', 'Yes', 'No', 'Yes'), 'Yes')
-    
-    [dirpath] = [uigetdir(),'\'];
-    if ~exist('PendulumTag')
-        PendulumTag = '';
-    end
-    PendulumTag = PhysTrack.askValue('For data structuring, you should tag this pendulum.', PendulumTag, 'Tag this pendulum');
-    imwrite(PhysTrack.read2(vro, 1), [dirpath, PendulumTag, ' snapshot.jpg']);
-    
-    eval(['fp1(', num2str(PendulumTag - 'A' + 1), ') = f1;']);
-    eval(['fp2(', num2str(PendulumTag - 'A' + 1), ') = f2;']);
-    saveas(fftH, [dirpath, PendulumTag, ' FFT.fig']);
-    saveas(fftH, [dirpath, PendulumTag, ' FFT.jpg']);
-    saveas(dispH, [dirpath, PendulumTag, ' Displacement.fig', '']);
-    saveas(dispH, [dirpath, PendulumTag, ' Displacement.jpg']);
-    save([dirpath, PendulumTag, ' Workspace.mat'])
-   
-end
+% 
+% if strcmp(questdlg('Do you want to save this data?', '', 'Yes', 'No', 'Yes'), 'Yes')
+%     [dirpath] = [uigetdir(),'\'];
+%     if ~exist('PendulumTag')
+%         PendulumTag = '';
+%     end
+%     PendulumTag = PhysTrack.askValue('For data structuring, you should tag this pendulum.', PendulumTag, 'Tag this pendulum');
+%     imwrite(PhysTrack.read2(vro, 1), [dirpath, PendulumTag, ' snapshot.jpg']);
+%     saveas(fftH, [dirpath, PendulumTag, ' FFT.fig']);
+%     saveas(dispH, [dirpath, PendulumTag, ' Displacement.fig', '']);
+%     saveas(fftH, [dirpath, PendulumTag, ' FFT.jpg']);
+%     saveas(dispH, [dirpath, PendulumTag, ' Displacement.jpg']);
+%     save([dirpath, PendulumTag, ' Workspace.mat'])
+%    
+%     close all;
+% end
     
 % clear the workspace. This may contain some useless script too. but it
 % won't be n issue.

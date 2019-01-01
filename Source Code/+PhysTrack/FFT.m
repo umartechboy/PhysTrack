@@ -6,18 +6,18 @@ end
 if nargin <=3
     dataUnits = 'the data';
 end
-meanData = data(:,1)-mean(data(:,1));
 nearestPower = log2(length(data));
 if nearestPower - floor(nearestPower) ~= 0 
     nearestPower = uint16(floor(nearestPower) + 1);
-    lengthReq = 2^ nearestPower;
-    meanData(lengthReq) = 0;
+    lengthReq = 2^nearestPower
+    data(lengthReq) = 0;
 end
+meanData = data(:,1)-mean(data(:,1));
 dataFFT = abs((fft(meanData))); %take the fourier transform of the position data
-dataFFT = dataFFT * 1/length(meanData);
+dataFFT = dataFFT * 1/length(data);
 X_mag=abs(dataFFT);
-N = double(length(meanData));
-freqHz = (0:1:length(meanData)-1).*Fs./N;
+N = double(length(data));
+freqHz = (0:1:length(data)-1).*Fs./N;
  
 %where Fs is your sampling rate (Hz) and N is your FFT block size (in your case N=length(x)).
 

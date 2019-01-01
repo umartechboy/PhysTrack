@@ -68,7 +68,7 @@ set(handles.slider1, 'Min', 1);
 set(handles.slider1, 'Max', vtt_vr2o_00.TotalFrames);
 set(handles.slider1, 'Value', 1);
 set(handles.curFrameLabel, 'String', ['Frame 1 of ', num2str(vtt_vr2o_00.TotalFrames)]);
-axes(handles.axes1);
+axis(handles.axes1);
 if isstruct(vtt_rw_00)
     set(handles.resetUnit, 'Visible', 'off');
     set(handles.unitMarkLen, 'Visible', 'off');

@@ -58,20 +58,6 @@ function vro2Obj = VideoReader2(forceCropTrim, forceBinaryConvert, forceFPS)
 %    See also PHYSTRACK.READ2, PHYSTRACK.TRIMVIDEO,
 %    PHYSTRACK.CONVERTVIDEOTOBINARY
 
-if iscell(forceCropTrim) && nargin == 1
-    if length(forceCropTrim) == 3
-         forceFPS = forceCropTrim{3};
-    end
-    if length(forceCropTrim) >= 2
-         forceBinaryConvert = forceCropTrim{2};
-    end
-    if length(forceCropTrim) >= 1
-         forceCropTrim = forceCropTrim{1};
-    end
-    if length(forceCropTrim) == 0
-         clear forceCropTrim
-    end
-end
     if ~exist('forceCropTrim')
         forceCropTrim = true;
     end
@@ -92,10 +78,9 @@ end
     fps = PhysTrack.askValue('Enter the number of frames shot per second by the camera: ', forceFPS, 'Video Frame rate', 'uint16');
     vro2Obj = struct('obj', vro, 'PreMag', preMag, 'FPS', fps, 'CropRect', [0,0, vro.Width * preMag, vro.height * preMag], 'ifi', 1, 'ofi', vro.NumberOfFrames, 'TotalFrames', vro.NumberOfFrames, 'BinaryThreshold', [], 'BinaryBackgroundIsLight', false , 'Rotation', 0);
     if (forceCropTrim)
-        % In most of the cases, we would need trimming.
-        %if strcmp(questdlg('Do you want to Crop and Trim the video?', '', 'Yes', 'No', 'Yes'), 'Yes')
+        if strcmp(questdlg('Do you want to Crop and Trim the video?', '', 'Yes', 'No', 'Yes'), 'Yes')
             vro2Obj = PhysTrack.TrimVideo(vro2Obj, true);
-        %end
+        end
     end
     if (forceBinaryConvert)
         if strcmp(questdlg('Do you want to convert this video to binary?', '', 'Yes', 'No', 'Yes'), 'Yes')
@@ -107,3 +92,4 @@ end
         clear PreProcessingFunction
     end
 end
+

@@ -57,7 +57,6 @@ function objectSelecter_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for objectSelecter
 handles.output = hObject;
 
-axis(handles.mainAxis);
 % Update handles structure
 guidata(hObject, handles);
 

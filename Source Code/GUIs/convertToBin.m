@@ -63,7 +63,6 @@ guidata(hObject, handles);
 if ~exist('handles') 
     return; 
 end
-axes(handles.mainAxis);
 % movegui(handles.vtt, 'northwest');
 if PhysTrack.vr2oExists;   
     evalin('base', 'global vtt_thresh_00');
