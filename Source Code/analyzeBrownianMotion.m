@@ -1,14 +1,22 @@
+% This function does nothing. It only tells the wizard to set a section
+% start here
+PhysTrack.Wizard.MarkSectionStart('Open File');
 % Create a video reader object. 
 vro = PhysTrack.VideoReader2(true, true);
+PhysTrack.Wizard.MarkSectionStart('Mark Objects');
 % let the user select the object needed to be tracked. The user will let
 % the process detect biinary objects in the first frame.
 obs = PhysTrack.GetObjects(vro);
+
+PhysTrack.Wizard.MarkSectionStart('Track Objects');
 % call the automatic object tracker now and give it the video and the
 % objects from the first frame. It will track these particles throughout the
 % video.
 particles = PhysTrack.BOT(vro, obs);
 % generate thime stamps
 t = PhysTrack.GenerateTimeStamps(vro);
+
+PhysTrack.Wizard.MarkSectionStart('Change Calibration');
 % for pixels per meter, we won;t use on screen distance marking. instead we
 % use the micro-scope's builtin function of distance calibration.
 ppmm = PhysTrack.askValue('Enter a value for pixels per \mu m calibration', 0.2025) * vro.PreMag; 
@@ -34,6 +42,8 @@ for ii = 1:size(obs, 1)
 end
 rn2 = rn2/obsUsed;
 
+
+PhysTrack.Wizard.MarkSectionStart('Plot Results');
 % display some sample trajectories...
 close all;
 for ii = 1:3
@@ -65,6 +75,8 @@ title('r_n^2 of the objects');
 xlabel('Time (seconds)');
 ylabel('r_n^2 (\mum)^2');
 
+
+PhysTrack.Wizard.MarkSectionStart('Do some extra analysis');
 % get the environmental variables from the user.
 temperature = PhysTrack.askValue('Enter the tmperature of the fluid in Kelvins: ', 298.13);
 sphereDia = double(PhysTrack.askValue('Enter the dia of microspheres in \mum: ', 2)) * 1e-6;

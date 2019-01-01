@@ -22,7 +22,7 @@ function varargout = vidTrimTool(varargin)
 
 % Edit the above text to modify the response to help vidTrimTool
 
-% Last Modified by GUIDE v2.5 10-Sep-2018 13:33:00
+% Last Modified by GUIDE v2.5 02-Oct-2018 12:34:00
 
 % Begin initialization code - DO NOT EDIT
 addpath(fileparts(pwd));
@@ -54,6 +54,8 @@ function vidTrimTool_OpeningFcn(hObject, eventdata, handles, varargin)
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to vidTrimTool (see VARARGIN)
 
+axes(handles.axes1);
+global vtt_vr2o_00 vtt_inFrameRect_00 vtt_outFrameRect_00
 % Choose default command line output for vidTrimTool
 handles.output = hObject;
 
@@ -73,8 +75,10 @@ if PhysTrack.vr2oExists;
     set(handles.ofiLabel, 'String', ['Out-Frame: ', num2str(vtt_vr2o_00.ofi)]);    
     set(handles.curFrameLabel, 'String', ['Frame ',num2str(vtt_vr2o_00.ifi),' of ', num2str(vtt_vr2o_00.obj.NumberOfFrames)]);
     set(handles.totalFrameLabel, 'String', num2str(vtt_vr2o_00.obj.NumberOfFrames));
-    axis(handles.axes1);
-    imshow(PhysTrack.read2(vtt_vr2o_00, vtt_vr2o_00.ifi, true, get(handles.forceRGB, 'Value'), true));
+    axes(handles.axes1);
+    I = PhysTrack.read2(vtt_vr2o_00, vtt_vr2o_00.ifi, true, get(handles.forceRGB, 'Value'), true);
+    I = showTrimmingMarkers(I, vtt_inFrameRect_00, vtt_outFrameRect_00);
+    imshow(I);
     drawnow;
 end
 
@@ -102,6 +106,7 @@ function slider1_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 
+global vtt_vr2o_00 vtt_inFrameRect_00 vtt_outFrameRect_00
 if strcmp(get(handles.playf, 'String'), 'Stop')
     return;
 end
@@ -109,10 +114,11 @@ watchon;
 if ~PhysTrack.vr2oExists
     delete(hObject);
 else
-    global vtt_vr2o_00
     set(handles.slider1, 'Value', round(get(handles.slider1, 'Value')));
     axes(handles.axes1);
-    imshow(PhysTrack.read2(vtt_vr2o_00, uint16(round(get(hObject,'Value'))), true, get(handles.forceRGB, 'Value'), true));
+    I = PhysTrack.read2(vtt_vr2o_00, uint16(round(get(hObject,'Value'))), true, get(handles.forceRGB, 'Value'), true);
+    I = showTrimmingMarkers(I, vtt_inFrameRect_00, vtt_outFrameRect_00);
+    imshow(I);
 
     set(handles.curFrameLabel, 'String', ['Frame ', ...
         num2str(round(get(handles.slider1,'Value'))),...
@@ -139,17 +145,19 @@ function markifi_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+global  vtt_inFrameRect_00 vtt_outFrameRect_00 vtt_vr2o_00
 if strcmp(get(handles.playf, 'String'), 'Stop')
     return;
 end
 if ~PhysTrack.vr2oExists
     delete(hObject);
 else
-    global vtt_vr2o_00
     axes(handles.axes1);
     if get(handles.slider1,'Value') > vtt_vr2o_00.ofi
         set(handles.slider1,'Value', vtt_vr2o_00.ofi);  
-        imshow(PhysTrack.read2(vtt_vr2o_00, uint16(round(get(handles.slider1,'Value')), true, get(handles.forceRGB, 'Value'), true)));
+        I = PhysTrack.read2(vtt_vr2o_00, uint16(round(get(handles.slider1,'Value')), true, get(handles.forceRGB, 'Value'), true));
+        I = showTrimmingMarkers(I, vtt_inFrameRect_00, vtt_outFrameRect_00);
+        imshow(I);
     end
     set(handles.ifiLabel, 'String', strcat(['In-Frame: ', num2str(round(get(handles.slider1,'Value')))]));
     vtt_vr2o_00.ifi = uint16(round(get(handles.slider1,'Value')));
@@ -163,17 +171,19 @@ function markofi_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+global vtt_vr2o_00 vtt_inFrameRect_00 vtt_outFrameRect_00
 if strcmp(get(handles.playf, 'String'), 'Stop')
     return;
 end
 if ~PhysTrack.vr2oExists
     delete(hObject);
 else
-    global vtt_vr2o_00
     axes(handles.axes1);
     if get(handles.slider1,'Value') < vtt_vr2o_00.ifi
         set(handles.slider1,'Value', vtt_vr2o_00.ifi);  
-        imshow(PhysTrack.read2(vtt_vr2o_00, uint16(round(get(handles.slider1,'Value')), true, get(handles.forceRGB, 'Value'), true)));
+        I = PhysTrack.read2(vtt_vr2o_00, uint16(round(get(handles.slider1,'Value')), true, get(handles.forceRGB, 'Value'), true));
+        I = showTrimmingMarkers(I, vtt_inFrameRect_00, vtt_outFrameRect_00);
+        imshow(I);
     end
     set(handles.ofiLabel, 'String', strcat(['Out-Frame: ', num2str(round(get(handles.slider1,'Value')))]));
     vtt_vr2o_00.ofi = uint16(round(get(handles.slider1,'Value')));
@@ -187,6 +197,7 @@ function gotoifi_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+global vtt_vr2o_00 vtt_inFrameRect_00 vtt_outFrameRect_00
 if strcmp(get(handles.playf, 'String'), 'Stop')
     return;
 end
@@ -194,11 +205,12 @@ end
 if ~PhysTrack.vr2oExists
     delete(hObject);
 else
-    global vtt_vr2o_00
     axes(handles.axes1);
     set(handles.slider1, 'Value', vtt_vr2o_00.ifi);
     set(handles.curFrameLabel, 'String', ['Frame ', num2str(vtt_vr2o_00.ifi),' of ',num2str(vtt_vr2o_00.obj.NumberOfFrames)]);
-    imshow(PhysTrack.read2(vtt_vr2o_00, vtt_vr2o_00.ifi, true, get(handles.forceRGB, 'Value'), true));
+    I = PhysTrack.read2(vtt_vr2o_00, vtt_vr2o_00.ifi, true, get(handles.forceRGB, 'Value'), true);
+    I = showTrimmingMarkers(I, vtt_inFrameRect_00, vtt_outFrameRect_00);
+    imshow(I);
 end
 % --- Executes on button press in gotoofi.
 function gotoofi_Callback(hObject, eventdata, handles)
@@ -206,6 +218,7 @@ function gotoofi_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+global vtt_vr2o_00 vtt_inFrameRect_00 vtt_outFrameRect_00
 if strcmp(get(handles.playf, 'String'), 'Stop')
     return;
 end
@@ -213,11 +226,13 @@ end
 if ~PhysTrack.vr2oExists
     delete(hObject);
 else
-    global vtt_vr2o_00
     axes(handles.axes1);
     set(handles.slider1, 'Value', vtt_vr2o_00.ofi);
     set(handles.curFrameLabel, 'String', ['Frame ', num2str(vtt_vr2o_00.ofi),' of ',num2str(vtt_vr2o_00.obj.NumberOfFrames)]);
-    imshow(PhysTrack.read2(vtt_vr2o_00, vtt_vr2o_00.ofi, true, get(handles.forceRGB, 'Value'), true));
+    
+    I = PhysTrack.read2(vtt_vr2o_00, vtt_vr2o_00.ofi, true, get(handles.forceRGB, 'Value'), true);
+    I = showTrimmingMarkers(I, vtt_inFrameRect_00, vtt_outFrameRect_00);
+    imshow(I);
 end
 
 % --- Executes on button press in closeB.
@@ -234,17 +249,20 @@ function firstf_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+global vtt_vr2o_00 vtt_inFrameRect_00 vtt_outFrameRect_00
 if strcmp(get(handles.playf, 'String'), 'Stop')
     return;
 end
 if ~PhysTrack.vr2oExists
     delete(hObject);
 else
-    global vtt_vr2o_00
     axes(handles.axes1);
     set(handles.slider1, 'Value', 1);
     set(handles.curFrameLabel, 'String', ['Frame 1 of ',num2str(vtt_vr2o_00.obj.NumberOfFrames)]);
-    imshow(PhysTrack.read2(vtt_vr2o_00, 1, true, get(handles.forceRGB, 'Value'), true));
+    
+    I = PhysTrack.read2(vtt_vr2o_00, 1, true, get(handles.forceRGB, 'Value'), true);
+    I = showTrimmingMarkers(I, vtt_inFrameRect_00, vtt_outFrameRect_00);
+    imshow(I);
 end
 
 % --- Executes on button press in prevf.
@@ -253,6 +271,7 @@ function prevf_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+global vtt_vr2o_00 vtt_inFrameRect_00 vtt_outFrameRect_00
 if strcmp(get(handles.playf, 'String'), 'Stop')
     return;
 end
@@ -260,11 +279,12 @@ end
 if ~PhysTrack.vr2oExists
     delete(hObject);
 elseif round(get(handles.slider1, 'Value')) > 1
-    global vtt_vr2o_00
     axes(handles.axes1);
     set(handles.slider1,'Value', round(get(handles.slider1, 'Value')) - 1);
     set(handles.curFrameLabel, 'String', ['Frame ', num2str(get(handles.slider1, 'Value')),' of ',num2str(vtt_vr2o_00.obj.NumberOfFrames)]);
-    imshow(PhysTrack.read2(vtt_vr2o_00, get(handles.slider1, 'Value'), true, get(handles.forceRGB, 'Value'), true));
+    I = PhysTrack.read2(vtt_vr2o_00, get(handles.slider1, 'Value'), true, get(handles.forceRGB, 'Value'), true);
+    I = showTrimmingMarkers(I, vtt_inFrameRect_00, vtt_outFrameRect_00);
+    imshow(I);
 end
 
 % --- Executes on button press in lastf.
@@ -273,17 +293,20 @@ function lastf_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+global vtt_vr2o_00 vtt_inFrameRect_00 vtt_outFrameRect_00
 if strcmp(get(handles.playf, 'String'), 'Stop')
     return;
 end
 if ~PhysTrack.vr2oExists
     delete(hObject);
 else
-    global vtt_vr2o_00
     axes(handles.axes1);
     set(handles.slider1, 'Value', vtt_vr2o_00.obj.NumberOfFrames);
     set(handles.curFrameLabel, 'String', ['Frame 1 of ',num2str(vtt_vr2o_00.obj.NumberOfFrames)]);
-    imshow(PhysTrack.read2(vtt_vr2o_00, vtt_vr2o_00.obj.NumberOfFrames, true, get(handles.forceRGB, 'Value'), true));
+    
+    I = PhysTrack.read2(vtt_vr2o_00, vtt_vr2o_00.obj.NumberOfFrames, true, get(handles.forceRGB, 'Value'), true);
+    I = showTrimmingMarkers(I, vtt_inFrameRect_00, vtt_outFrameRect_00);
+    imshow(I);
 end
 
 % --- Executes on button press in nextf.
@@ -292,18 +315,21 @@ function nextf_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+global vtt_vr2o_00 vtt_inFrameRect_00 vtt_outFrameRect_00
 if strcmp(get(handles.playf, 'String'), 'Stop')
     return;
 end
 if ~PhysTrack.vr2oExists
     delete(hObject);
 else
-    global vtt_vr2o_00
     axes(handles.axes1);
     if round(get(handles.slider1, 'Value')) < vtt_vr2o_00.obj.NumberOfFrames
         set(handles.slider1,'Value', round(get(handles.slider1, 'Value')) + 1);
         set(handles.curFrameLabel, 'String', ['Frame ', num2str(get(handles.slider1, 'Value')),' of ',num2str(vtt_vr2o_00.obj.NumberOfFrames)]);
-        imshow(PhysTrack.read2(vtt_vr2o_00, get(handles.slider1, 'Value'), true, get(handles.forceRGB, 'Value'), true));
+        
+        I = PhysTrack.read2(vtt_vr2o_00, get(handles.slider1, 'Value'), true, get(handles.forceRGB, 'Value'), true);
+        I = showTrimmingMarkers(I, vtt_inFrameRect_00, vtt_outFrameRect_00);
+        imshow(I);
     end
 end
 
@@ -313,10 +339,10 @@ function playf_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+global vtt_vr2o_00 vtt_inFrameRect_00 vtt_outFrameRect_00
 if ~PhysTrack.vr2oExists
     delete(hObject);
 else
-    global vtt_vr2o_00
     axes(handles.axes1);
     if strcmp(get(handles.playf, 'String'), 'Preview') % is stopped
         set(handles.playf, 'String', 'Stop');
@@ -349,6 +375,7 @@ function gotoxB_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+global vtt_vr2o_00 vtt_inFrameRect_00 vtt_outFrameRect_00
 if strcmp(get(handles.playf, 'String'), 'Stop')
     return;
 end
@@ -356,13 +383,14 @@ end
 if ~PhysTrack.vr2oExists
     delete(hObject);
 else
-    global vtt_vr2o_00
     try    
         toFrame = str2double(char(get(handles.framex, 'String')));
         if toFrame > 0 && toFrame <= vtt_vr2o_00.obj.NumberOfFrames    
             set(handles.slider1, 'Value', toFrame);
             set(handles.curFrameLabel, 'String', ['Frame ', num2str(round(get(handles.slider1,'Value'))),' of ',num2str(vtt_vr2o_00.obj.NumberOfFrames)]);
-            imshow(PhysTrack.read2(vtt_vr2o_00, toFrame, true, get(handles.forceRGB, 'Value'), true));
+            I = PhysTrack.read2(vtt_vr2o_00, toFrame, true, get(handles.forceRGB, 'Value'), true);
+            I = showTrimmingMarkers(I, vtt_inFrameRect_00, vtt_outFrameRect_00);
+            imshow(I);
         end
     catch
     end
@@ -417,14 +445,14 @@ function resetCrop_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+global vtt_vr2o_00
 if strcmp(get(handles.playf, 'String'), 'Stop')
     return;
 end
 
 if ~PhysTrack.vr2oExists
     delete(hObject);
-else
-    global vtt_vr2o_00    
+else  
     vroTemp = vtt_vr2o_00;
     vtt_vr2o_00.CropRect = [1, 1, vtt_vr2o_00.obj.Width * vtt_vr2o_00.PreMag, vtt_vr2o_00.obj.Height * vtt_vr2o_00.PreMag];
     if vtt_vr2o_00.Rotation == 90 || vtt_vr2o_00.Rotation == 270
@@ -467,7 +495,10 @@ function forceRGB_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of forceRGB
-
+global vtt_vr2o_00 vtt_inFrameRect_00 vtt_outFrameRect_00
+    I = PhysTrack.read2(vtt_vr2o_00, get(handles.slider1, 'Value'), true, get(handles.forceRGB, 'Value'), true);
+    I = showTrimmingMarkers(I, vtt_inFrameRect_00, vtt_outFrameRect_00);
+    imshow(I);
 
 % --- Executes on button press in rotate0RB.
 function rotate0RB_Callback(hObject, eventdata, handles)
@@ -475,7 +506,7 @@ function rotate0RB_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-global vtt_vr2o_00
+global vtt_vr2o_00 vtt_inFrameRect_00 vtt_outFrameRect_00
 if get(hObject, 'Value') == 1
     vtt_vr2o_00.Rotation = 0;
     vtt_vr2o_00.CropRect = [0,0, vtt_vr2o_00.obj.Width * vtt_vr2o_00.PreMag, vtt_vr2o_00.obj.Height * vtt_vr2o_00.PreMag];
@@ -483,7 +514,9 @@ if get(hObject, 'Value') == 1
     set(handles.rotate180RB, 'Value', 0);
     set(handles.rotate270RB, 'Value', 0);
 end
-imshow(PhysTrack.read2(vtt_vr2o_00, vtt_vr2o_00.ifi, true, get(handles.forceRGB, 'Value'), true));
+I = PhysTrack.read2(vtt_vr2o_00, get(handles.slider1, 'Value'), true, get(handles.forceRGB, 'Value'), true);
+I = showTrimmingMarkers(I, vtt_inFrameRect_00, vtt_outFrameRect_00);
+imshow(I);
 % Hint: get(hObject,'Value') returns toggle state of rotate0RB
 
 
@@ -493,7 +526,7 @@ function rotate90RB_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-global vtt_vr2o_00
+global vtt_vr2o_00 vtt_inFrameRect_00 vtt_outFrameRect_00
 if get(hObject, 'Value') == 1
     vtt_vr2o_00.Rotation = 90;
     vtt_vr2o_00.CropRect = [0,0, vtt_vr2o_00.obj.Height * vtt_vr2o_00.PreMag, vtt_vr2o_00.obj.Width * vtt_vr2o_00.PreMag];
@@ -501,7 +534,9 @@ if get(hObject, 'Value') == 1
     set(handles.rotate180RB, 'Value', 0);
     set(handles.rotate270RB, 'Value', 0);
 end
-imshow(PhysTrack.read2(vtt_vr2o_00, vtt_vr2o_00.ifi, true, get(handles.forceRGB, 'Value'), true));
+I = PhysTrack.read2(vtt_vr2o_00, get(handles.slider1, 'Value'), true, get(handles.forceRGB, 'Value'), true);
+I = showTrimmingMarkers(I, vtt_inFrameRect_00, vtt_outFrameRect_00);
+imshow(I);
 % Hint: get(hObject,'Value') returns toggle state of rotate90RB
 
 
@@ -511,7 +546,7 @@ function rotate180RB_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-global vtt_vr2o_00
+global vtt_vr2o_00 vtt_inFrameRect_00 vtt_outFrameRect_00
 if get(hObject, 'Value') == 1
     vtt_vr2o_00.Rotation = 180;
     vtt_vr2o_00.CropRect = [0,0, vtt_vr2o_00.obj.Width * vtt_vr2o_00.PreMag, vtt_vr2o_00.obj.Height * vtt_vr2o_00.PreMag];
@@ -519,7 +554,10 @@ if get(hObject, 'Value') == 1
     set(handles.rotate0RB, 'Value', 0);
     set(handles.rotate270RB, 'Value', 0);
 end
-imshow(PhysTrack.read2(vtt_vr2o_00, vtt_vr2o_00.ifi, true, get(handles.forceRGB, 'Value'), true));
+
+I = PhysTrack.read2(vtt_vr2o_00, get(handles.slider1, 'Value'), true, get(handles.forceRGB, 'Value'), true);
+I = showTrimmingMarkers(I, vtt_inFrameRect_00, vtt_outFrameRect_00);
+imshow(I);
 % Hint: get(hObject,'Value') returns toggle state of rotate180RB
 
 
@@ -529,7 +567,7 @@ function rotate270RB_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-global vtt_vr2o_00
+global vtt_vr2o_00 vtt_inFrameRect_00 vtt_outFrameRect_00
 if get(hObject, 'Value') == 1
     vtt_vr2o_00.Rotation = 270;    
     vtt_vr2o_00.CropRect = [0,0, vtt_vr2o_00.obj.Height * vtt_vr2o_00.PreMag, vtt_vr2o_00.obj.Width * vtt_vr2o_00.PreMag];
@@ -537,5 +575,51 @@ if get(hObject, 'Value') == 1
     set(handles.rotate180RB, 'Value', 0);
     set(handles.rotate0RB, 'Value', 0);
 end
-imshow(PhysTrack.read2(vtt_vr2o_00, vtt_vr2o_00.ifi, true, get(handles.forceRGB, 'Value'), true));
+
+I = PhysTrack.read2(vtt_vr2o_00, get(handles.slider1, 'Value'), true, get(handles.forceRGB, 'Value'), true);
+I = showTrimmingMarkers(I, vtt_inFrameRect_00, vtt_outFrameRect_00);
+imshow(I);
 % Hint: get(hObject,'Value') returns toggle state of rotate270RB
+
+
+% --- Executes on button press in locateInFrameIndicater.
+function locateInFrameIndicater_Callback(hObject, eventdata, handles)
+% hObject    handle to locateInFrameIndicater (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+global vtt_vr2o_00 vtt_inFrameRect_00 vtt_outFrameRect_00
+vtt_inFrameRect_00 = getrect();
+I = PhysTrack.read2(vtt_vr2o_00, get(handles.slider1, 'Value'), true, get(handles.forceRGB, 'Value'), true);
+I = showTrimmingMarkers(I, vtt_inFrameRect_00, vtt_outFrameRect_00);
+imshow(I);
+
+% --- Executes on button press in locateOutFrameIndicater.
+function locateOutFrameIndicater_Callback(hObject, eventdata, handles)
+% hObject    handle to locateOutFrameIndicater (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global vtt_vr2o_00 vtt_inFrameRect_00 vtt_outFrameRect_00
+vtt_outFrameRect_00 = getrect();
+
+I = PhysTrack.read2(vtt_vr2o_00, get(handles.slider1, 'Value'), true, get(handles.forceRGB, 'Value'), true);
+I = showTrimmingMarkers(I, vtt_inFrameRect_00, vtt_outFrameRect_00);
+imshow(I);
+
+% --- Executes on button press in autoTrackTtrimming.
+function autoTrackTtrimming_Callback(hObject, eventdata, handles)
+% hObject    handle to autoTrackTtrimming (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global vtt_vr2o_00 vtt_inFrameRect_00 vtt_outFrameRect_00
+vtt_vr2o_00 = processMarkersForTrimming(vtt_vr2o_00, vtt_inFrameRect_00, vtt_outFrameRect_00);
+
+axes(handles.axes1);
+set(handles.slider1,'Value', vtt_vr2o_00.ifi);  
+I = PhysTrack.read2(vtt_vr2o_00, vtt_vr2o_00.ifi, true, get(handles.forceRGB, 'Value'), true);
+I = showTrimmingMarkers(I, vtt_inFrameRect_00, vtt_outFrameRect_00);
+imshow(I);
+set(handles.ifiLabel, 'String', strcat(['In-Frame: ', num2str(vtt_vr2o_00.ifi)]));
+set(handles.ofiLabel, 'String', strcat(['Out-Frame: ', num2str(vtt_vr2o_00.ofi)]));
+vtt_vr2o_00.TotalFrames = vtt_vr2o_00.ofi - vtt_vr2o_00.ifi + 1;
+set(handles.totalFrameLabel, 'String', num2str(vtt_vr2o_00.TotalFrames));

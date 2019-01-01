@@ -54,6 +54,7 @@ function KLTFilterTool_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for KLTFilterTool
 handles.output = hObject;
+axes(handles.axes1);
 
 % Update handles structure
 guidata(hObject, handles);

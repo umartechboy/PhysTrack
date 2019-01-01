@@ -1,13 +1,22 @@
+% This function does nothing. It only tells the wizard to set a section
+% start here
+PhysTrack.Wizard.MarkSectionStart('Open Video File');
 % Create a video reader object.
 vro = PhysTrack.VideoReader2(true, false, 240);
+
+PhysTrack.Wizard.MarkSectionStart('Define Reference Coordinate System');
 % we need a static coordinate system to be placed on the horizontal
 % surface. coordinate system is stored in rwRCS and the pixels per meter
 % constant in ppm.
 questdlg('Define a reference coordinate system where x-coordinate is aligned horizontally acording to the scene and y-axis is pointing upwards.', '', 'OK', 'OK');
 [rwRCS, ppm] = PhysTrack.DrawCoordinateSystem(vro);
+
+PhysTrack.Wizard.MarkSectionStart('Mark Objects');
 % let the user select the object needed to be tracked.
 % the user will select the whole flying bob as the object
 obs = PhysTrack.GetObjects(vro);
+
+PhysTrack.Wizard.MarkSectionStart('Track Objects');
 % call the automatic object tracker now and give it the video and the
 % objects from the first frame. It will track these objects throughout the
 % video.
@@ -43,9 +52,8 @@ dy = trajectory.y - trajectory.y(1);
 [tvx, vx] = PhysTrack.deriv(t,dx,1);
 [tvy, vy] = PhysTrack.deriv(t,dy,1);
 
-% close all open figures and windows
-close all;
 
+PhysTrack.Wizard.MarkSectionStart('Plot Data');
 % create a Figure
 figure;
 whitebg([1,1,1]);

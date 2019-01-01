@@ -1,0 +1,2 @@
+function MarkSectionStart(title)
+end

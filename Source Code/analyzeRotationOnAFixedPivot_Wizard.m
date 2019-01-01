@@ -1,0 +1,1 @@
+PhysTrack.Wizard.RunWizard('analyzeRotationOnAFixedPivot');

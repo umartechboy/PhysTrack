@@ -1,9 +1,22 @@
-I = PhysTrack.read2(vtt_vr2o_00, 1, false, get(handles.forceRGBCB, 'Value'));
+warning off
+global vtt_resumeFromInd_00 vtt_lastObj_00 vtt_vr2o_00
+warning on
+showLast = get(handles.showLastCB, 'Value');
+I = PhysTrack.read2(vtt_vr2o_00, vtt_resumeFromInd_00, false, get(handles.forceRGBCB, 'Value'));
 if islogical(I)
     I = uint8(I) * 255;
 end
+if showLast
+    I = insertShape(I, 'Rectangle', vtt_lastObj_00, 'LineWidth', 2, 'Color', [255, 0, 0]);
+end
 strs = [];
-for ii = 1:size(vtt_obs_00, 1)
+if exist('vtt_obs_00')
+    totalObs = size(vtt_obs_00, 1);
+else
+    totalObs = 0;
+end
+for ii = 1:totalObs
+strs = [];
     rectDf = vtt_obs_00(ii, :);
     rectDf(1:2) = rectDf(1:2) - 2;
     rectDf(3:4) = rectDf(3:4) + 4;
@@ -16,6 +29,6 @@ if length(strs) > 0
     strs(strcmp('',strs)) = [];
     set(handles.obsList, 'String', strs);
 end
-axis(handles.mainAxis);
+axes(handles.mainAxis);
 imshow(I);
 drawnow;
