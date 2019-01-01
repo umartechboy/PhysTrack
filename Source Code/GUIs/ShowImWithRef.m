@@ -10,6 +10,9 @@ function ShowImWithRef( vr2o, ind, rwRCS, forceRGB, ppmLine)
         rwRCS_ = rwRCS;
     end
     I = PhysTrack.read2(vr2o, ind, false, forceRGB);
+    if islogical(I)
+        I = uint8(I) * 255;
+    end
     ts = uint16(round(min(size(I, 1), size(I, 2))/20));
     I = insertText(I, rwRCS_(2,:), 'X', 'BoxOpacity', 0.5, 'BoxColor', [255,255,255], 'FontSize', ts);
     I = insertText(I, rwRCS_(3,:), 'Y', 'BoxOpacity', 0.5, 'BoxColor', [255,255,255], 'FontSize', ts);
