@@ -1,13 +1,24 @@
+PhysTrack.Wizard.MarkSectionStart('Load file');
 % Create a video reader object. 
 vro = PhysTrack.VideoReader2(true, false);
+
+% generate thime stamps
+t = PhysTrack.GenerateTimeStamps(vro);
+
+PhysTrack.Wizard.MarkSectionStart('Define coordinate system');
 questdlg('Define a reference coordinate system where x-coordinate is aligned horizontally acording to the scene and the mass moves along the y-axis.', '', 'OK', 'OK');
 % we need a static coordinate system to be placed on the horizontal
 % surface. coordinate system is stored in rwRCS and the pixels per meter
 % constant in ppm.
 [rwRCS, ppm] = PhysTrack.DrawCoordinateSystem(vro);
+
+PhysTrack.Wizard.MarkSectionStart('Mark pendulum');
 % let the user select the object needed to be tracked. The user will select
 % a single point on the pendulum.
 obs = PhysTrack.GetObjects(vro);
+
+
+PhysTrack.Wizard.MarkSectionStart('Track Pendulum');
 % call the automatic object tracker now and give it the video and the
 % objects from the first frame. It will track these objects throughout the
 % video.
@@ -22,8 +33,6 @@ trajectory = PhysTrack.TransformCart2Cart(trajectory.tp1, rwRCS);
 % convert pixels to meters.
 trajectory = PhysTrack.StructOp(trajectory, ppm, './');
 
-% generate thime stamps
-t = PhysTrack.GenerateTimeStamps(vro);
 % convert the coordinates to displacement. (Final - initial value)
 dx  = trajectory.x - trajectory.x(1);
 dy = trajectory.y - trajectory.y(1);
@@ -47,6 +56,7 @@ xlabel('time - t (second)');
 ylabel('Vertical displacement (mm)');
 
 
+PhysTrack.Wizard.MarkSectionStart('FFT analysis');
 % do the FFT
 [freqAxis, amplitudes] = PhysTrack.FFT(dy, 30);
 fftH = figure; hold on;

@@ -2,6 +2,7 @@ function angle = GetAngleGraphically(vro, rwRCS)
     notOK = true;
     angle = [];
     while notOK    
+        figure; hold on;
         h = imshow(PhysTrack.read2(vro, 1));hold on;
         title('Draw a Line on the horzontal surface followed by the "Enter" key.');
         [px py] = getline();
@@ -20,5 +21,5 @@ function angle = GetAngleGraphically(vro, rwRCS)
             notOK = false;
         end
     end
-    close all;
+    PhysTrack.closeAll;
 end

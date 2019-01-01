@@ -22,7 +22,7 @@ function varargout = Wizard(varargin)
 
 % Edit the above text to modify the response to help Wizard
 
-% Last Modified by GUIDE v2.5 01-Jan-2019 09:58:38
+% Last Modified by GUIDE v2.5 01-Jan-2019 14:13:26
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -60,9 +60,9 @@ guidata(hObject, handles);
 evalin('base', 'global wizard_00_sections');
 global wizard_00_sections
 wizard_00_sections = varargin{1};
-%for ii = 2:8
-%    set(eval(['handles.b', num2str(ii)]), 'Enable', 'off');
-%end
+for ii = 2:8
+   set(eval(['handles.b', num2str(ii)]), 'Enable', 'off');
+end
 for ii = 1:length(wizard_00_sections)
     set(eval(['handles.b', num2str(ii)]), 'String', wizard_00_sections(ii).Title);
 end
@@ -148,3 +148,15 @@ function b8_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 WizardStep;
+
+
+% --- Executes on button press in enableAllB.
+function enableAllB_Callback(hObject, eventdata, handles)
+% hObject    handle to enableAllB (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+global wizard_00_sections
+for ii = 1:length(wizard_00_sections)
+    set(eval(['handles.b', num2str(ii)]), 'Enable', 'on');
+end

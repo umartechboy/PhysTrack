@@ -34,6 +34,7 @@
         iiFrame = sceneFrame;
         PhysTrack.makeTrackerII;
         eval(['klt_trackPoints_00_', inS, ' = [];']);
+        eval(['klt_trail_00_', inS, ' = [];']);
         eval(['klt_PointsValidity_00_', inS, ' = [];']);
     end
     broken = false;
@@ -43,6 +44,7 @@
     tic;
     speedStr = '';
     abort = false;
+    
     while ff < klt_vr2o_00.TotalFrames
         ff = ff + 1;
         framesDone = framesDone + 1;
@@ -53,9 +55,7 @@
         for kk = 1: size(objs, 1);
             inS = num2str(kk);
             eval(['[tPoints, validity] = step(tracker', inS, ', frame);']);
-            if rem(ff, previewDownSample) == 0
-                eval(['out = insertMarker(out, tPoints(validity, :), ''o'', ''Size'', 5, ''Color'', PhysTrack.GetColor(',inS,'));']);
-            end
+            
 
             lastValidFID = ff;
             if mean(validity) < 0.000001 || abort %track was lost
@@ -99,8 +99,27 @@
                 ind = ff;
                 eval(['klt_trackPoints_00_', inS, '(:,:, ',num2str(ind),') = tPoints;']);
                 eval(['klt_PointsValidity_00_', inS, '(:,',num2str(ind),') = validity;']);
+                
+                
+                if rem(ff, previewDownSample) == 0
+                    if get(handles.showAllPointsCB, 'Value')
+                        eval(['out = insertMarker(out, tPoints(validity, :), ''o'', ''Size'', 8, ''Color'', PhysTrack.GetColor(',inS,'));']);
+                    else          
+                        mp = mean(tPoints(validity, :), 1);
+                        out = insertMarker(out, mp, 'o', 'Size', 10, 'Color', PhysTrack.GetColor(kk));
+                    end
+                    if get(handles.showTrailCB, 'Value')
+                        eval(['klt_trail_00_', inS, '(end + 1, :) = mean(tPoints(validity, :), 1);']);
+                        if size(eval(['klt_trail_00_', inS]), 1 ) > 10
+                            eval(['klt_trail_00_', inS, '(1, :) = [];']);
+                        end
+                        eval(['out = insertMarker(out, ', 'klt_trail_00_', inS, ', ''*'', ''Size'', 10, ''Color'', PhysTrack.GetColor(',inS,'));']);
+                    end
+                end
+
             end
         end
+        
         if framesDone >= 20
             speed = framesDone / toc;
             if avgSpeed == -1
@@ -193,6 +212,7 @@
     for kk = 1: klt_tObs_00
         evalin('base', ['clear klt_PointsValidity_00_', num2str(kk)]);
         evalin('base', ['clear klt_trackPoints_00_', num2str(kk)]);
+        eval(['clear klt_trail_00_', num2str(kk)]);
     end
     evalin('base', 'clear ans klt_vr2o_00 klt_tObs_00');
     
@@ -200,13 +220,13 @@
     klt_vr2o_00.ofo = klt_vr2o_00.ofi + klt_vr2o_00.TotalFrames - 1;
     vr2o_new = klt_vr2o_00;
     
-    if ~abort 
+    %if ~abort 
         evalin('base', 'global klt_trajectories_00 klt_vr2o_new_00');
         global klt_trajectories_00 klt_vr2o_new_00
         klt_trajectories_00  = trajectories;
         klt_vr2o_new_00 = vr2o_new;
         % extract vr2o_new trajectories
-    else
-        klt_trajectories_00 = [];
-        klt_vr2o_new_00 = vr2o_bkp;
-    end
+    %else
+     %   klt_trajectories_00 = [];
+     %   klt_vr2o_new_00 = vr2o_bkp;
+    %end

@@ -1,13 +1,15 @@
+PhysTrack.Wizard.MarkSectionStart('Open video file');
 % Create a video reader object.
 vro = PhysTrack.VideoReader2(true, false);
-% we need a static coordinate system to be placed on the horizontal
-% surface. coordinate system is stored in rwRCS and the pixels per meter
-% constant in ppm.
-questdlg('Define a real world reference coordinate system.', '', 'OK', 'OK');
-[rwRCS, ppm] = PhysTrack.DrawCoordinateSystem(vro);
+
+PhysTrack.Wizard.MarkSectionStart('Mark objects to be tracked');
 % let the user select the objects needed to be tracked.
 % the user can select as many objects as required
 obs = PhysTrack.GetObjects(vro);
+% generate thime stamps
+t = PhysTrack.GenerateTimeStamps(vro);
+
+PhysTrack.Wizard.MarkSectionStart('Run the KLT object tracker');
 % call the automatic object tracker now and give it the video and the
 % objects from the first frame. It will track these objects throughout the
 % video.
@@ -16,13 +18,18 @@ obs = PhysTrack.GetObjects(vro);
 % returned from the tracker because the out frame might change during the
 % tracking process.
 [trPt_, vro] = PhysTrack.KLT(vro, obs);
+
+% we need a static coordinate system to be placed on the horizontal
+% surface. coordinate system is stored in rwRCS and the pixels per meter
+% constant in ppm.
+questdlg('Define a real world reference coordinate system.', '', 'OK', 'OK');
+[rwRCS, ppm] = PhysTrack.DrawCoordinateSystem(vro);
+
 % transform our trajectory to real world coordinates (units are still pixels)
 trajectory = PhysTrack.TransformCart2Cart(trPt_, rwRCS);
 % convert pixels to meters.
 trajectory = PhysTrack.StructOp(trajectory, ppm, './');
 
-% generate thime stamps
-t = PhysTrack.GenerateTimeStamps(vro);
 % Compute first and second order derivatives.
 % dx, dy > x, y Displacement
 % vx, vy > x, y Velocity

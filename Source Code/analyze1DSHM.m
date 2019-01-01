@@ -1,6 +1,8 @@
-% Create a video reader object. 
 PhysTrack.Wizard.MarkSectionStart('Open File');
+% Create a video reader object. 
 vro = PhysTrack.VideoReader2(true, false, 240);
+% generate thime stamps
+t = PhysTrack.GenerateTimeStamps(vro);
 
 PhysTrack.Wizard.MarkSectionStart('Draw coordinate system');
 questdlg('Define a reference coordinate system where x-coordinate is aligned horizontally acording to the scene and the mass moves along the y-axis.', '', 'OK', 'OK');
@@ -9,12 +11,12 @@ questdlg('Define a reference coordinate system where x-coordinate is aligned hor
 % constant in ppm.
 [rwRCS, ppm] = PhysTrack.DrawCoordinateSystem(vro);
 
-PhysTrack.Wizard.MarkSectionStart('Get objects');
+PhysTrack.Wizard.MarkSectionStart('Mark object');
 % let the user select the object needed to be tracked. The user will select
 % a single point on the pendulum.
 obs = PhysTrack.GetObjects(vro);
 
-PhysTrack.Wizard.MarkSectionStart('Track objects');
+PhysTrack.Wizard.MarkSectionStart('Track pendulum');
 % call the automatic object tracker now and give it the video and the
 % objects from the first frame. It will track these objects throughout the
 % video.
@@ -30,8 +32,6 @@ trajectory = PhysTrack.TransformCart2Cart(trajectory.tp1, rwRCS);
 % convert pixels to meters.
 trajectory = PhysTrack.StructOp(trajectory, ppm, './');
 
-% generate thime stamps
-t = PhysTrack.GenerateTimeStamps(vro);
 % convert the coordinates to displacement. (Final - initial value)
 dx  = trajectory.x - trajectory.x(1);
 dy = trajectory.y - trajectory.y(1);

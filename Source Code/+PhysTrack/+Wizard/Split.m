@@ -29,6 +29,7 @@ for ii = 1:length(AllInds)
     end
     section = [];
     section.Title = args;
+    code = strrep(code, 'close all', 'PhysTrack.closeAll');
     section.Code = code;
     sections(end + 1) = section;
 end

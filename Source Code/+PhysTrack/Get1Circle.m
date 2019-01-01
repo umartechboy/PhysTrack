@@ -19,6 +19,6 @@ function [cen1, rad1] = Get1Circle(vro)
         if strcmp(questdlg('Do you want to continue with this circle?', 'Confirm drawing', 'Yes', 'No', 'Yes'), 'Yes')
             notOK = false;
         end
-        close all;
+        PhysTrack.closeAll;
     end
 end

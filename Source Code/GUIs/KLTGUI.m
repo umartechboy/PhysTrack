@@ -22,7 +22,7 @@ function varargout = KLTGUI(varargin)
 
 % Edit the above text to modify the response to help KLTGUI
 
-% Last Modified by GUIDE v2.5 01-Jan-2019 10:28:39
+% Last Modified by GUIDE v2.5 01-Jan-2019 14:25:01
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -53,6 +53,9 @@ function KLTGUI_OpeningFcn(hObject, eventdata, handles, varargin)
 % varargin   command line arguments to KLTGUI (see VARARGIN)
 
 % Choose default command line output for KLTGUI
+evalin('base', 'global klt_gui_handle_00')
+global klt_gui_handle_00
+klt_gui_handle_00 = hObject;
 handles.output = hObject;
 axes(handles.axes1);
 % Update handles structure
@@ -91,13 +94,13 @@ function showTrailCB_Callback(hObject, eventdata, handles)
 % Hint: get(hObject,'Value') returns toggle state of showTrailCB
 
 
-% --- Executes on button press in checkbox3.
-function checkbox3_Callback(hObject, eventdata, handles)
-% hObject    handle to checkbox3 (see GCBO)
+% --- Executes on button press in showAllPointsCB.
+function showAllPointsCB_Callback(hObject, eventdata, handles)
+% hObject    handle to showAllPointsCB (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hint: get(hObject,'Value') returns toggle state of checkbox3
+% Hint: get(hObject,'Value') returns toggle state of showAllPointsCB
 
 
 % --- Executes on button press in beginB.
@@ -108,6 +111,11 @@ function beginB_Callback(hObject, eventdata, handles)
 set(handles.abortB, 'Enable', 'on')
 KLTGUI_Begin;
 
+global klt_gui_handle_00
+handle = klt_gui_handle_00;
+evalin('base', 'clear klt_gui_handle_00');
+
+close(handle);
 
 % --- Executes on button press in abortB.
 function abortB_Callback(hObject, eventdata, handles)

@@ -3,12 +3,12 @@
 PhysTrack.Wizard.MarkSectionStart('Open File');
 % Create a video reader object. 
 vro = PhysTrack.VideoReader2(true, true);
-PhysTrack.Wizard.MarkSectionStart('Mark Objects');
+PhysTrack.Wizard.MarkSectionStart('Mark particles');
 % let the user select the object needed to be tracked. The user will let
 % the process detect biinary objects in the first frame.
 obs = PhysTrack.GetObjects(vro);
 
-PhysTrack.Wizard.MarkSectionStart('Track Objects');
+PhysTrack.Wizard.MarkSectionStart('Track particles');
 % call the automatic object tracker now and give it the video and the
 % objects from the first frame. It will track these particles throughout the
 % video.
@@ -16,7 +16,7 @@ particles = PhysTrack.BOT(vro, obs);
 % generate thime stamps
 t = PhysTrack.GenerateTimeStamps(vro);
 
-PhysTrack.Wizard.MarkSectionStart('Change Calibration');
+PhysTrack.Wizard.MarkSectionStart('Change calibration');
 % for pixels per meter, we won;t use on screen distance marking. instead we
 % use the micro-scope's builtin function of distance calibration.
 ppmm = PhysTrack.askValue('Enter a value for pixels per \mu m calibration', 0.2025) * vro.PreMag; 

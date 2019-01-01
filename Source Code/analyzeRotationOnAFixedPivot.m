@@ -1,8 +1,16 @@
+PhysTrack.Wizard.MarkSectionStart('Open video file');
 % Create a video reader object. 
 vro = PhysTrack.VideoReader2(true, false, 240);
+
+% generate time stamps
+t = PhysTrack.GenerateTimeStamps(vro);
+
+PhysTrack.Wizard.MarkSectionStart('Mark rotating marker');
 % let the user select the object needed to be tracked. The user will select
 % a track marker on the rotating disc.
 obs = PhysTrack.GetObjects(vro);
+
+PhysTrack.Wizard.MarkSectionStart('Track rotaing marker');
 % call the automatic object tracker now and give it the video and the
 % objects from the first frame. It will track these objects throughout the
 % video.
@@ -16,6 +24,8 @@ trajectory = trPt_.tp1;
 
 % using the trajectory, lets fit a circle to get the center of rotation
 circCenter = PhysTrack.circleFit(trajectory.xy);
+
+PhysTrack.Wizard.MarkSectionStart('Define a coordinate system');
 questdlg('Define a reference coordinate system where Origin is coinciding with the center of the disc.', '', 'OK', 'OK');
 % we need a static coordinate system coordinate system is stored in rwRCS 
 % and the pixels per meter constant in ppm.
@@ -26,8 +36,6 @@ trajectory = PhysTrack.TransformCart2Cart(trajectory, rwRCS);
 CoR = PhysTrack.TransformCart2Cart([circCenter(1),circCenter(2)],rwRCS);
 CoR = CoR/ppm;
 
-% generate thime stamps
-t = PhysTrack.GenerateTimeStamps(vro);
 % work with angular velocity for this experiment
 d = PhysTrack.GetAngDispFrom2DtrackPoints(trajectory.xy);
 
@@ -35,6 +43,8 @@ d = PhysTrack.GetAngDispFrom2DtrackPoints(trajectory.xy);
 [tw, w] = PhysTrack.deriv(t,d,1);
 [ta, a] = PhysTrack.deriv(t,d,2);
 
+
+PhysTrack.Wizard.MarkSectionStart('Plot everything');
 close all;
 % preview the result
 % create a Figure

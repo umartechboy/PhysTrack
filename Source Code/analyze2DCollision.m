@@ -1,5 +1,10 @@
+PhysTrack.Wizard.MarkSectionStart('Open File');
 % Create a video reader object. 
 vro = PhysTrack.VideoReader2(true, false, 240);
+
+% generate the time stamps
+t = PhysTrack.GenerateTimeStamps(vro);
+PhysTrack.Wizard.MarkSectionStart('Define a Coordinate System');
 % we need a static coordinate system to be placed on carom board. The
 % orientation doesn't matter for the analysis but its better to leave it as
 % it is. It weill help relateing the objects in the video to the objects in
@@ -8,10 +13,14 @@ vro = PhysTrack.VideoReader2(true, false, 240);
 % constant in ppm.
 questdlg('Define a reference coordinate system.', '', 'OK', 'OK');
 [rwRCS, ppm] = PhysTrack.DrawCoordinateSystem(vro);
+
+PhysTrack.Wizard.MarkSectionStart('Mark Objects');
 % let the user select the object needed to be tracked.
 % the user will first identify 2 markers on the object going to collide in
 % the other (Object A) and then two points on Object B.
 obs = PhysTrack.GetObjects(vro);
+
+PhysTrack.Wizard.MarkSectionStart('Track marked objects');
 % call the automatic object tracker now and give it the video and the
 % objects from the first frame. It will track these objects throughout the
 % video.
@@ -20,6 +29,8 @@ obs = PhysTrack.GetObjects(vro);
 % returned from the tracker because the out frame might change during the
 % tracking process.
 [trajs, vro] = PhysTrack.KLT(vro, obs);
+
+PhysTrack.Wizard.MarkSectionStart('Draw circles and process');
 % We will stitch two circles with the trajectories to visualize the pucks
 % themselves. Acquire the circles using PhysTrack function.
 % cenA, cenB are center coordinates, radA, radB are radii.
@@ -33,6 +44,8 @@ obs = PhysTrack.GetObjects(vro);
 % corners. Instead, we use the center and one random point right on the
 % perphery to keep it's track of translation and rotation.
 
+
+PhysTrack.Wizard.MarkSectionStart('Process All');
 %these objA, objB now contain the trajectories of the center and a
 %periphereal point on each circle. These trajectories are different than
 %the track marker's trajectories.
@@ -54,8 +67,6 @@ trajectories = PhysTrack.TransformCart2Cart(trajs, rwRCS);
 trajectories = PhysTrack.StructOp(trajectories, ppm, './');
 
 % make index guess for IoC
-% generate the time stamps
-t = PhysTrack.GenerateTimeStamps(vro);
 
 % now we need to identify the index of collision. so that we can divide the
 % trajectories in two parts.
@@ -141,6 +152,7 @@ objBvFit = PhysTrack.lsqCFit(objBtv,objBv,'v', 'vi + a * t', 't');
 %get velocities from fit for the 2 events
 objBvi = objBvFit(objBtv(1));
 objBvf = objBvFit(objBtv(end));
+
 
 % lets start displaying the data now.
 figHandle = figure;

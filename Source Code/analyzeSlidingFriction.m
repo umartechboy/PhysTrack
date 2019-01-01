@@ -1,14 +1,23 @@
+PhysTrack.Wizard.MarkSectionStart('Open video file');
 % Create a video reader object. 
 vro = PhysTrack.VideoReader2(true, false, 240);
 % we need a static coordinate system to be placed on the slanted plane
 % surface. coordinate system is stored in rwRCS and the pixels per meter
 % constant in ppm.
 
+PhysTrack.Wizard.MarkSectionStart('Define a coordinate system');
 questdlg('Define a reference coordinate system where x-coordinate is aligned with the inclined plane and the object moves along the positive side of the axis', '', 'OK', 'OK');
 [rwRCS, ppm] = PhysTrack.DrawCoordinateSystem(vro);
+
+% generate thime stamps
+t = PhysTrack.GenerateTimeStamps(vro);
+
+PhysTrack.Wizard.MarkSectionStart('Mark object to track');
 % let the user select the object needed to be tracked. The user will select
 % a single point on sliding object.
 obs = PhysTrack.GetObjects(vro);
+
+PhysTrack.Wizard.MarkSectionStart('Track object');
 % call the automatic object tracker now and give it the video and the
 % objects from the first frame. It will track these objects throughout the
 % video.
@@ -22,6 +31,8 @@ obs = PhysTrack.GetObjects(vro);
 trajectory = PhysTrack.TransformCart2Cart(trPt_.tp1, rwRCS);
 trajectory = PhysTrack.StructOp(trajectory, ppm, './');
 
+
+PhysTrack.Wizard.MarkSectionStart('Get board inclination');
 questdlg('To get the inclination of board, draw a horizontal line.', '', 'OK', 'OK');
 th = PhysTrack.GetAngleGraphically(vro, rwRCS);
 % adjust the value according to our needs. we need an angle which is
@@ -34,8 +45,6 @@ elseif th >= pi * 3 / 2 && th <= 2 * pi
         th = 2*pi - th;
 end
 
-% generate thime stamps
-t = PhysTrack.GenerateTimeStamps(vro);
 % convert the coordinates to displacement. (Final - initial value)
 dx = trajectory.x - trajectory.x(1);
 dy = trajectory.y - trajectory.y(1);
@@ -45,6 +54,8 @@ d = (dx.^2 + dy.^2).^0.5;
 % get the velocity from the displacement.
 [tv, v] = PhysTrack.deriv(t,d,1);
 
+
+PhysTrack.Wizard.MarkSectionStart('Plot Data');
 % close all open figures and windows
 close all;
 % create a Figure

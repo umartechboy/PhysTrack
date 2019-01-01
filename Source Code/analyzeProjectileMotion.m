@@ -11,12 +11,12 @@ PhysTrack.Wizard.MarkSectionStart('Define Reference Coordinate System');
 questdlg('Define a reference coordinate system where x-coordinate is aligned horizontally acording to the scene and y-axis is pointing upwards.', '', 'OK', 'OK');
 [rwRCS, ppm] = PhysTrack.DrawCoordinateSystem(vro);
 
-PhysTrack.Wizard.MarkSectionStart('Mark Objects');
+PhysTrack.Wizard.MarkSectionStart('Mark projectile');
 % let the user select the object needed to be tracked.
 % the user will select the whole flying bob as the object
 obs = PhysTrack.GetObjects(vro);
 
-PhysTrack.Wizard.MarkSectionStart('Track Objects');
+PhysTrack.Wizard.MarkSectionStart('Track projectile');
 % call the automatic object tracker now and give it the video and the
 % objects from the first frame. It will track these objects throughout the
 % video.

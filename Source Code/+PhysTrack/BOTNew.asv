@@ -1,0 +1,17 @@
+function [trajectories, vr2o_new] = BOT(vr2o, selObjects)
+%BOTGUI Uses the code developed for BOT and runs it inside a GUI. Waits for
+%the GUI to exit and then returns the results just like KLT. Can be used
+%directly with the old BOT.
+
+evalin('base', 'global bot_gui_00_vr2o bot_gui_00_objs')
+global klt_gui_00_vr2o klt_gui_00_objs
+klt_gui_00_vr2o = vr2o;
+klt_gui_00_objs = selObjects;
+    h = KLTGUI;
+    uiwait();
+	global klt_trajectories_00 klt_vr2o_new_00
+    trajectories = klt_trajectories_00;
+    vr2o_new = klt_vr2o_new_00;
+    
+    evalin('base', 'clear ans klt_vr2o_00 klt_tObs_00 klt_gui_00_objs klt_gui_00_previewDownSample klt_gui_00_vr2o wizard_00_sections klt_trajectories_00 klt_vr2o_new_00');
+end
