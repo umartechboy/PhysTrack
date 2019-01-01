@@ -1,1 +1,1 @@
-PhysTrack.Wizard.RunWizard('analyze2DCollision');
+PhysTrack.Wizard.RunWizard('analyzeBrownianMotion');
