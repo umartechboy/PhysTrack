@@ -36,11 +36,13 @@ You are only a couple of steps away from using PhysTrack for your own experiment
 
 * Open Matlab and change the current directory to the downloaded package. You should see the _"+PhysTrack"_ and _"GUIs"_ directory along with some _"analyze motion"_ scripts in the current address window.
 
-* Depending upon the type of experiment required, select any script from the window and run it. (Or you can type in the name of that experiment in the command window and hit _"Enter"_.
+* Option 1. (V3.0 and later) Type in "RunWizard" and hit _"Enter"_. Depending upon the type of experiment required, select any script from the window and run it. A wizard will popup with the experiment sequential steps splitted in separate buttons.
+
+* Option 2. (Depreciated) Depending upon the type of experiment required, select any script from the window and run it. (Or you can type in the name of that experiment in the command window and hit _"Enter"_.
 
 * The scripts are designed to be user interactive. They communicate with the user through GUI's and message boxes and guide through the whole process. The script will also ask to load the experiment video you downloaded in the previous steps.
 
-* Once done, peruse the sample scripts, which are well commented, and try to understand how you can modify the codes for your own experiment. You will also find help on the usage of each function from the [PhysTrack Wiki](https://github.com/umartechboy/PhysTrack/wiki).
+* Once done, peruse the sample "analyzeMotionX" scripts, which are well commented, and try to understand how you can modify the codes for your own experiment. You will also find help on the usage of each function from the [PhysTrack Wiki](https://github.com/umartechboy/PhysTrack/wiki).
 
 * Capture your own experiment's video and start making robust video tracking experiment scripts.
 
@@ -57,6 +59,9 @@ alt="PhysTrack Package" width="20" height="20" border="10" /></a> [Sample Videos
 
 <a href="https://github.com/umartechboy/PhysTrack/blob/master/PhysTrack%20--%20Experimenter's%20Reference%20Manual%202017-1.pdf" target="_blank"><img src="http://www.free-icons-download.net/images/download-logo-icon-45961.png" 
 alt="PhysTrack Package" width="20" height="20" border="10" /></a> [Experimenter's Reference Manual](https://github.com/umartechboy/PhysTrack/blob/master/PhysTrack%20--%20Experimenter's%20Reference%20Manual%202017-1.pdf)
+
+## Release Updates
+* V3.0 Added a new way of running the MotionScripts, the PhysTrack Wizard. The main function is PhysTrack.Wizard.RunWizard. It presents a GUI which runs the same motion scripts in sequential parts.
 
 ## Performing a physics experiment with PhysTrack
 
