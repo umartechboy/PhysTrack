@@ -9,9 +9,8 @@ bot_gui_00_vr2o = vr2o;
 bot_gui_00_objs = selObjects;
 
     H = figure(BOTGUI);
-	global bot_trajectories_00 bot_vr2o_new_00 bot_guiHandle_00
-    bot_guiHandle_00 = H;
-    uiwait(H);
+    uiwait();
+	global bot_trajectories_00 bot_vr2o_new_00
     trajectories = bot_trajectories_00;
     vr2o_new = bot_vr2o_new_00;
     

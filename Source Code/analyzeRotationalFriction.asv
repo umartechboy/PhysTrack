@@ -182,9 +182,7 @@ ft = PhysTrack.lsqCFit(t, x_, 'x_', 'c2 + c1 * t + 1/3*9.81*t^2 * sin(0.1341)', 
 % phase of object in third Coordinate system
 phi0 = atan2(yp__(1), xp__(1));
 close all;
-PhysTrack.cascade;
-clear('ans',  'mn', 'mx', 'mnx', 'mny','vyFuncStr', 'model', 'str', 'dgof', 'lastValidFID', 'mxx', 'mxy', 'pFinal', 'wgof', 'answer', 'defaultValues', 'dlg_title', 'kd', 'kdx', 'kdy', 'num_lines','options','prompt');
-clear figHandle obj1F1 obj1F2 obj1Fe1 obj1I1 obj1I2 obj2F obj2I
+
 
 PhysTrack.Wizard.MarkSectionStart('Plot displacement Data');
 % basic Figures
@@ -195,15 +193,6 @@ figure; hold on; plot(t, x_, 'r'); plot(t, y_, 'b'); title('Position of center o
 figure; hold on; plot(t, xp, 'r'); plot(t, yp, 'b'); title('Position of point P in FoR1 with time'); xlabel('t (sec)'); ylabel('distance (m)'); legend('x', 'y');
 figure; hold on; plot(t, xp_, 'r'); plot(t, yp_, 'b'); title('Position of point P in FoR2 with time'); xlabel('t (sec)'); ylabel('distance (m)'); legend('x''', 'y''');
 figure; hold on; plot(t, xp__, 'r'); plot(t, yp__, 'b');title('Position of point P in FoR3 with time'); xlabel('t (sec)'); ylabel('distance (m)'); legend('x''''', 'y''''');
-
-%plot angular Disp
-figure;
-w = PhysTrack.GetAngDispFrom2DtrackPoints(traj.tp1, traj.tp2);
-plot(t,w);
-title ('Angular displacement');
-xlabel('time (seconds)')
-ylabel('Angular Displacement (radians)')
-PhysTrack.cascade;
 % 
 PhysTrack.Wizard.MarkSectionStart('Plot Velocity Data');
 figure; hold on; plot(dt, dx, 'r'); plot(dt, dy, 'b'); title('Velocity of center of mass in FoR1 with time'); xlabel('t (sec)'); ylabel('velocity (m/s)'); legend('vx', 'vy');
@@ -212,7 +201,6 @@ figure; hold on; plot(dt, dx_, 'r'); plot(dt, dy_, 'b'); title('Velocity of cent
 figure; hold on; plot(dt, dxp, 'r'); plot(dt, dyp, 'b'); title('Velocity of point P in FoR1 with time'); xlabel('t (sec)'); ylabel('velocity (m/s)'); legend('vx', 'vy');
 figure; hold on; plot(dt, dxp_, 'r'); plot(dt, dyp_, 'b'); title('Velocity of point P in FoR2 with time'); xlabel('t (sec)'); ylabel('velocity (m/s)'); legend('vx''', 'vy''');
 figure; hold on; plot(dt, dxp__, 'r'); plot(dt, dyp__, 'b'); title('Velocity of point P in FoR3 with time'); xlabel('t (sec)'); ylabel('velocity (m/s)'); legend('vx''''', 'vy''''');
-PhysTrack.cascade;
 % 
 % 
 % The acceleration figures are so noisy  that they don't make any sense.
@@ -222,3 +210,15 @@ PhysTrack.cascade;
 % figure; hold on; plot(d2t, d2xp, 'r'); plot(d2t, d2yp, 'b'); title('dt d2xp-d2yp');
 % figure; hold on; plot(d2t, d2xp_, 'r'); plot(d2t, d2yp_, 'b'); title('dt dxp_-dyp_');
 % figure; hold on; plot(d2t, d2xp__, 'r'); plot(d2t, d2yp__, 'b'); title('dt dxp__-dyp__');
+ 
+%plot angular Disp
+figure;
+w = PhysTrack.GetAngDispFrom2DtrackPoints(traj.tp1, traj.tp2);
+plot(t,w);
+title ('Angular displacement');
+xlabel('time (seconds)')
+ylabel('Angular Displacement (radians)')
+
+PhysTrack.cascade;
+clear('ans',  'mn', 'mx', 'mnx', 'mny','vyFuncStr', 'model', 'str', 'dgof', 'lastValidFID', 'mxx', 'mxy', 'pFinal', 'wgof', 'answer', 'defaultValues', 'dlg_title', 'kd', 'kdx', 'kdy', 'num_lines','options','prompt');
+clear figHandle obj1F1 obj1F2 obj1Fe1 obj1I1 obj1I2 obj2F obj2I

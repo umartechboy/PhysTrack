@@ -1,1 +1,0 @@
-PhysTrack.Wizard.RunWizard('analyze2DCollision');

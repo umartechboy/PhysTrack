@@ -1,1 +1,0 @@
-PhysTrack.Wizard.RunWizard('singlePointTracker');

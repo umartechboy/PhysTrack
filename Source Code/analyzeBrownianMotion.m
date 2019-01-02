@@ -35,7 +35,7 @@ for ii = 1:size(obs, 1)
     % it first converts the arguments to string... then execute the 
     % command represented by that string
     eval(['particles.tp', num2str(ii), '.rp2 = rp2;']);
-    if eval(['mean(particles.tp', num2str(ii), '.validity) >= 1'])
+    if eval(['mean(particles.tp', num2str(ii), '.validity) >= 0.5'])
         rn2 = rn2 + rp2;
         obsUsed = obsUsed + 1;
     end

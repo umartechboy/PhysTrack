@@ -41,7 +41,6 @@ if nargout
 else
     gui_mainfcn(gui_State, varargin{:});
 end
-PhysTrack.closeAll;
 % End initialization code - DO NOT EDIT
 
 
@@ -95,11 +94,10 @@ function beginB_Callback(hObject, eventdata, handles)
 set(handles.abortB, 'Enable', 'on')
 BOTGUI_Begin;
 
-global klt_gui_handle_00
-handle = klt_gui_handle_00;
+global bot_guiHandle_00
+handle = bot_guiHandle_00;
+close(bot_guiHandle_00);
 evalin('base', 'clear klt_gui_handle_00');
-
-close(handle);
 
 % --- Executes on button press in abortB.
 function abortB_Callback(hObject, eventdata, handles)

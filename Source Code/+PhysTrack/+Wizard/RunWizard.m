@@ -1,7 +1,12 @@
 function [success] = RunWizard(scriptFileName)
 % This function takes a filename of a WizardEncoded file, creates a
 % simple GUI wizard out of it and executes the resulting wizard. 
-    close all force;
+if nargin == 0% this gets a file first and tries to run it like a wizard
+    [fileName, rootPath, filterIndex] = uigetfile({'*.m','Matlab Script File';'*.*','All Files'}, 'Select a Matlab Script File');
+    scriptFileName = strcat(rootPath,fileName);
+    PhysTrack.Wizard.RunWizard(scriptFileName);
+    clear fileName rootPath filterIndex     
+end
     clc;
     addpath('GUIs');
     if ~exist(scriptFileName, 'file')

@@ -22,7 +22,7 @@ function varargout = Wizard(varargin)
 
 % Edit the above text to modify the response to help Wizard
 
-% Last Modified by GUIDE v2.5 01-Jan-2019 14:13:26
+% Last Modified by GUIDE v2.5 02-Jan-2019 15:53:53
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -60,14 +60,14 @@ guidata(hObject, handles);
 evalin('base', 'global wizard_00_sections');
 global wizard_00_sections
 wizard_00_sections = varargin{1};
-for ii = 2:8
+for ii = 2:11
    set(eval(['handles.b', num2str(ii)]), 'Enable', 'off');
 end
 for ii = 1:length(wizard_00_sections)
     set(eval(['handles.b', num2str(ii)]), 'String', wizard_00_sections(ii).Title);
 end
 
-for ii = length(wizard_00_sections)+1:1:8
+for ii = length(wizard_00_sections)+1:1:11
     set(eval(['handles.b', num2str(ii)]), 'Visible', 'off');
 end
 
@@ -160,3 +160,67 @@ global wizard_00_sections
 for ii = 1:length(wizard_00_sections)
     set(eval(['handles.b', num2str(ii)]), 'Enable', 'on');
 end
+
+
+% --- Executes on button press in b9.
+function b9_Callback(hObject, eventdata, handles)
+% hObject    handle to b9 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+WizardStep;
+
+
+% --- Executes on button press in b10.
+function b10_Callback(hObject, eventdata, handles)
+% hObject    handle to b10 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+WizardStep;
+
+
+% --- Executes on button press in b11.
+function b11_Callback(hObject, eventdata, handles)
+% hObject    handle to b11 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+WizardStep;
+
+
+% --- Executes on button press in clearall.
+function clearall_Callback(hObject, eventdata, handles)
+% hObject    handle to clearall (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+clear all force
+
+% --- Executes on button press in closeAllFigures.
+function closeAllFigures_Callback(hObject, eventdata, handles)
+% hObject    handle to closeAllFigures (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+PhysTrack.clearAll;
+
+% --- Executes on button press in plotWhiteB.
+function plotWhiteB_Callback(hObject, eventdata, handles)
+% hObject    handle to plotWhiteB (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+whitebg([1,1,1])
+
+% --- Executes on button press in plotBlackB.
+function plotBlackB_Callback(hObject, eventdata, handles)
+% hObject    handle to plotBlackB (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+whitebg([0,0,0])
+
+
+% --- Executes on button press in cascadeB.
+function cascadeB_Callback(hObject, eventdata, handles)
+% hObject    handle to cascadeB (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+PhysTrack.cascade

@@ -13,6 +13,13 @@ function cascade
 figs = findobj(0,'Type','figure'); 
 figs = sort(figs);
 
+for n = 1:length(figs)
+    if strcmp(figs(n).Name, 'Wizard')
+        figs(n) = [];
+        break;
+    end
+end
+    
 % Size of Entire Screen
 ss = get(0,'ScreenSize'); 
 

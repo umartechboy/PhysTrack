@@ -13,8 +13,8 @@ else
     klt_gui_00_previewDownSample = previewDownSample;
 end
 
-    h = KLTGUI;
-    uiwait();
+    H = figure(KLTGUI);
+    uiwait(H);
 	global klt_trajectories_00 klt_vr2o_new_00
     trajectories = klt_trajectories_00;
     vr2o_new = klt_vr2o_new_00;
