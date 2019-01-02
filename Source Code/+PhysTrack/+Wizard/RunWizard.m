@@ -1,4 +1,4 @@
-function [success] = RunWizard(scriptFileName)
+function RunWizard(scriptFileName)
 % This function takes a filename of a WizardEncoded file, creates a
 % simple GUI wizard out of it and executes the resulting wizard. 
 if nargin == 0% this gets a file first and tries to run it like a wizard
