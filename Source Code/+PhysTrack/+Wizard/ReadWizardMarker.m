@@ -3,7 +3,7 @@ function [args, ii] = ReadWizardMarker(script, start)
     step = 0;
     args = '';
     while ii < length(script)
-        if script(ii) == 13
+        if script(ii) == 13 || script(ii) == 10
             break;
         end
         if step == 0
