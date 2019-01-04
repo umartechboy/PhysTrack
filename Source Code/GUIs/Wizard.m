@@ -199,7 +199,7 @@ function closeAllFigures_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-PhysTrack.clearAll;
+PhysTrack.closeAll;
 
 % --- Executes on button press in plotWhiteB.
 function plotWhiteB_Callback(hObject, eventdata, handles)
