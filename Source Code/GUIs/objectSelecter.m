@@ -315,6 +315,8 @@ function obsList_Callback(hObject, eventdata, handles)
 % Hints: contents = cellstr(get(hObject,'String')) returns obsList contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from obsList
 
+highlitedObInd = get(hObject, 'Value');
+refreshBinObsWindow;
 
 % --- Executes during object creation, after setting all properties.
 function obsList_CreateFcn(hObject, eventdata, handles)

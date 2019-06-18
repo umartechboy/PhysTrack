@@ -1,5 +1,5 @@
 warning off
-global vtt_resumeFromInd_00 vtt_lastObj_00 vtt_vr2o_00 totalObs vtt_obs_00
+global vtt_resumeFromInd_00 vtt_lastObj_00 vtt_vr2o_00
 warning on
 showLast = get(handles.showLastCB, 'Value');
 I = PhysTrack.read2(vtt_vr2o_00, vtt_resumeFromInd_00, false, get(handles.forceRGBCB, 'Value'));
@@ -17,18 +17,16 @@ else
 end
 strs = [];
 if ~exist('highlitedObInd')
-    highlitedObInd = -1;
+    highlitedObInd = -1
 end
 for ii = 1:totalObs
     rectDf = vtt_obs_00(ii, :);
     rectDf(1:2) = rectDf(1:2) - 2;
     rectDf(3:4) = rectDf(3:4) + 4;
     if ii == highlitedObInd
-        I = insertShape(I, 'Rectangle', rectDf, 'LineWidth', 15, 'Color', [255, 255, 255]);
-        I = insertShape(I, 'Rectangle', rectDf, 'LineWidth', 10, 'Color', [0, 0, 0]);
     else
-        I = insertShape(I, 'Rectangle', rectDf, 'LineWidth', 6, 'Color', [255, 255, 255]);
-        I = insertShape(I, 'Rectangle', rectDf, 'LineWidth', 3, 'Color', [0, 0, 0]);
+        I = insertShape(I, 'Rectangle', rectDf, 'LineWidth', 4, 'Color', [0, 0, 0]);
+        I = insertShape(I, 'Rectangle', [vtt_obs_00(ii, 1:2) - 2, vtt_obs_00(ii, 3:4) + 2], 'LineWidth', 2, 'Color', [170, 170, 170]);
     end
     strs = [strs, ';', [num2str(ii), ': ', num2str(round(vtt_obs_00(ii, 1) + vtt_obs_00(ii, 3) / 2)),', ', num2str(round(vtt_obs_00(ii, 2) + vtt_obs_00(ii, 4) / 2))]];
 end
