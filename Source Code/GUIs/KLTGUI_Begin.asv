@@ -57,7 +57,7 @@
             
 
             lastValidFID = ff;
-            if mean(validity) < 0.000001 || abort %track was lost
+            if mean(validity) < 0.000001 || abort  || ff == 10 %track was lost
                 canResume = false;
                 if ~abort 
                     canResume = strcmp(questdlg('Validity of one of the track points has dropped below critical level. Do you want to select the object again?', 'Track point was lost', 'Yes', 'No', 'Yes'), 'Yes');
@@ -121,9 +121,8 @@
                         eval(['klt_trail_00_', inS, '(1, :) = [];']);
                     end
                     eval(['out = insertMarker(out, ', 'klt_trail_00_', inS, ', ''*'', ''Size'', 15, ''Color'', PhysTrack.GetColor(',inS,'));']);
+                    out = insertText(out, [10 10 ], ['FrameNumber: ', num2str(ff)], 'FontSize',40);
                 end
-                
-                out = insertText(out, [10 10 ], ['Frame: ', num2str(ff)], 'FontSize',40);
             end
         end
         
@@ -156,11 +155,11 @@
                 imshow(out,'InitialMagnification',200);
             end
             drawnow;
+        end
             %h = waitbar(0, 'Creating trajectory of track pointer');
             % ['Creating trajectory of track pointer: ', num2str(round(double(ff)/double(vr2o.TotalFrames)*100)), '% ', speedStr]);
             set(handles.progressL, 'String', [num2str(round(double(ff)/double(vr2o.TotalFrames)*100)), '% ']);
             set(handles.remainingL, 'String',speedStr);
-        end
         if broken 
             break;
         end
@@ -193,36 +192,25 @@
         end
     end
     
-    
-    % find min sized object
-    minFrames = size(klt_trackPoints_00_1, 3);
-    for kk = 1: klt_tObs_00
-        inS = num2str(kk);   
-        if eval(['size(klt_trackPoints_00_', inS, ', 3)']) < minFrames
-            minFrames = eval(['size(klt_trackPoints_00_', inS, '3']);
-        end
-    end
-    tFrames = minFrames;
     % squeeze the arrays. Its for an  old glitch removal
     for kk = 1: klt_tObs_00
         inS = num2str(kk);        
-        eval(['finalPoints_', inS, ' = zeros(tFrames, 2);']);
+        tFrames = length(klt_trackPoints_00_1(:,1));
+        finalPoints_1 = [];
         for ff = 1:tFrames
-            try
-                allPointsAtff = eval(['klt_trackPoints_00_', inS, '(:,:,',num2str(ff),')']);
-                validityAtff = eval(['klt_PointsValidity_00_', inS, '(:,',num2str(ff),')']);
-                validPointsAtff = allPointsAtff(validityAtff > 0, :);
-                eval(['finalPoints_', inS, '(ff, :) = mean(validPointsAtff, 1);']);
-            catch
-                error 'asdasd'
-            end
-        end
+            allPointsAtff = eval(['klt_trackPoints_00_', inS, '(:,:,',num2str(ff),')']);
+            validityAtff = eval(['klt_PointsValidity_00_', inS, '(:,',num2str(ff),')']);
+            validPointsAtff = allPointsAtff(validityAtff, :);
+            finalPoints_1(end + 1, :) = mean(validPointsAtff, 1);
+        eval(['klt_trackPoints_00_', inS, ' = squeeze(mean(validPoints ,1))'';']);
+        eval(['klt_PointsValidity_00_', inS, ' = mean(klt_PointsValidity_00_', inS, ')'';']);
     end
     for kk = 1:klt_tObs_00
         eval(['objStr', num2str(kk), '= struct(',...
-            '''x'', finalPoints_', num2str(kk) ,'(:,1), '...
-            '''y'', finalPoints_', num2str(kk) ,'(:,2), '...
-            '''xy'', finalPoints_', num2str(kk) ,'(:,:)'...
+            '''x'', klt_trackPoints_00_', num2str(kk) ,'(:,1), '...
+            '''y'', klt_trackPoints_00_', num2str(kk) ,'(:,2), '...
+            '''xy'', klt_trackPoints_00_', num2str(kk) ,'(:,:), '...
+            '''validity'', klt_PointsValidity_00_', num2str(kk), ...
             ');']);
     end
     trajStr = 'struct(';    
@@ -242,7 +230,7 @@
     end
     evalin('base', 'clear ans klt_vr2o_00 klt_tObs_00');
     
-    klt_vr2o_00.TotalFrames = tFrames;
+    klt_vr2o_00.TotalFrames = length(klt_trackPoints_00_1(:,1));
     klt_vr2o_00.ofo = klt_vr2o_00.ofi + klt_vr2o_00.TotalFrames - 1;
     vr2o_new = klt_vr2o_00;
     

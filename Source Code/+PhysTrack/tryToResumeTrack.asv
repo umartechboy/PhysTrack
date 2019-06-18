@@ -29,7 +29,6 @@ else
         drawnow;
         pause(1);
         hold on;
-        
         for ll = 1:2
             frame = PhysTrack.read2(klt_vr2o_00, resumeFrom + ll - 1, false, true);
             out = frame;
@@ -38,11 +37,6 @@ else
             imshow(out,'InitialMagnification',200);
             drawnow;
             pause(1);
-            if (ll == 1)                
-                thisMeanX = mean(tPoints(:,1));
-                thisMeanY = mean(tPoints(:,2));
-                thisOffset_t = [lastMeanX - thisMeanX, lastMeanY - thisMeanY];
-            end
         end
         
         if mean(validity) < 0.00001            
@@ -55,8 +49,9 @@ else
         end
         break;
     end
-    thisOffset = [0, 0];
     if canResume
-        thisOffset = thisOffset_t;
+        thisMeanX = mean(tPoints(:,1));
+        thisMeanY = mean(tPoints(:,2));
+        thisOffset = [lastMeanX - thisMeanX, lastMeanY - thisMeanY];
     end
 end
