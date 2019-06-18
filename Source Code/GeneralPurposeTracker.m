@@ -20,7 +20,7 @@ PhysTrack.Wizard.MarkSectionStart('Run the KLT object tracker');
 [trPt_, vro] = PhysTrack.KLT(vro, obs);
 
 
-PhysTrack.Wizard.MarkSectionStart('Define ref. coordinate system');
+PhysTrack.Wizard.MarkSectionStart('Define a ref. coordinate system');
 % we need a static coordinate system to be placed on the horizontal
 % surface. coordinate system is stored in rwRCS and the pixels per meter
 % constant in ppm.
