@@ -22,7 +22,7 @@ function varargout = objectSelecter(varargin)
 
 % Edit the above text to modify the response to help objectSelecter
 
-% Last Modified by GUIDE v2.5 06-Sep-2018 12:20:05
+% Last Modified by GUIDE v2.5 27-Aug-2019 14:08:11
 
 % Begin initialization code - DO NOT EDIT
 
@@ -398,3 +398,12 @@ function showLastCB_Callback(hObject, eventdata, handles)
 % Hint: get(hObject,'Value') returns toggle state of showLastCB
 showLast = get(handles.showLastCB, 'Value');
 refreshBinObsWindow;
+
+
+% --- Executes on button press in checkbox4.
+function checkbox4_Callback(hObject, eventdata, handles)
+% hObject    handle to checkbox4 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of checkbox4

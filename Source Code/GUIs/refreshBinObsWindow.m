@@ -1,8 +1,10 @@
 warning off
 global vtt_resumeFromInd_00 vtt_lastObj_00 vtt_vr2o_00 totalObs vtt_obs_00
+
+
 warning on
 showLast = get(handles.showLastCB, 'Value');
-I = PhysTrack.read2(vtt_vr2o_00, vtt_resumeFromInd_00, false, get(handles.forceRGBCB, 'Value'));
+I = PhysTrack.read2(vtt_vr2o_00, vtt_resumeFromInd_00, false, get(handles.forceRGBCB, 'Value'), false, vtt_vr2o_00.TrackInReverse);
 if islogical(I)
     I = uint8(I) * 255;
 end

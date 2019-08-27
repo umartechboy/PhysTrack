@@ -1,4 +1,4 @@
-function I = read2(vro, frameNumber, indIsAbsolute, forceRGB, cropPreviewOnly)
+function I = read2(vro, frameNumber, indIsAbsolute, forceRGB, cropPreviewOnly, reverseReading)
 
 % READ2 This function has mnay working modes and depending upon the kind
 % and types of arguments, can give differnet result. Basically, it is used
@@ -41,8 +41,14 @@ function I = read2(vro, frameNumber, indIsAbsolute, forceRGB, cropPreviewOnly)
     if ~exist('cropPreviewOnly')
         cropPreviewOnly = false;
     end
+    if ~exist('reverseReading')
+        reverseReading = false;
+    end
     I = [];
     if ~indIsAbsolute
+        if reverseReading
+            frameNumber = vro.TotalFrames - frameNumber + 1;
+        end
         if frameNumber + vro.ifi - 1 < 1 || frameNumber + vro.ifi - 1 > vro.obj.NumberOfFrames
             error 'The video file doesn''t contain the frame specified.';
         end
@@ -84,7 +90,10 @@ function I = read2(vro, frameNumber, indIsAbsolute, forceRGB, cropPreviewOnly)
                 end
             end
         end
-    else
+    else        
+        if reverseReading
+            frameNumber = vro.obj.NumberOfFrames - frameNumber + 1;
+        end
         if frameNumber < 1 || frameNumber > vro.obj.NumberOfFrames
             error 'The video file doesn''t contain the frame specified.';
         end

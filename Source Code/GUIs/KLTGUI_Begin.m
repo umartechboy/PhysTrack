@@ -9,7 +9,7 @@
     objs = klt_gui_00_objs;
     previewDownSample = klt_gui_00_previewDownSample;
     warning off;
-    sceneFrame = PhysTrack.read2(vr2o, 1, false, true);
+    sceneFrame = PhysTrack.read2(vr2o, 1, false, true, false, vr2o.TrackInReverse);
     for kk = 1: size(objs, 1);
         eval(['points',num2str(kk),' = detectMinEigenFeatures(rgb2gray(sceneFrame), ''ROI'', objs(kk,:));']);
     end
@@ -47,7 +47,7 @@
     while ff < klt_vr2o_00.TotalFrames
         ff = ff + 1;
         framesDone = framesDone + 1;
-        frame = PhysTrack.read2(klt_vr2o_00, ff, false, true);
+        frame = PhysTrack.read2(klt_vr2o_00, ff, false, true, false, klt_vr2o_00.TrackInReverse);
         if rem(ff, previewDownSample) == 0
             out = frame;
         end
@@ -171,6 +171,7 @@
 %         eval(['klt_PointsValidity_00_', num2str(kk), '(:,1) = [];']);
 %     end
 
+
     % filter out track pointer
     if ~abort
         if strcmp(questdlg('Do you want to filter out some wrong track points?', 'Refine your results', 'Yes', 'No', 'Yes'), 'Yes')
@@ -220,9 +221,9 @@
     end
     for kk = 1:klt_tObs_00
         eval(['objStr', num2str(kk), '= struct(',...
-            '''x'', finalPoints_', num2str(kk) ,'(:,1), '...
-            '''y'', finalPoints_', num2str(kk) ,'(:,2), '...
-            '''xy'', finalPoints_', num2str(kk) ,'(:,:)'...
+            '''x'', finalPoints_', num2str(kk) ,'(end:-1:1,1), '...
+            '''y'', finalPoints_', num2str(kk) ,'(end:-1:1,2), '...
+            '''xy'', finalPoints_', num2str(kk) ,'(end:-1:1,:)'...
             ');']);
     end
     trajStr = 'struct(';    

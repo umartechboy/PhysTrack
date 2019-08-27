@@ -22,7 +22,7 @@ function varargout = vidTrimTool(varargin)
 
 % Edit the above text to modify the response to help vidTrimTool
 
-% Last Modified by GUIDE v2.5 02-Oct-2018 12:34:00
+% Last Modified by GUIDE v2.5 27-Aug-2019 14:05:35
 
 % Begin initialization code - DO NOT EDIT
 addpath(fileparts(pwd));
@@ -623,3 +623,17 @@ set(handles.ifiLabel, 'String', strcat(['In-Frame: ', num2str(vtt_vr2o_00.ifi)])
 set(handles.ofiLabel, 'String', strcat(['Out-Frame: ', num2str(vtt_vr2o_00.ofi)]));
 vtt_vr2o_00.TotalFrames = vtt_vr2o_00.ofi - vtt_vr2o_00.ifi + 1;
 set(handles.totalFrameLabel, 'String', num2str(vtt_vr2o_00.TotalFrames));
+
+
+% --- Executes on button press in useReverseKLTCB.
+function useReverseKLTCB_Callback(hObject, eventdata, handles)
+% hObject    handle to useReverseKLTCB (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of useReverseKLTCB
+global vtt_vr2o_00 vtt_inFrameRect_00 vtt_outFrameRect_00
+    vtt_vr2o_00.TrackInReverse = get(handles.useReverseKLTCB, 'Value');
+    I = PhysTrack.read2(vtt_vr2o_00, get(handles.slider1, 'Value'), true, get(handles.forceRGB, 'Value'), true);
+    I = showTrimmingMarkers(I, vtt_inFrameRect_00, vtt_outFrameRect_00);
+    imshow(I);

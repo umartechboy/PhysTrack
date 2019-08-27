@@ -21,7 +21,7 @@ else
             continue;
         end
         
-        iiFrame = PhysTrack.read2(vr2o, resumeFrom, false, true);
+        iiFrame = PhysTrack.read2(vr2o, resumeFrom, false, true, false, vr2o.TrackInReverse);
         eval(['points',num2str(kk),' = detectMinEigenFeatures(rgb2gray(iiFrame), ''ROI'', relocatedObj);']);
         ii = kk;
         PhysTrack.makeTrackerII;
@@ -31,7 +31,7 @@ else
         hold on;
         
         for ll = 1:2
-            frame = PhysTrack.read2(klt_vr2o_00, resumeFrom + ll - 1, false, true);
+            frame = PhysTrack.read2(klt_vr2o_00, resumeFrom + ll - 1, false, true, false, vr2o.TrackInReverse);
             out = frame;
             eval(['[tPoints, validity] = step(tracker', inS, ', frame);']);
             eval(['out = insertMarker(out, tPoints(validity, :), ''o'', ''Size'', 5, ''Color'', PhysTrack.GetColor(',inS,'));']);
