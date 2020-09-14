@@ -58,6 +58,10 @@ function vro2Obj = VideoReader2(forceCropTrim, forceBinaryConvert, forceFPS)
 %    See also PHYSTRACK.READ2, PHYSTRACK.TRIMVIDEO,
 %    PHYSTRACK.CONVERTVIDEOTOBINARY
 
+if nargin <= 0
+    forceCropTrim = true;
+    %, false, 240
+end
 if iscell(forceCropTrim) && nargin == 1
     if length(forceCropTrim) == 3
          forceFPS = forceCropTrim{3};
