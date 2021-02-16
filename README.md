@@ -48,16 +48,16 @@ You are only a couple of steps away from using PhysTrack for your own experiment
 
 ## Downloads
 
-<a href="https://github.com/umartechboy/PhysTrack/archive/master.zip" target="_blank"><img src="http://www.free-icons-download.net/images/download-logo-icon-45961.png" 
+<a href="https://github.com/umartechboy/PhysTrack/archive/master.zip" target="_blank"><img src="https://raw.githubusercontent.com/umartechboy/PhysTrack/master/download.PNG" 
 alt="PhysTrack Package" width="20" height="20" border="10" /></a> [Complete package including the sample videos (this Git)](https://github.com/umartechboy/PhysTrack/archive/master.zip)
 
-<a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/umartechboy/PhysTrack/tree/master/Source%20Code" target="_blank"><img src="http://www.free-icons-download.net/images/download-logo-icon-45961.png" 
+<a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/umartechboy/PhysTrack/tree/master/Source%20Code" target="_blank"><img src="https://raw.githubusercontent.com/umartechboy/PhysTrack/master/download.PNG" 
 alt="PhysTrack Package" width="20" height="20" border="10" /></a> [The latest PhysTrack Package (without videos)](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/umartechboy/PhysTrack/tree/master/Source%20Code)
 
-<a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos" target="_blank"><img src="http://www.free-icons-download.net/images/download-logo-icon-45961.png" 
+<a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos" target="_blank"><img src="https://raw.githubusercontent.com/umartechboy/PhysTrack/master/download.PNG" 
 alt="PhysTrack Package" width="20" height="20" border="10" /></a> [Sample Videos](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/umartechboy/PhysTrack/tree/master/SampleVideos)
 
-<a href="https://github.com/umartechboy/PhysTrack/blob/master/PhysTrack%20--%20Experimenter's%20Reference%20Manual%202017-1.pdf" target="_blank"><img src="http://www.free-icons-download.net/images/download-logo-icon-45961.png" 
+<a href="https://github.com/umartechboy/PhysTrack/blob/master/PhysTrack%20--%20Experimenter's%20Reference%20Manual%202017-1.pdf" target="_blank"><img src="https://raw.githubusercontent.com/umartechboy/PhysTrack/master/download.PNG" 
 alt="PhysTrack Package" width="20" height="20" border="10" /></a> [Experimenter's Reference Manual](https://github.com/umartechboy/PhysTrack/blob/master/PhysTrack%20--%20Experimenter's%20Reference%20Manual%202017-1.pdf)
 
 ## Release Updates
