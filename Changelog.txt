@@ -1,3 +1,10 @@
+v3.1
+. Corrected a bug that was causiing the tracked x/y arrays to be flipped in KLT. Addressing was manually entered. Not sure how did it go wrong in the first place. May be a debug test wasn't cleared properly.
+
+v3.0 20190102
++ Added Wizard support
+. Added wizard compatibility to existing scripts
+
 v2.4 (20180910)
 + Added video rotation in VideoReader2
 . FFT function does zero padding of data make the length a multiple of 2
