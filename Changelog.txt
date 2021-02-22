@@ -1,4 +1,4 @@
-v3.1
+v3.4
 . Corrected a bug that was causiing the tracked x/y arrays to be flipped in KLT. Addressing was manually entered. Not sure how did it go wrong in the first place. May be a debug test wasn't cleared properly.
 
 v3.0 20190102
