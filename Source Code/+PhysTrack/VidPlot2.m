@@ -1,5 +1,20 @@
-function VidPlot(vro, x, y, previewRender)
-    lines = [x(1), y(1), x(1), y(1)] ;
+function VidPlot2(vro, trajectory, previewRender)
+    
+if (nargin == 2)
+    previewRender = true;
+end
+    vars = fieldnames(trajectory);
+    str = 'lines = struct(';
+    for ii = 1:length(vars)
+        eval(['x = trajectory.', vars{ii}, '.x;'])
+        eval(['y = trajectory.', vars{ii}, '.y;'])
+        str = [str, '''',vars{ii}, '''', ', [x(1), y(1), x(1), y(1)]'];
+        if (ii + 1 <= length(vars))
+            str = [str, ', '];
+        end
+    end
+    str = [str, ');']
+    eval(str);
     ink = PhysTrack.read2(vro, 1) * 0;
     mask = ink + 1;
 
@@ -8,10 +23,13 @@ function VidPlot(vro, x, y, previewRender)
     end
     saveRender = true;
     frameStep = 1;
-    lines = [x(1), y(1), x(1), y(1)] ;
     jj = 2;
-    for ii = 2:frameStep:length(x)
-        lines(end + 1, :) = [x(ii), y(ii), x(ii - 1), y(ii - 1)];
+    for ii = 2:frameStep:length(x)        
+        for kk = 1:length(vars)
+            eval(['x = trajectory.', vars{kk}, '.x;'])
+            eval(['y = trajectory.', vars{kk}, '.y;'])
+            eval(['lines.', vars{kk}, '(end + 1, :) = [x(ii), y(ii), x(ii - 1), y(ii - 1)];'])
+        end
         jj = jj + 1;
     end
     if saveRender
@@ -28,9 +46,12 @@ function VidPlot(vro, x, y, previewRender)
         hue_ = ii/length(x)*3;
         while hue_ > 1
             hue_ = hue_ - 1;
-        end;
-        ink = insertShape(ink, 'Line', lines(jj - 1: jj,:), 'LineWidth', 4, 'Color', hsv2rgb([hue_,1,1])*255);   
-        mask = insertShape(mask, 'Line', lines(jj - 1:jj,:), 'LineWidth', 3, 'Color',  [0,0,0]);
+        end;     
+        for kk = 1:length(vars)
+            eval(['line = lines.', vars{kk}, ';']);
+            ink = insertShape(ink, 'Line', line(jj - 1: jj,:), 'LineWidth', 4, 'Color', hsv2rgb([hue_,1,1])*255);   
+            mask = insertShape(mask, 'Line', line(jj - 1:jj,:), 'LineWidth', 3, 'Color',  [0,0,0]);
+        end
         img = PhysTrack.read2(vro, ii) .* mask + ink;
         if previewRender
             warning off;
